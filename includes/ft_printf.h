@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/18 02:40:49 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 22:16:38 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ char				*ft_llitoa_base(long long int nb, int base);
 char				*ft_litoa_base(long int nb, int base);
 char				*ft_luitoa_base(unsigned long int num, int base);
 char				*ft_ustoa_base(unsigned short int num, int base);
+char				*ft_uctoa_base(unsigned char num, int base);
 char				*ft_itoa_base(int num, int base);
 char				*ft_itoo(int num);
 char				*ft_imtoa_base(intmax_t num, int base);
