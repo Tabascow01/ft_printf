@@ -24,6 +24,7 @@ void	ft_process_oct(t_flags *list)
 		ft_putstr(list->args);
 		ft_return_size(list);
 		ft_strdel(&list->args);
+		ft_clear_flags(list);
 		return ;
 	}
 }

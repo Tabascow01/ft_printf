@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:11:53 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/25 05:09:08 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:06:59 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_process_int(t_flags *list)
 		ft_putstr(list->args);
 		ft_return_size(list);
 		ft_strdel(&list->args);
+		ft_clear_flags(list);
 		return ;
 	}
 }

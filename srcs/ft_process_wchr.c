@@ -39,6 +39,7 @@ void	ft_process_wchr(t_flags *list)
 		list->bytes = ft_wputchar(list->wargs[0]);
 		ft_return_wsize(list);
 		ft_strdel((void *)&list->wargs);
+		ft_clear_flags(list);
 		return ;
 	}
 }
