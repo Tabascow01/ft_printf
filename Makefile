@@ -6,7 +6,7 @@
 #    By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/16 04:30:58 by mchemakh          #+#    #+#              #
-#    Updated: 2017/03/19 22:16:04 by mchemakh         ###   ########.fr        #
+#    Updated: 2017/03/19 22:24:36 by mchemakh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,6 @@ fclean: clean
 	@/bin/rm -rf $(NAME)
 	@echo "[$(NAME)]\t\t\t\t\t\t\033[1;31m[Deleted]\033[0m"
 
-re: clean fclean all
+re: fclean all
 
 .PHONY: all, clean, fclean, re
