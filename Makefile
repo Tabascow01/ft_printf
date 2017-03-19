@@ -6,7 +6,7 @@
 #    By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/16 04:30:58 by mchemakh          #+#    #+#              #
-#    Updated: 2017/03/19 23:16:08 by mchemakh         ###   ########.fr        #
+#    Updated: 2017/03/19 23:30:42 by mchemakh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(INC_PATH) -g -o $@ -c $?
+	@$(CC) $(CFLAGS) $(INC_PATH) -g -o $@ -c $<
 	@echo "\033[32m█\033[0m\c"
 
 clean: 
