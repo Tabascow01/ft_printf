@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:22:51 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 22:22:25 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 22:29:45 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_process_sshort(t_flags *list, va_list args, char conv)
 
 	i = 0;
 	if (conv == 'd' || conv == 'i')
-		list->args = ft_uctoa_base((signed char)va_arg(args, int), 10);
+		list->args = ft_itoa_base((char)va_arg(args, int), 10);
 	else if (conv == 'o')
 		list->args = ft_uctoa_base((unsigned char)va_arg(args, int), 8);
 	else if (conv == 'O')

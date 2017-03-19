@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:52:28 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/02 12:16:32 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 22:37:00 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_hashflag(t_flags *list)
 	{
 		if ((list->conv == 'o' || list->conv == 'O') && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0");
-		else if (ft_isupper(list->args[i]) && newarg[0] != '0')
+		else if (list->conv == 'X' && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0X");
-		else if (ft_islower(list->args[i]) && newarg[0] != '0')
+		else if (list->conv == 'x' && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0x");
 		i++;
 	}
