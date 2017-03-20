@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_verif_wchr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/20 01:19:27 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/03/20 01:19:34 by mchemakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
 void	ft_save_wchr(t_flags *list, va_list args)
-{	
+{
 	wchar_t		chr;
 
 	if (list->option > 0)
@@ -21,11 +32,11 @@ void	ft_save_wchr(t_flags *list, va_list args)
 
 int		ft_verif_wchr(t_flags *list, int idxtmp)
 {
-	//printf("C[%c]\n",list->conv);
 	while (list->format[idxtmp] && list->format[idxtmp] == '%'
 			&& ft_isflag(list->format[idxtmp]))
 		idxtmp++;
-	if (list->format[idxtmp] == 'C' || (list->format[idxtmp] == 'c' && list->option == 'l'))
+	if (list->format[idxtmp] == 'C' || (list->format[idxtmp] == 'c'
+				&& list->option == 'l'))
 		return (1);
 	return (0);
 }

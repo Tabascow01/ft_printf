@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 09:51:27 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:05:10 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
+static void		ft_precs(t_flags *list, char *newarg, char *fdigit, int digit)
 {
 	char	*tmp;
 	char	*tmpargs;
@@ -112,7 +112,7 @@ static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
 		{
 			i = 0;
 			tmpargs = ft_strnew(digit);
-			while (list->args[i] && i< digit)
+			while (list->args[i] && i < digit)
 				i++;
 			tmp = &list->args[i];
 			i = 0;
@@ -154,11 +154,9 @@ void			ft_ldigitflag(t_flags *list)
 		digit = ft_atoi(list->digit);
 		newarg = ft_strnew(digit - size);
 		while (i < (digit - size))
-		{
-			newarg[i] = ' ';
-			i++;
-		}
-		if (((i >= 0 && list->conv != 'p') || (i > 0 && list->conv == 'p')) && digit < 13)
+			newarg[i++] = ' ';
+		if (((i >= 0 && list->conv != 'p') || (i > 0 && list->conv == 'p'))
+				&& digit < 13)
 			newarg[i] = '\0';
 		else if (list->conv == 'p' && digit > 12)
 			newarg[i] = '\0';
@@ -179,7 +177,7 @@ void			ft_ldigitflag(t_flags *list)
 			i++;
 		}
 		digit = ft_atoi(&list->digit[i + 1]);
-		newarg = ft_strnew(ft_atoi(tmp) + (digit - ((int)ft_strlen(list->args))));
-		ft_precision(list, newarg, tmp, digit);
+		newarg = ft_strnew(ft_atoi(tmp) + (digit - (int)ft_strlen(list->args)));
+		ft_precs(list, newarg, tmp, digit);
 	}
 }

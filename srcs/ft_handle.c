@@ -6,15 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 01:48:50 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/15 20:10:03 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:44:57 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
- ** Fonctions de manipulations
- */
 
 int		ft_handle(t_flags *list, va_list args)
 {
@@ -66,10 +62,7 @@ int		ft_handle(t_flags *list, va_list args)
 					ft_putchar(list->format[list->index]);
 			}
 			else
-			{
-				//printf("prct[%d]\n",list->percent);
 				ft_putchar(list->format[list->index]);
-			}
 		}
 		list->index += 1;
 	}

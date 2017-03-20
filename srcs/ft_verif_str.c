@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 00:13:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/15 21:57:31 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:18:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_save_str(t_flags *list, va_list args)
 {
 	char	*tmp;
-	
+
 	tmp = va_arg(args, char *);
 	if (tmp == NULL && list->digit == 0)
 	{

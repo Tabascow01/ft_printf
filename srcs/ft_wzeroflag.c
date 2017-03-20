@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/16 04:51:56 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:20:28 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_wzeroflag(t_flags *list)
 		newarg[i] = '\0';
 	else if (i > 0)
 		newarg[i] = '\0';
-	if (list->wargs != NULL && (list->wargs[0] == '-' || list->wargs[0] == '+') && list->noconv == 0)
+	if (list->wargs != NULL && (list->wargs[0] == '-' || list->wargs[0] == '+')
+			&& list->noconv == 0)
 	{
 		tmp = ft_wstrnew(1);
 		if (list->wargs[0] == '-')
@@ -61,7 +62,6 @@ void	ft_wzeroflag(t_flags *list)
 		tmp = list->wargs;
 		newarg = ft_wstrjoin(tmparg, list->wargs);
 	}
-	//ft_wstrdel(&tmparg);
 	ft_wstrdel(&tmp);
 	list->wargs = ft_wreallocf(newarg, 0);
 }

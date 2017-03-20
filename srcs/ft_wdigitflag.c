@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 00:30:03 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/17 19:55:23 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:38:50 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int digit)
+static void		ft_precs(t_flags *list, wchar_t *newarg, wchar_t *d, int digit)
 {
 	wchar_t	*tmp;
 	wchar_t	*tmpargs;
@@ -21,8 +21,8 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 	int		size;
 	int		digittmp;
 
-	digittmp = ft_atoi((void *)fdigit);
-	ft_wstrdel(&fdigit);
+	digittmp = ft_atoi((void *)d);
+	ft_wstrdel(&d);
 	if (digittmp == 0 && digit == 0)
 		return ;
 	i = 0;
@@ -31,11 +31,14 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 	{
 		if (((list->wargs[0] == '-' || list->wargs[0] == '+') && digit >= 0))
 			size -= 1;
-		if (digittmp > digit && size > 0 && size <= digit && digit > 0 && list->wargs[0] != '-' && list->wargs[0] != '+')
+		if (digittmp > digit && size > 0 && size <= digit && digit > 0
+				&& list->wargs[0] != '-' && list->wargs[0] != '+')
 			digittmp = digittmp - (digit - size) + 1;
-		else if (digittmp > digit && digittmp > size && digit > 0 && list->wargs[0] != '-' && list->wargs[0] != '+')
+		else if (digittmp > digit && digittmp > size && digit > 0
+				&& list->wargs[0] != '-' && list->wargs[0] != '+')
 			digittmp += 1;
-		else if ((list->wargs[0] == '-' || list->wargs[0] == '+') && digittmp > digit && digit > 0 && size > 0 && digit > size)
+		else if ((list->wargs[0] == '-' || list->wargs[0] == '+')
+				&& digittmp > digit && digit > 0 && size > 0 && digit > size)
 			digittmp -= size;
 		else
 			digittmp += 0;
@@ -58,7 +61,8 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 		}
 		if (i > 0)
 			newarg[i] = '\0';
-		if (digit < size && (list->wargs[0] == '-' || list->wargs[0] == '+') && digittmp > size)
+		if (digit < size && (list->wargs[0] == '-' || list->wargs[0] == '+')
+				&& digittmp > size)
 			newarg[i] = list->wargs[0];
 		if ((list->wargs[0] == '-' || list->wargs[0] == '+') && i > 0)
 		{
@@ -85,7 +89,6 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 	}
 	else
 	{
-		//printf("dgt[%d]\ndgtmp[%d]\n",digit,digittmp);
 		if (digit > 0)
 		{
 			tmpargs = ft_wstrnew(digit + 1);
@@ -127,7 +130,7 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 	}
 }
 
-void	ft_wdigitflag(t_flags *list)
+void			ft_wdigitflag(t_flags *list)
 {
 	wchar_t	*newarg;
 	wchar_t	*tmp;
@@ -140,7 +143,8 @@ void	ft_wdigitflag(t_flags *list)
 	size = (int)ft_wstrlen(list->wargs);
 	if (list->precision == 0)
 	{
-		if ((int)ft_wstrlen(list->wargs) == 0 && (list->conv != 'S' || list->noconv > 0))
+		if ((int)ft_wstrlen(list->wargs) == 0 && (list->conv != 'S'
+			|| list->noconv > 0))
 		{
 			if (list->noconv > 0)
 				list->size += 1;
@@ -157,14 +161,13 @@ void	ft_wdigitflag(t_flags *list)
 			newarg[i] = '\0';
 		tmp = ft_wstrjoin(newarg, list->wargs);
 		ft_wstrdel(&newarg);
-		//ft_wstrdel(&list->wargs);
 		list->wargs = ft_wreallocf(tmp, 0);
 	}
 	else
 	{
 		while (list->digit[i] && list->digit[i] != '.')
 			i++;
-		tmp = ft_wstrnew( + 1);
+		tmp = ft_wstrnew(1);
 		i = 0;
 		while (list->digit[i] && list->digit[i] != '.')
 		{
@@ -173,6 +176,6 @@ void	ft_wdigitflag(t_flags *list)
 		}
 		digit = ft_atoi(&list->digit[i + 1]);
 		newarg = ft_wstrnew(ft_atoi((void *)tmp) + digit - ((int)ft_wstrlen(list->wargs) + 1));
-		ft_precision(list, newarg, tmp, digit);
+		ft_precs(list, newarg, tmp, digit);
 	}
 }

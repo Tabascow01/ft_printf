@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:31:03 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/18 02:40:35 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:44:14 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_is_spec(char c)
+static int			ft_is_spec(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\r' || c == ' ' || c == '\v'
 			|| c == '\f')
@@ -20,11 +20,11 @@ static int		ft_is_spec(char c)
 	return (0);
 }
 
-unsigned long int				ft_atoli(char const *str)
+unsigned long int	ft_atoli(char const *str)
 {
-	int i;
-	int sign;
-	unsigned long int num;
+	int					i;
+	int					sign;
+	unsigned long int	num;
 
 	i = 0;
 	sign = 1;

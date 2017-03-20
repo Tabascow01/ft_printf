@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/16 04:05:11 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:31:55 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int digit)
+static void		ft_precs(t_flags *list, wchar_t *newarg, wchar_t *d, int digit)
 {
 	wchar_t		*tmp;
 	wchar_t		*tmpargs;
@@ -21,8 +21,8 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 	int			size;
 	int			digittmp;
 
-	digittmp = ft_atoi((void *)fdigit);
-	ft_wstrdel(&fdigit);
+	digittmp = ft_atoi((void *)d);
+	ft_wstrdel(&d);
 	i = 0;
 	size = (int)ft_wstrlen(list->wargs);
 	if (list->conv != 'S')
@@ -112,7 +112,7 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 		{
 			i = 0;
 			tmpargs = ft_wstrnew(digit);
-			while (list->wargs[i] && i< digit)
+			while (list->wargs[i] && i < digit)
 				i++;
 			tmp = &list->wargs[i];
 			i = 0;
@@ -124,12 +124,12 @@ static void		ft_precision(t_flags *list, wchar_t *newarg, wchar_t *fdigit, int d
 			i = 0;
 			if (list->args[0] != '\0')
 				digittmp -= digit;
-			fdigit = ft_wstrnew(digittmp);
+			d = ft_wstrnew(digittmp);
 			while (i < digittmp)
-				fdigit[i++] = ' ';
-			list->wargs = ft_wstrjoin(tmpargs, fdigit);
+				d[i++] = ' ';
+			list->wargs = ft_wstrjoin(tmpargs, d);
 			ft_wstrdel(&tmpargs);
-			ft_wstrdel(&fdigit);
+			ft_wstrdel(&d);
 			tmpargs = list->wargs;
 			list->wargs = ft_wstrjoin(list->wargs, tmp);
 		}
@@ -154,10 +154,7 @@ void			ft_wldigitflag(t_flags *list)
 		digit = ft_atoi(list->digit);
 		newarg = ft_wstrnew(digit - size);
 		while (i < (digit - size))
-		{
-			newarg[i] = ' ';
-			i++;
-		}
+			newarg[i++] = ' ';
 		if (i > 0)
 			newarg[i] = 0;
 		tmp = ft_wstrjoin(list->wargs, newarg);
@@ -177,6 +174,6 @@ void			ft_wldigitflag(t_flags *list)
 		}
 		digit = ft_atoi(&list->digit[i + 1]);
 		newarg = ft_wstrnew(ft_atoi((void *)tmp) + (digit - ((int)ft_wstrlen(list->wargs))));
-		ft_precision(list, newarg, tmp, digit);
+		ft_precs(list, newarg, tmp, digit);
 	}
 }

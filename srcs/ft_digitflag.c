@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/12 04:24:05 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:58:07 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
+static void		ft_precs(t_flags *list, char *newarg, char *fdigit, int digit)
 {
 	char	*tmp;
 	char	*tmpargs;
@@ -29,15 +29,22 @@ static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
 	size = (int)ft_strlen(list->args);
 	if (list->conv != 's')
 	{
-		if (((list->args[0] == '-' || list->args[0] == '+') && digit >= 0 /*size*/) || (digittmp > digit && list->conv == 'p'))
+		if (((list->args[0] == '-' || list->args[0] == '+') && digit >= 0)
+				|| (digittmp > digit && list->conv == 'p'))
 			size -= 1;
-		if (digittmp > digit && (list->space > 0 || list->sign > 0) && digit > 0 && list->conv != 'p')
+		if (digittmp > digit && (list->space > 0 || list->sign > 0)
+				&& digit > 0 && list->conv != 'p')
 			digittmp = digittmp - digit + size;
-		else if (digittmp > digit && size > 0 && size <= digit && digit > 0 && list->conv != 'p' && list->args[0] != '-' && list->args[0] != '+')
+		else if (digittmp > digit && size > 0 && size <= digit && digit > 0
+				&& list->conv != 'p' && list->args[0] != '-'
+				&& list->args[0] != '+')
 			digittmp = digittmp - (digit - size) + 1;
-		else if (digittmp > digit && digittmp > size && digit > 0 && list->conv != 'p' && list->args[0] != '-' && list->args[0] != '+')
+		else if (digittmp > digit && digittmp > size && digit > 0
+				&& list->conv != 'p' && list->args[0] != '-'
+				&& list->args[0] != '+')
 			digittmp += 1;
-		else if ((list->args[0] == '-' || list->args[0] == '+') && digittmp > digit && digit > 0 && size > 0 && digit > size)
+		else if ((list->args[0] == '-' || list->args[0] == '+')
+				&& digittmp > digit && digit > 0 && size > 0 && digit > size)
 			digittmp -= size;
 		else
 			digittmp += 0;
@@ -60,7 +67,8 @@ static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
 		}
 		if (i > 0)
 			newarg[i] = '\0';
-		if (digit < size && (list->args[0] == '-' || list->args[0] == '+') && digittmp > size)
+		if (digit < size && (list->args[0] == '-' || list->args[0] == '+')
+				&& digittmp > size)
 			newarg[i] = list->args[0];
 		if ((list->args[0] == '-' || list->args[0] == '+') && i > 0)
 		{
@@ -89,7 +97,6 @@ static void		ft_precision(t_flags *list, char *newarg, char *fdigit, int digit)
 	{
 		if (digit > 0)
 		{
-			//printf("dgt[%d]\n",digit);
 			tmpargs = ft_strnew(digit);
 			while (list->args[i] && i < digit)
 				i++;
@@ -142,7 +149,8 @@ void			ft_digitflag(t_flags *list)
 	size = (int)ft_strlen(list->args);
 	if (list->precision == 0)
 	{
-		if ((int)ft_strlen(list->args) == 0 && (list->conv != 's' || list->noconv > 0))
+		if ((int)ft_strlen(list->args) == 0 && (list->conv != 's'
+				|| list->noconv > 0))
 		{
 			if (list->noconv > 0)
 				list->size += 1;
@@ -151,10 +159,7 @@ void			ft_digitflag(t_flags *list)
 		digit = ft_atoi(list->digit);
 		newarg = ft_strnew(digit - size);
 		while (i < (digit - size))
-		{
-			newarg[i] = ' ';
-			i++;
-		}
+			newarg[i++] = ' ';
 		if (i >= 0 && list->conv != 'u')
 			newarg[i] = '\0';
 		else if (i > 0)
@@ -177,6 +182,6 @@ void			ft_digitflag(t_flags *list)
 		}
 		digit = ft_atoi(&list->digit[i + 1]);
 		newarg = ft_strnew(ft_atoi(tmp) + digit - ((int)ft_strlen(list->args)));
-		ft_precision(list, newarg, tmp, digit);
+		ft_precs(list, newarg, tmp, digit);
 	}
 }

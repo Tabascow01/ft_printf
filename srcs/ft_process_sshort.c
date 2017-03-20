@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:22:51 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:14:21 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:05:41 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_process_sshort(t_flags *list, va_list args, char conv)
 	else if (conv == 'x')
 	{
 		list->args = ft_uctoa_base((unsigned char)va_arg(args, int), 16);
-		while(list->args[i])
+		while (list->args[i])
 		{
 			list->args[i] = ft_tolower(list->args[i]);
 			i++;
@@ -35,7 +35,7 @@ void	ft_process_sshort(t_flags *list, va_list args, char conv)
 	else if (conv == 'X')
 	{
 		list->args = ft_uctoa_base((unsigned char)va_arg(args, int), 16);
-		while(list->args[i])
+		while (list->args[i])
 		{
 			list->args[i] = ft_toupper(list->args[i]);
 			i++;

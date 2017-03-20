@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 07:44:00 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 07:52:23 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:52:49 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	*ft_itoo(int num)
 
 	res = 0;
 	i = 1;
-	while(num != 0) 
+	while (num != 0)
 	{
-		res = num%8;
-		num = num/8;
+		res = num % 8;
+		num = num / 8;
 		octal = octal + (res * i);
 		i = i * 10;
 	}
-	str = ft_litoa_base(octal,10);
+	str = ft_litoa_base(octal, 10);
 	return (str);
 }

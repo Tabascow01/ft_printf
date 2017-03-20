@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_verif_oct.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/20 01:16:31 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/03/20 01:35:35 by mchemakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -12,7 +23,7 @@ void	ft_save_oct_low(t_flags *list, va_list args)
 	{
 		itmp = va_arg(args, unsigned int);
 		if (itmp > 0)
-			tmp =  ft_uitoa_base(itmp, 8);
+			tmp = ft_uitoa_base(itmp, 8);
 		else
 		{
 			tmp = ft_strnew(1);

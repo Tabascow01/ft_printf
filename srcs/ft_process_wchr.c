@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_process_wchr.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/20 01:06:06 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/03/20 01:06:45 by mchemakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int		ft_print_wchr(t_flags *list, wchar_t c)
 {
-	if (list->left == 0 && (list->wargs[ft_atoi(list->digit) - 1] == 0 || list->wargs[0] == '\0') )
+	if (list->left == 0 && (list->wargs[ft_atoi(list->digit) - 1] == 0
+			|| list->wargs[0] == '\0'))
 	{
 		ft_wputstr(list->wargs);
 		list->bytes = ft_wputchar(c);
 	}
-	else if (list->left > 0 && (list->wargs[ft_atoi(list->digit) - 1] == 0 || list->wargs[0] == '\0'))
+	else if (list->left > 0 && (list->wargs[ft_atoi(list->digit) - 1] == 0
+			|| list->wargs[0] == '\0'))
 	{
 		list->bytes = ft_wputchar(c);
 		ft_wputstr(list->wargs);

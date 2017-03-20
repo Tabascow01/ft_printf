@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_verif_wstr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/20 01:18:21 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/03/20 01:18:57 by mchemakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
 void	ft_save_wstr(t_flags *list, va_list args)
-{	
+{
 	wchar_t		*tmp;
 
 	tmp = va_arg(args, wchar_t *);
@@ -33,7 +44,8 @@ int		ft_verif_wstr(t_flags *list, int idxtmp)
 	while (list->format[idxtmp] && list->format[idxtmp] == '%'
 			&& ft_isflag(list->format[idxtmp]))
 		idxtmp++;
-	if (list->format[idxtmp] == 'S' || (list->format[idxtmp] == 's' && list->option == 'l'))
+	if (list->format[idxtmp] == 'S' || (list->format[idxtmp] == 's'
+				&& list->option == 'l'))
 		return (1);
 	return (0);
 }

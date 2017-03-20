@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/17 23:23:07 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:21:59 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_zhashflag(t_flags *list)
 	{
 		if (list->conv == 'X' && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0X");
-		else if ((list->conv == 'x'|| list->conv == 'p') && newarg[0] != '0')
+		else if ((list->conv == 'x' || list->conv == 'p') && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0x");
 		else if ((list->conv == 'o' || list->conv == 'O') && newarg[0] != '0')
 			newarg = ft_strcpy(newarg, "0");
@@ -51,7 +51,7 @@ void	ft_zeroflag(t_flags *list)
 
 	i = 0;
 	if (list->conv == 'p')
-		ft_cut_lststr(list,2);
+		ft_cut_lststr(list, 2);
 	size = (int)ft_strlen(list->args);
 	digit = ft_atoi(list->digit);
 	newarg = ft_strnew(size + digit);
@@ -65,19 +65,13 @@ void	ft_zeroflag(t_flags *list)
 	if (list->noconv > 0)
 		digit -= 1;
 	while (i < (digit - (int)ft_strlen(list->args)))
-	{
-		newarg[i] = '0';
-		i++;
-	}
-	//printf("dgt[%d]\nsize[%d]\n",ft_atoi(list->digit),size);
+		newarg[i++] = '0';
 	if (digit > 0 && size < digit)
-	{
-	//	printf("Hoy\n");
 		newarg[i] = '\0';
-	}
 	else if (i > 0)
 		newarg[i] = '\0';
-	if (list->args != NULL && (list->args[0] == '-' || list->args[0] == '+') && list->noconv == 0)
+	if (list->args != NULL && (list->args[0] == '-' || list->args[0] == '+')
+			&& list->noconv == 0)
 	{
 		tmp = ft_strnew(1);
 		if (list->args[0] == '-')

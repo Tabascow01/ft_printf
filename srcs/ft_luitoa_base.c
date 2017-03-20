@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/01/31 12:25:48 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:56:48 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,7 @@ static char		*ft_reverse(char *str, int i)
 	str = tmp;
 	return (str);
 }
-/*
-static void		ft_luitoa_nextn(int **bs, int **ng, unsigned long int **num, char ***str)
-{
-	if ((**bs) == 10)
-	{
-		(**ng) = 1;
-		(**num) = -(**num);
-	}
-	else if ((**bs) == 2)
-	{
-		ft_strdel(&(**str));
-		(**str) = ft_itob((**num), 31);
-	}
-	else if ((**bs) == 16)
-	{
-		ft_strdel(&(**str));
-		(**str) = ft_btoh(ft_itob((**num), 31));
-	}
-}
-*/
+
 static char		*ft_luitoa_next(char **str, unsigned long int *num)
 {
 	int i;
@@ -62,7 +43,6 @@ static char		*ft_luitoa_next(char **str, unsigned long int *num)
 		(*str)[i] = '\0';
 		return ((*str));
 	}
-	//ft_luitoa_nextn(&base, &neg, &num, &str);
 	return ((*str));
 }
 
@@ -74,8 +54,8 @@ static void		ft_luitoa_init(char **str, int *i)
 
 char			*ft_luitoa_base(unsigned long int num, int base)
 {
-	char		*str;
-	int			i;
+	char				*str;
+	int					i;
 	unsigned long int	rem;
 
 	ft_luitoa_init(&str, &i);

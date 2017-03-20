@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/25 07:16:25 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/01 12:04:26 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:12:36 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_save_int_up(t_flags *list, va_list args)
 
 	if (list->option > 0)
 		ft_process_option(list, args, 'D');
-	tmp = ft_litoa_base(va_arg(args,long int), 10);
+	tmp = ft_litoa_base(va_arg(args, long int), 10);
 	list->args = ft_reallocf(tmp, 0);
 	if (list->precision > 0 && (int)ft_strlen(list->digit) > 0
 			&& ft_atoi(list->args) == 0 && list->zero == 0)

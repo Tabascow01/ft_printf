@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/20 01:20:02 by mchemakh          #+#    #+#             */
+/*   Updated: 2017/03/20 01:36:18 by mchemakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int		ft_countbytes(wchar_t wc)
+static int		ft_countbytes(wchar_t wc)
 {
 	if (wc <= 0x0000007F)
 		return (1);
@@ -19,7 +30,7 @@ static	int		ft_countbytes(wchar_t wc)
 		return (0);
 }
 
-size_t		ft_wstrlen(wchar_t *wstr)
+size_t			ft_wstrlen(wchar_t *wstr)
 {
 	size_t	i;
 	int		bytes;
