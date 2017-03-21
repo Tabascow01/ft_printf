@@ -6,13 +6,27 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 00:59:31 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/20 01:35:08 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/21 20:18:24 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_verif_flags(t_flags *list)
+static void		ft_verif_flags_next(t_flags *list, int idxtmp)
+{
+	if (ft_verif_left(list, idxtmp) &&
+			ft_isleft_allowed(list, idxtmp) && list->left == 0)
+	{
+		list->index += 1;
+		list->left = 1;
+	}
+	if (ft_verif_number(list, idxtmp) &&
+			ft_isdigit_allowed(list, idxtmp) && list->digit == 0)
+		ft_save_digit(list, idxtmp);
+
+}
+
+int				ft_verif_flags(t_flags *list)
 {
 	int		idxtmp;
 
@@ -31,15 +45,8 @@ int		ft_verif_flags(t_flags *list)
 		if (ft_verif_spcs(list, idxtmp) &&
 				ft_isspcs_allowed(list, idxtmp) && list->space == 0)
 			ft_save_spcs(list, idxtmp);
-		if (ft_verif_left(list, idxtmp) &&
-				ft_isleft_allowed(list, idxtmp) && list->left == 0)
-		{
-			list->index += 1;
-			list->left = 1;
-		}
-		if (ft_verif_number(list, idxtmp) &&
-				ft_isdigit_allowed(list, idxtmp) && list->digit == 0)
-			ft_save_digit(list, idxtmp);
+		else
+			ft_verif_flags_next(list, idxtmp);
 		if (ft_verif_percent(list, idxtmp) && list->percent == 0)
 		{
 			list->index += 1;
