@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:18:21 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/20 01:18:57 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/21 22:12:42 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_save_wstr(t_flags *list, va_list args)
 	{
 		list->wargs = (wchar_t *)ft_strnew(ft_wstrlen(tmp) * sizeof(tmp));
 		if (tmp != NULL)
-			list->wargs = ft_memcpy(list->wargs, tmp, ft_wstrlen(tmp) * sizeof(tmp));
+			list->wargs = ft_memcpy(list->wargs, tmp,
+					ft_wstrlen(tmp) * sizeof(tmp));
 		list->wargs[(int)ft_wstrlen(tmp)] = '\0';
 	}
 	list->conv = 'S';

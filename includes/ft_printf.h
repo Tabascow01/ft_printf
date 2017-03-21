@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:51:32 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/21 22:09:45 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_list
 ** ft_printf
 */
 
+int					ft_argnull(t_flags *list);
 void				ft_decompose_digit(t_flags *list);
 void				ft_cut_lststr(t_flags *list, int start);
 int					ft_verif_noconv(t_flags *list, int idxtmp);
@@ -174,6 +175,7 @@ int					ft_verif_numbersign(t_flags *list, int idxtmp);
 
 int					ft_verif_option(t_flags *list);
 int					ft_verif_flags(t_flags *list);
+int					ft_vrf_cv_nnnnn(t_flags *lst, int *i, va_list args);
 int					ft_verif_conv(t_flags *list, va_list args);
 
 t_flags				*ft_init_flags(t_flags *list, const char *format);

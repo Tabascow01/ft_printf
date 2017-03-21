@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:30 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/15 23:36:05 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/21 21:52:06 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int		ft_isnbsign_allowed(t_flags *list, int idxtmp)
 			list->index += 1;
 			list->size -= 1;
 		}
-		if (list->format[idxtmp + 1] == 'd' ||
-			list->format[idxtmp + 1] == 'i')
+		if (list->format[idxtmp + 1] == 'd' || list->format[idxtmp + 1] == 'i')
 			return (1);
 		idxtmp++;
 	}
