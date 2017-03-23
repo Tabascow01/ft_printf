@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 14:20:16 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 22:20:49 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:25:33 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int				ft_wputchar(wchar_t wc)
 	int ret;
 
 	ret = 0;
+	if (MB_CUR_MAX < 2)
+		return (0);
 	if (wc <= 0x0000007F)
 	{
 		ft_putchar(wc);
