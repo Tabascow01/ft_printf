@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/23 22:07:35 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:17:44 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		ft_sitoa_init(char **str, int *i, int *negative)
 	(*str) = ft_strnew(64);
 }
 
-char			*ft_sitoa_base(short int num, int base)
+char			*ft_sitoa_base(short int num, int bs)
 {
 	char		*str;
 	int			i;
@@ -64,20 +64,18 @@ char			*ft_sitoa_base(short int num, int base)
 	int			negative;
 
 	ft_sitoa_init(&str, &i, &negative);
-	str = ft_sitoa_next(&str, &num, &base, &negative);
+	str = ft_sitoa_next(&str, &num, &bs, &negative);
 	if (num == -32768)
 		return (ft_strdup("-32768"));
-	if (str[0] == '0' && str[1] == '\0')
-		return (str);
-	else if (num < 0 && (base == 2 || base == 16))
+	if ((str[0] == '0' && str[1] == '\0') || (num < 0 && (bs == 2 || bs == 16)))
 		return (str);
 	else
 	{
 		while (num != 0)
 		{
-			rem = num % base;
+			rem = num % bs;
 			str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
-			num = num / base;
+			num = num / bs;
 		}
 		if (negative == 1)
 			str[i++] = '-';
