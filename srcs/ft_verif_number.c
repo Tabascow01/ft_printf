@@ -6,11 +6,35 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:59:22 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 06:26:05 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:00:21 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int		ft_save_digit_n(t_flags *list, int *idxtmp, int *ret, int *i)
+{
+	if (ft_isdigit(list->format[(*idxtmp)]
+			&& (list->format[(*idxtmp) + 1] == ' '
+			|| list->format[(*idxtmp) + 1] == '#'
+			|| list->format[(*idxtmp) + 1] == '-'
+			|| list->format[(*idxtmp) + 1] == '+')))
+		(*ret) = 1;
+	if ((*ret) == 1)
+	{
+		ft_strdel(&list->digit);
+		return (0);
+	}
+	if ((ft_isdigit(list->format[(*idxtmp)])
+		|| (list->format[(*idxtmp)] == '.')))
+	{
+		list->digit[(*i)++] = list->format[(*idxtmp)];
+		list->index += 1;
+		if (list->format[(*idxtmp)] == '.')
+			(*ret) = 2;
+	}
+	return (1);
+}
 
 void	ft_save_digit(t_flags *list, int idxtmp)
 {
@@ -26,25 +50,8 @@ void	ft_save_digit(t_flags *list, int idxtmp)
 	while (list->format[idxtmp] && list->format[idxtmp] != '%'
 			&& ft_isflag(list->format[idxtmp]))
 	{
-		if (ft_isdigit(list->format[idxtmp]
-					&& (list->format[idxtmp + 1] == ' '
-						|| list->format[idxtmp + 1] == '#'
-						|| list->format[idxtmp + 1] == '-'
-						|| list->format[idxtmp + 1] == '+')))
-			ret = 1;
-		if (ret == 1)
-		{
-			ft_strdel(&list->digit);
+		if (!ft_save_digit_n(list, &idxtmp, &ret, &i))
 			return ;
-		}
-		if ((ft_isdigit(list->format[idxtmp])
-				|| (list->format[idxtmp] == '.')))
-		{
-			list->digit[i++] = list->format[idxtmp];
-			list->index += 1;
-			if (list->format[idxtmp] == '.')
-				ret = 2;
-		}
 		idxtmp++;
 	}
 	list->digit[i] = '\0';

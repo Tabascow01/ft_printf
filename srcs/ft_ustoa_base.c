@@ -6,31 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 09:01:42 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:05:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static char		*reverse(char *str, int i)
-{
-	int		j;
-	char	*tmp;
-
-	j = 0;
-	tmp = ft_strnew(i);
-	i -= 1;
-	while (i >= 0)
-	{
-		tmp[j] = str[i];
-		i--;
-		j++;
-	}
-	tmp[j] = '\0';
-	ft_strdel(&str);
-	str = tmp;
-	return (str);
-}
 
 static char		*ft_ustoa_next(char **str, unsigned short *num)
 {
@@ -63,6 +43,6 @@ char			*ft_ustoa_base(unsigned short num, int base)
 		num = num / base;
 	}
 	str[i] = '\0';
-	str = reverse(str, i);
+	str = ft_strrev(str, i);
 	return (str);
 }

@@ -6,31 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 11:41:42 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:13:33 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static char		*ft_reverse(char *str, int i)
-{
-	int		j;
-	char	*tmp;
-
-	j = 0;
-	tmp = ft_strnew(i);
-	i -= 1;
-	while (i >= 0)
-	{
-		tmp[j] = str[i];
-		i--;
-		j++;
-	}
-	tmp[j] = '\0';
-	ft_strdel(&str);
-	str = tmp;
-	return (str);
-}
 
 static void		llitoa_n(int **bs, int **ng, long long int **num, char ***str)
 {
@@ -69,6 +49,16 @@ static char		*llitoa_nxt(char **str, long long *num, int *base, int *neg)
 	return ((*str));
 }
 
+static int		ft_llitoa_base_n(long long int *num)
+{
+	long long int a;
+
+	a = (9223372036854775807 * -1) - 1;
+	if ((*num) == a)
+		return (1);
+	return (0);
+}
+
 static void		ft_llitoa_init(char **str, int *i, int *negative)
 {
 	(*i) = 0;
@@ -76,35 +66,31 @@ static void		ft_llitoa_init(char **str, int *i, int *negative)
 	(*str) = ft_strnew(64);
 }
 
-char			*ft_llitoa_base(long long num, int base)
+char			*ft_llitoa_base(long long num, int bs)
 {
 	char			*str;
 	int				i;
 	long int		rem;
 	int				negative;
-	long long int	a;
 
-	a = (9223372036854775807 * -1) - 1;
 	ft_llitoa_init(&str, &i, &negative);
-	str = llitoa_nxt(&str, &num, &base, &negative);
-	if (num == a)
+	str = llitoa_nxt(&str, &num, &bs, &negative);
+	if (ft_llitoa_base_n(&num))
 		return (ft_strdup("-9223372036854775808"));
-	if (str[0] == '0' && str[1] == '\0')
-		return (str);
-	else if (num < 0 && (base == 2 || base == 16))
+	if ((str[0] == '0' && str[1] == '\0') || (num < 0 && (bs == 2 || bs == 16)))
 		return (str);
 	else
 	{
 		while (num != 0)
 		{
-			rem = num % base;
+			rem = num % bs;
 			str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
-			num = num / base;
+			num = num / bs;
 		}
 		if (negative == 1)
 			str[i++] = '-';
 		str[i] = '\0';
-		str = ft_reverse(str, i);
+		str = ft_strrev(str, i);
 	}
 	return (str);
 }

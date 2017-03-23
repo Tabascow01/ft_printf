@@ -6,31 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 05:58:47 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:07:35 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static char		*ft_reverse(char *str, int i)
-{
-	int		j;
-	char	*tmp;
-
-	j = 0;
-	tmp = ft_strnew(i);
-	i -= 1;
-	while (i >= 0)
-	{
-		tmp[j] = str[i];
-		i--;
-		j++;
-	}
-	tmp[j] = '\0';
-	ft_strdel(&str);
-	str = tmp;
-	return (str);
-}
 
 static void		ft_sitoa_nextn(int **bs, int **ng, short int **num, char ***str)
 {
@@ -102,7 +82,7 @@ char			*ft_sitoa_base(short int num, int base)
 		if (negative == 1)
 			str[i++] = '-';
 		str[i] = '\0';
-		str = ft_reverse(str, i);
+		str = ft_strrev(str, i);
 	}
 	return (str);
 }
