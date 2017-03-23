@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 20:44:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/23 22:22:53 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 23:10:03 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ void			ft_save_hex_low(t_flags *list, va_list args)
 			tmp = ft_btoh(ft_itob(temp, 31));
 		else
 			tmp = ft_uitoa_base(temp, 16);
-		while (tmp[i])
-		{
-			tmp[i] = ft_tolower(tmp[i]);
-			i++;
-		}
+		tmp = ft_strtolower(tmp);
 		list->args = ft_reallocf(tmp, 0);
 		if (ft_atoi(list->args) == 0 && !ft_isalpha(list->args[0]))
 			ft_free_hex(list);
@@ -67,12 +63,8 @@ void			ft_save_hex_up(t_flags *list, va_list args)
 			tmp = ft_btoh(ft_itob(temp, 31));
 		else
 			tmp = ft_itoa_base(temp, 16);
-		while (tmp[i])
-		{
-			tmp[i] = ft_toupper(tmp[i]);
-			i++;
-		}
-	list->args = ft_reallocf(tmp, 0);
+		tmp = ft_strtoupper(tmp);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	if (ft_atoi(list->args) == 0 && !ft_isalpha(list->args[0]))
 		ft_free_hex(list);

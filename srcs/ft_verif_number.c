@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 17:59:22 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/23 22:00:21 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 23:14:47 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int		ft_save_digit_n(t_flags *list, int *idxtmp, int *ret, int *i)
 	return (1);
 }
 
-void	ft_save_digit(t_flags *list, int idxtmp)
+void			ft_save_digit(t_flags *list, int idxtmp)
 {
 	int		i;
 	int		ret;
@@ -59,7 +59,7 @@ void	ft_save_digit(t_flags *list, int idxtmp)
 		list->precision = 1;
 }
 
-int		ft_isdigit_allowed(t_flags *list, int idxtmp)
+int				ft_isdigit_allowed(t_flags *list, int idxtmp)
 {
 	int count;
 	int counter;
@@ -85,7 +85,7 @@ int		ft_isdigit_allowed(t_flags *list, int idxtmp)
 	return (0);
 }
 
-int		ft_verif_number(t_flags *list, int idxtmp)
+int				ft_verif_number(t_flags *list, int idxtmp)
 {
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 			&& ft_isflag(list->format[idxtmp]))

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/23 22:14:29 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 23:04:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct		s_list
 ** ft_printf
 */
 
+char				*ft_strtolower(char *str);
+char				*ft_strtoupper(char *str);
 char				*ft_strrev(char *str, int i);
 int					ft_argnull(t_flags *list);
 void				ft_decompose_digit(t_flags *list);
