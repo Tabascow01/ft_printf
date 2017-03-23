@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 20:44:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 22:13:48 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/23 22:22:53 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			ft_save_hex_low(t_flags *list, va_list args)
 	int		i;
 	int		temp;
 
-	i = -1;
+	i = 0;
 	temp = 0;
 	if (list->option != 0 || list->dbloption != 0)
 		ft_process_option(list, args, 'x');
@@ -36,8 +36,11 @@ void			ft_save_hex_low(t_flags *list, va_list args)
 			tmp = ft_btoh(ft_itob(temp, 31));
 		else
 			tmp = ft_uitoa_base(temp, 16);
-		while (tmp[i++])
+		while (tmp[i])
+		{
 			tmp[i] = ft_tolower(tmp[i]);
+			i++;
+		}
 		list->args = ft_reallocf(tmp, 0);
 		if (ft_atoi(list->args) == 0 && !ft_isalpha(list->args[0]))
 			ft_free_hex(list);
@@ -53,7 +56,7 @@ void			ft_save_hex_up(t_flags *list, va_list args)
 	int		temp;
 	int		i;
 
-	i = -1;
+	i = 0;
 	temp = 0;
 	if (list->option != 0 || list->dbloption != 0)
 		ft_process_option(list, args, 'X');
@@ -64,9 +67,12 @@ void			ft_save_hex_up(t_flags *list, va_list args)
 			tmp = ft_btoh(ft_itob(temp, 31));
 		else
 			tmp = ft_itoa_base(temp, 16);
-		while (tmp[i++])
+		while (tmp[i])
+		{
 			tmp[i] = ft_toupper(tmp[i]);
-		list->args = ft_reallocf(tmp, 0);
+			i++;
+		}
+	list->args = ft_reallocf(tmp, 0);
 	}
 	if (ft_atoi(list->args) == 0 && !ft_isalpha(list->args[0]))
 		ft_free_hex(list);
