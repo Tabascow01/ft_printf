@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:58:07 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/27 03:30:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,44 @@ static void		ft_precs(t_flags *list, char *newarg, char *fdigit, int digit)
 	}
 }
 
+static void		ft_digit_n(t_flags *list, int *size, int *digit, char **newarg)
+{
+	if ((int)ft_strlen(list->args) == 0 && (list->conv != 's'
+				|| list->noconv > 0))
+	{
+		if (list->noconv > 0)
+			list->size += 1;
+		(*size) += 1;
+	}
+	(*digit) = ft_atoi(list->digit);
+	(*newarg) = ft_strnew((*digit) - (*size));
+}
+
+static void		ft_digit_nn(t_flags *list, int *i, char **tmp, int *digit)
+{
+	while (list->digit[(*i)] && list->digit[(*i)] != '.')
+		(*i)++;
+	(*tmp) = ft_strnew((*i));
+	(*i) = 0;
+	while (list->digit[(*i)] && list->digit[(*i)] != '.')
+	{
+		(*tmp)[(*i)] = list->digit[(*i)];
+		(*i)++;
+	}
+}
+
+static void		ft_digit_nnn(t_flags *list, int *i, char **newarg, char **tmp)
+{
+	if ((*i) >= 0 && list->conv != 'u')
+		(*newarg)[(*i)] = '\0';
+	else if ((*i) > 0)
+		(*newarg)[(*i)] = '\0';
+	(*tmp) = ft_strjoin((*newarg), list->args);
+	ft_strdel((*&newarg));
+	ft_strdel(&list->args);
+	list->args = ft_reallocf((*tmp), 0);
+}
+
 void			ft_digitflag(t_flags *list)
 {
 	char	*newarg;
@@ -149,37 +187,14 @@ void			ft_digitflag(t_flags *list)
 	size = (int)ft_strlen(list->args);
 	if (list->precision == 0)
 	{
-		if ((int)ft_strlen(list->args) == 0 && (list->conv != 's'
-				|| list->noconv > 0))
-		{
-			if (list->noconv > 0)
-				list->size += 1;
-			size += 1;
-		}
-		digit = ft_atoi(list->digit);
-		newarg = ft_strnew(digit - size);
+		ft_digit_n(list, &size, &digit, &newarg);
 		while (i < (digit - size))
 			newarg[i++] = ' ';
-		if (i >= 0 && list->conv != 'u')
-			newarg[i] = '\0';
-		else if (i > 0)
-			newarg[i] = '\0';
-		tmp = ft_strjoin(newarg, list->args);
-		ft_strdel(&newarg);
-		ft_strdel(&list->args);
-		list->args = ft_reallocf(tmp, 0);
+		ft_digit_nnn(list, &i, &newarg, &tmp);
 	}
 	else
 	{
-		while (list->digit[i] && list->digit[i] != '.')
-			i++;
-		tmp = ft_strnew(i);
-		i = 0;
-		while (list->digit[i] && list->digit[i] != '.')
-		{
-			tmp[i] = list->digit[i];
-			i++;
-		}
+		ft_digit_nn(list, &i, &tmp, &digit);
 		digit = ft_atoi(&list->digit[i + 1]);
 		newarg = ft_strnew(ft_atoi(tmp) + digit - ((int)ft_strlen(list->args)));
 		ft_precs(list, newarg, tmp, digit);
