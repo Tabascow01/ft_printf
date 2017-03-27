@@ -6,13 +6,13 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 04:11:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 04:13:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/27 04:20:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_ldigitflag_nnnn(t_flags *list, int *size, int *i, char ** newarg)
+void	ft_ldigit_nnnn(t_flags *list, int *size, int *i, char ** newarg)
 {
 	(*newarg) = NULL;
 	(*i) = 0;
