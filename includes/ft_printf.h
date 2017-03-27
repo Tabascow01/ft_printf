@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 01:47:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:17:35 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ typedef struct		s_list
 ** ft_printf
 */
 
+
+void				ft_return_size_nn(t_flags *list);
+void				ft_return_size_nnn(t_flags *list);
+void				ft_return_size_nnnn(t_flags *list);
+void				ft_return_size_nnnnn(t_flags *list);
 void				ft_process_flags_nnnn(t_flags *list);
 
 char				*ft_strtolower(char *str);
