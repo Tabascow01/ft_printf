@@ -6,13 +6,81 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/20 01:21:59 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/27 02:56:37 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_zhashflag(t_flags *list)
+static void		ft_zeroflag_nn(t_flags *list, char **tmparg, char **newarg)
+{
+	char *tmp;
+
+	if (list->args != NULL && (list->args[0] == '-' || list->args[0] == '+')
+			&& list->noconv == 0)
+	{
+		tmp = ft_strnew(1);
+		if (list->args[0] == '-')
+			tmp[0] = '-';
+		else
+			tmp[0] = '+';
+		list->args++;
+		(*tmparg) = ft_strjoin(tmp, (*newarg));
+		ft_strdel(&tmp);
+		ft_strdel((*&newarg));
+		(*newarg) = ft_strjoin((*tmparg), list->args);
+		list->args--;
+		tmp = list->args;
+	}
+	else
+	{
+		(*tmparg) = (*newarg);
+		tmp = list->args;
+		(*newarg) = ft_strjoin((*tmparg), list->args);
+	}
+	ft_strdel(&tmp);
+}
+
+static void		ft_zeroflag_n(t_flags *list, int *size, int *digit)
+{
+	if (list->args != NULL)
+	{
+		if (list->args[0] == '-')
+			(*size) -= 1;
+		if ((list->args[0] == '\0' && list->conv == 'c') || list->space > 0)
+			(*digit) -= 1;
+	}
+	if (list->noconv > 0)
+		(*digit) -= 1;
+}
+
+void			ft_zeroflag(t_flags *list)
+{
+	char	*newarg;
+	char	*tmparg;
+	int		digit;
+	int		i;
+	int		size;
+
+	i = 0;
+	if (list->conv == 'p')
+		ft_cut_lststr(list, 2);
+	size = (int)ft_strlen(list->args);
+	digit = ft_atoi(list->digit);
+	newarg = ft_strnew(size + digit);
+	ft_zeroflag_n(list, &size, &digit);
+	while (i < (digit - (int)ft_strlen(list->args)))
+		newarg[i++] = '0';
+	if (digit > 0 && size < digit)
+		newarg[i] = '\0';
+	else if (i > 0)
+		newarg[i] = '\0';
+	ft_zeroflag_nn(list, &tmparg, &newarg);
+	ft_strdel(&tmparg);
+	list->args = ft_reallocf(newarg, 0);
+}
+
+void			ft_zhashflag(t_flags *list)
 {
 	char	*newarg;
 	char	*tmp;
@@ -37,62 +105,5 @@ void	ft_zhashflag(t_flags *list)
 	}
 	newarg = ft_strcat(newarg, tmp);
 	ft_strdel(&list->args);
-	list->args = ft_reallocf(newarg, 0);
-}
-
-void	ft_zeroflag(t_flags *list)
-{
-	char	*newarg;
-	char	*tmp;
-	char	*tmparg;
-	int		digit;
-	int		i;
-	int		size;
-
-	i = 0;
-	if (list->conv == 'p')
-		ft_cut_lststr(list, 2);
-	size = (int)ft_strlen(list->args);
-	digit = ft_atoi(list->digit);
-	newarg = ft_strnew(size + digit);
-	if (list->args != NULL)
-	{
-		if (list->args[0] == '-')
-			size -= 1;
-		if ((list->args[0] == '\0' && list->conv == 'c') || list->space > 0)
-			digit -= 1;
-	}
-	if (list->noconv > 0)
-		digit -= 1;
-	while (i < (digit - (int)ft_strlen(list->args)))
-		newarg[i++] = '0';
-	if (digit > 0 && size < digit)
-		newarg[i] = '\0';
-	else if (i > 0)
-		newarg[i] = '\0';
-	if (list->args != NULL && (list->args[0] == '-' || list->args[0] == '+')
-			&& list->noconv == 0)
-	{
-		tmp = ft_strnew(1);
-		if (list->args[0] == '-')
-			tmp[0] = '-';
-		else
-			tmp[0] = '+';
-		list->args++;
-		tmparg = ft_strjoin(tmp, newarg);
-		ft_strdel(&tmp);
-		ft_strdel(&newarg);
-		newarg = ft_strjoin(tmparg, list->args);
-		list->args--;
-		tmp = list->args;
-	}
-	else
-	{
-		tmparg = newarg;
-		tmp = list->args;
-		newarg = ft_strjoin(tmparg, list->args);
-	}
-	ft_strdel(&tmparg);
-	ft_strdel(&tmp);
 	list->args = ft_reallocf(newarg, 0);
 }
