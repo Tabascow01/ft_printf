@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/20 01:31:55 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/27 04:32:21 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,37 @@ static void		ft_precs(t_flags *list, wchar_t *newarg, wchar_t *d, int digit)
 	}
 }
 
+static void		ft_wldigit_n(t_flags *list, int *size, int *i, wchar_t **newarg)
+{
+	(*newarg) = NULL;
+	(*i) = 0;
+	(*size) = (int)ft_wstrlen(list->wargs);
+	if (list->wargs == NULL)
+		(*size) += 1;
+}
+
+static void		ft_wld_nn(t_flags *lst, int *i, wchar_t **newarg, wchar_t **tmp)
+{
+	if ((*i) > 0)
+		(*newarg)[(*i)] = 0;
+	(*tmp) = ft_wstrjoin(lst->wargs, (*newarg));
+	ft_wstrdel((*&newarg));
+	lst->wargs = ft_wreallocf((*tmp), 0);
+}
+
+static void		ft_wldigit_nnn(t_flags *list, int *i, wchar_t **tmp)
+{
+	while (list->digit[(*i)] && list->digit[(*i)] != '.')
+		(*i)++;
+	(*tmp) = ft_wstrnew((*i));
+	(*i) = 0;
+	while (list->digit[(*i)] && list->digit[(*i)] != '.')
+	{
+		(*tmp)[(*i)] = list->digit[(*i)];
+		(*i)++;
+	}
+}
+
 void			ft_wldigitflag(t_flags *list)
 {
 	wchar_t		*newarg;
@@ -144,36 +175,21 @@ void			ft_wldigitflag(t_flags *list)
 	int			i;
 	int			size;
 
-	newarg = NULL;
-	i = 0;
-	size = (int)ft_wstrlen(list->wargs);
-	if (list->wargs == NULL)
-		size += 1;
+	ft_wldigit_n(list, &size, &i, &newarg);
 	if (list->precision == 0)
 	{
 		digit = ft_atoi(list->digit);
 		newarg = ft_wstrnew(digit - size);
 		while (i < (digit - size))
 			newarg[i++] = ' ';
-		if (i > 0)
-			newarg[i] = 0;
-		tmp = ft_wstrjoin(list->wargs, newarg);
-		ft_wstrdel(&newarg);
-		list->wargs = ft_wreallocf(tmp, 0);
+		ft_wld_nn(list, &i, &newarg, &tmp);
 	}
 	else
 	{
-		while (list->digit[i] && list->digit[i] != '.')
-			i++;
-		tmp = ft_wstrnew(i);
-		i = 0;
-		while (list->digit[i] && list->digit[i] != '.')
-		{
-			tmp[i] = list->digit[i];
-			i++;
-		}
+		ft_wldigit_nnn(list, &i, &tmp);
 		digit = ft_atoi(&list->digit[i + 1]);
-		newarg = ft_wstrnew(ft_atoi((void *)tmp) + (digit - ((int)ft_wstrlen(list->wargs))));
+		newarg = ft_wstrnew(ft_atoi((void *)tmp) + (digit -
+					(int)ft_wstrlen(list->wargs)));
 		ft_precs(list, newarg, tmp, digit);
 	}
 }
