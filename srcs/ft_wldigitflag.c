@@ -6,84 +6,79 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 04:32:21 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 00:14:23 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precs(t_flags *list, wchar_t *newarg, wchar_t *d, int digit)
+static void		ft_precs(t_flags *list, wchar_t *newarg, t_precs *lst, int dgit)
 {
-	wchar_t		*tmp;
-	wchar_t		*tmpargs;
-	int			i;
-	int			j;
-	int			size;
 	int			digittmp;
 
-	digittmp = ft_atoi((void *)d);
-	ft_wstrdel(&d);
-	i = 0;
-	size = (int)ft_wstrlen(list->wargs);
+	digittmp = ft_atoi((void *)lst->wtmp);
+	ft_wstrdel(&lst->wtmp);
+	lst->i = 0;
+	lst->size = (int)ft_wstrlen(list->wargs);
 	if (list->conv != 'S')
 	{
 		if (list->wargs[0] == '-' || list->wargs[0] == '+')
-			size -= 1;
-		if (digittmp > digit && (list->space > 0 || list->sign > 0))
-			digittmp -= digit;
-		if (digittmp > (digit - size) + (int)ft_wstrlen(list->wargs))
+			lst->size -= 1;
+		if (digittmp > dgit && (list->space > 0 || list->sign > 0))
+			digittmp -= dgit;
+		if (digittmp > (dgit - lst->size) + (int)ft_wstrlen(list->wargs))
 		{
-			while (i < digittmp - size)
-				newarg[i++] = ' ';
-			i--;
+			while (lst->i < digittmp - lst->size)
+				newarg[lst->i++] = ' ';
+			lst->i--;
 		}
 		else if (list->sign > 0)
 		{
-			while (i < digittmp)
-				newarg[i++] = ' ';
-			i--;
+			while (lst->i < digittmp)
+				newarg[lst->i++] = ' ';
+			lst->i--;
 		}
-		if (i > 0)
-			newarg[i] = '\0';
+		if (lst->i > 0)
+			newarg[lst->i] = '\0';
 		if (list->wargs[0] == '-' || list->wargs[0] == '+')
-			i = 0;
+			lst->i = 0;
 		else
-			i = 1;
-		j = 0;
-		tmp = ft_wstrnew(digit - size);
-		while (i <= digit - size)
+			lst->i = 1;
+		lst->j = 0;
+		lst->wtmp = ft_wstrnew(dgit - lst->size);
+		while (lst->i <= dgit - lst->size)
 		{
-			if (list->wargs[0] == '-' && j < 1)
-				tmp[j++] = '-';
-			else if (list->wargs[0] == '+' && j < 1)
-				tmp[j++] = '+';
+			if (list->wargs[0] == '-' && lst->j < 1)
+				lst->wtmp[lst->j++] = '-';
+			else if (list->wargs[0] == '+' && lst->j < 1)
+				lst->wtmp[lst->j++] = '+';
 			else
-				tmp[j++] = '0';
-			i++;
+				lst->wtmp[lst->j++] = '0';
+			lst->i++;
 		}
-		if (j >= 1)
-			tmp[j] = '\0';
+		if (lst->j >= 1)
+			lst->wtmp[lst->j] = '\0';
 		if (list->wargs[0] == '-' || list->wargs[0] == '+')
 		{
 			list->wargs++;
-			tmpargs = ft_wstrjoin(tmp, list->wargs);
-			ft_wstrdel(&tmp);
+			lst->wtmpargs = ft_wstrjoin(lst->wtmp, list->wargs);
+			ft_wstrdel(&lst->wtmp);
 			list->wargs--;
 			ft_wstrdel(&list->wargs);
-			tmp = newarg;
-			newarg = ft_wstrjoin(tmpargs, tmp);
-			ft_wstrdel(&tmpargs);
-			ft_wstrdel(&tmp);
+			lst->wtmp = newarg;
+			newarg = ft_wstrjoin(lst->wtmpargs, lst->wtmp);
+			ft_wstrdel(&lst->wtmpargs);
+			ft_wstrdel(&lst->wtmp);
 		}
 		else
 		{
-			tmpargs = ft_wstrjoin(tmp, list->wargs);
+			lst->wtmpargs = ft_wstrjoin(lst->wtmp, list->wargs);
 			ft_wstrdel(&list->wargs);
-			ft_wstrdel(&tmp);
-			tmp = newarg;
-			newarg = ft_wstrjoin(tmpargs, tmp);
-			ft_wstrdel(&tmpargs);
-			ft_wstrdel(&tmp);
+			ft_wstrdel(&lst->wtmp);
+			lst->wtmp = newarg;
+			newarg = ft_wstrjoin(lst->wtmpargs, lst->wtmp);
+			ft_wstrdel(&lst->wtmpargs);
+			ft_wstrdel(&lst->wtmp);
 		}
 		list->wargs = ft_wreallocf(newarg, 0);
 		if (list->space > 0)
@@ -91,47 +86,47 @@ static void		ft_precs(t_flags *list, wchar_t *newarg, wchar_t *d, int digit)
 	}
 	else
 	{
-		if (digit > 0)
+		if (dgit > 0)
 		{
-			tmpargs = ft_wstrnew(digit);
-			while (list->wargs[i] && i < digit)
-				i++;
-			tmp = &list->wargs[i];
-			i = 0;
-			while (i < digit)
+			lst->wtmpargs = ft_wstrnew(dgit);
+			while (list->wargs[lst->i] && lst->i < dgit)
+				lst->i++;
+			lst->wtmp = &list->wargs[lst->i];
+			lst->i = 0;
+			while (lst->i < dgit)
 			{
-				tmpargs[i] = list->wargs[i];
-				i++;
+				lst->wtmpargs[lst->i] = list->wargs[lst->i];
+				lst->i++;
 			}
 			if (list->wargs[0] != '\0')
 				ft_wstrdel(&list->wargs);
-			list->wargs = ft_wstrjoin(tmpargs, tmp);
-			ft_wstrdel(&tmpargs);
+			list->wargs = ft_wstrjoin(lst->wtmpargs, lst->wtmp);
+			ft_wstrdel(&lst->wtmpargs);
 		}
 		if (digittmp > 0)
 		{
-			i = 0;
-			tmpargs = ft_wstrnew(digit);
-			while (list->wargs[i] && i < digit)
-				i++;
-			tmp = &list->wargs[i];
-			i = 0;
-			while (i < digit)
+			lst->i = 0;
+			lst->wtmpargs = ft_wstrnew(dgit);
+			while (list->wargs[lst->i] && lst->i < dgit)
+				lst->i++;
+			lst->wtmp = &list->wargs[lst->i];
+			lst->i = 0;
+			while (lst->i < dgit)
 			{
-				tmpargs[i] = list->args[i];
-				i++;
+				lst->wtmpargs[lst->i] = list->args[lst->i];
+				lst->i++;
 			}
-			i = 0;
+			lst->i = 0;
 			if (list->args[0] != '\0')
-				digittmp -= digit;
-			d = ft_wstrnew(digittmp);
-			while (i < digittmp)
-				d[i++] = ' ';
-			list->wargs = ft_wstrjoin(tmpargs, d);
-			ft_wstrdel(&tmpargs);
-			ft_wstrdel(&d);
-			tmpargs = list->wargs;
-			list->wargs = ft_wstrjoin(list->wargs, tmp);
+				digittmp -= dgit;
+			lst->wtmp = ft_wstrnew(digittmp);
+			while (lst->i < digittmp)
+				lst->wtmp[lst->i++] = ' ';
+			list->wargs = ft_wstrjoin(lst->wtmpargs, lst->wtmp);
+			ft_wstrdel(&lst->wtmpargs);
+			ft_wstrdel(&lst->wtmp);
+			lst->wtmpargs = list->wargs;
+			list->wargs = ft_wstrjoin(list->wargs, lst->wtmp);
 		}
 	}
 }
@@ -170,26 +165,26 @@ static void		ft_wldigit_nnn(t_flags *list, int *i, wchar_t **tmp)
 void			ft_wldigitflag(t_flags *list)
 {
 	wchar_t		*newarg;
-	wchar_t		*tmp;
 	int			digit;
-	int			i;
-	int			size;
+	t_precs		*lst;
 
-	ft_wldigit_n(list, &size, &i, &newarg);
+	lst = NULL;
+	lst = ft_init_precs(lst);
+	ft_wldigit_n(list, &lst->size, &lst->i, &newarg);
 	if (list->precision == 0)
 	{
 		digit = ft_atoi(list->digit);
-		newarg = ft_wstrnew(digit - size);
-		while (i < (digit - size))
-			newarg[i++] = ' ';
-		ft_wld_nn(list, &i, &newarg, &tmp);
+		newarg = ft_wstrnew(digit - lst->size);
+		while (lst->i < (digit - lst->size))
+			newarg[lst->i++] = ' ';
+		ft_wld_nn(list, &lst->i, &newarg, &lst->wtmp);
 	}
 	else
 	{
-		ft_wldigit_nnn(list, &i, &tmp);
-		digit = ft_atoi(&list->digit[i + 1]);
-		newarg = ft_wstrnew(ft_atoi((void *)tmp) + (digit -
+		ft_wldigit_nnn(list, &lst->i, &lst->wtmp);
+		digit = ft_atoi(&list->digit[lst->i + 1]);
+		newarg = ft_wstrnew(ft_atoi((void *)lst->wtmp) + (digit -
 					(int)ft_wstrlen(list->wargs)));
-		ft_precs(list, newarg, tmp, digit);
+		ft_precs(list, newarg, lst, digit);
 	}
 }

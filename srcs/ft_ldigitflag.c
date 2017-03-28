@@ -6,84 +6,79 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 04:12:56 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/28 23:51:39 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precs(t_flags *list, char *newarg, char *fdigit, int digit)
+static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
-	char	*tmp;
-	char	*tmpargs;
-	int		i;
-	int		j;
-	int		size;
 	int		digittmp;
 
-	digittmp = ft_atoi(fdigit);
-	ft_strdel(&fdigit);
-	i = 0;
-	size = (int)ft_strlen(list->args);
+	digittmp = ft_atoi(lst->tmp);
+	ft_strdel(&lst->tmp);
+	lst->i = 0;
+	lst->size = (int)ft_strlen(list->args);
 	if (list->conv != 's')
 	{
 		if (list->args[0] == '-' || list->args[0] == '+')
-			size -= 1;
+			lst->size -= 1;
 		if (digittmp > digit && (list->space > 0 || list->sign > 0))
 			digittmp -= digit;
-		if (digittmp > (digit - size) + (int)ft_strlen(list->args))
+		if (digittmp > (digit - lst->size) + (int)ft_strlen(list->args))
 		{
-			while (i < digittmp - size)
-				newarg[i++] = ' ';
-			i--;
+			while (lst->i < digittmp - lst->size)
+				newarg[lst->i++] = ' ';
+			lst->i--;
 		}
 		else if (list->sign > 0)
 		{
-			while (i < digittmp)
-				newarg[i++] = ' ';
-			i--;
+			while (lst->i < digittmp)
+				newarg[lst->i++] = ' ';
+			lst->i--;
 		}
-		if (i > 0)
-			newarg[i] = '\0';
+		if (lst->i > 0)
+			newarg[lst->i] = '\0';
 		if (list->args[0] == '-' || list->args[0] == '+')
-			i = 0;
+			lst->i = 0;
 		else
-			i = 1;
-		j = 0;
-		tmp = ft_strnew(digit - size);
-		while (i <= digit - size)
+			lst->i = 1;
+		lst->j = 0;
+		lst->tmp = ft_strnew(digit - lst->size);
+		while (lst->i <= digit - lst->size)
 		{
-			if (list->args[0] == '-' && j < 1)
-				tmp[j++] = '-';
-			else if (list->args[0] == '+' && j < 1)
-				tmp[j++] = '+';
+			if (list->args[0] == '-' && lst->j < 1)
+				lst->tmp[lst->j++] = '-';
+			else if (list->args[0] == '+' && lst->j < 1)
+				lst->tmp[lst->j++] = '+';
 			else
-				tmp[j++] = '0';
-			i++;
+				lst->tmp[lst->j++] = '0';
+			lst->i++;
 		}
-		if (j >= 1)
-			tmp[j] = '\0';
+		if (lst->j >= 1)
+			lst->tmp[lst->j] = '\0';
 		if (list->args[0] == '-' || list->args[0] == '+')
 		{
 			list->args++;
-			tmpargs = ft_strjoin(tmp, list->args);
-			ft_strdel(&tmp);
+			lst->tmpargs = ft_strjoin(lst->tmp, list->args);
+			ft_strdel(&lst->tmp);
 			list->args--;
 			ft_strdel(&list->args);
-			tmp = newarg;
-			newarg = ft_strjoin(tmpargs, tmp);
-			ft_strdel(&tmpargs);
-			ft_strdel(&tmp);
+			lst->tmp = newarg;
+			newarg = ft_strjoin(lst->tmpargs, lst->tmp);
+			ft_strdel(&lst->tmpargs);
+			ft_strdel(&lst->tmp);
 		}
 		else
 		{
-			tmpargs = ft_strjoin(tmp, list->args);
+			lst->tmpargs = ft_strjoin(lst->tmp, list->args);
 			ft_strdel(&list->args);
-			ft_strdel(&tmp);
-			tmp = newarg;
-			newarg = ft_strjoin(tmpargs, tmp);
-			ft_strdel(&tmpargs);
-			ft_strdel(&tmp);
+			ft_strdel(&lst->tmp);
+			lst->tmp = newarg;
+			newarg = ft_strjoin(lst->tmpargs, lst->tmp);
+			ft_strdel(&lst->tmpargs);
+			ft_strdel(&lst->tmp);
 		}
 		list->args = ft_reallocf(newarg, 0);
 		if (list->space > 0)
@@ -93,45 +88,45 @@ static void		ft_precs(t_flags *list, char *newarg, char *fdigit, int digit)
 	{
 		if (digit > 0)
 		{
-			tmpargs = ft_strnew(digit);
-			while (list->args[i] && i < digit)
-				i++;
-			tmp = &list->args[i];
-			i = 0;
-			while (i < digit)
+			lst->tmpargs = ft_strnew(digit);
+			while (list->args[lst->i] && lst->i < digit)
+				lst->i++;
+			lst->tmp = &list->args[lst->i];
+			lst->i = 0;
+			while (lst->i < digit)
 			{
-				tmpargs[i] = list->args[i];
-				i++;
+				lst->tmpargs[lst->i] = list->args[lst->i];
+				lst->i++;
 			}
 			if (list->args[0] != '\0')
 				ft_strdel(&list->args);
-			list->args = ft_strjoin(tmpargs, tmp);
-			ft_strdel(&tmpargs);
+			list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+			ft_strdel(&lst->tmpargs);
 		}
 		if (digittmp > 0)
 		{
-			i = 0;
-			tmpargs = ft_strnew(digit);
-			while (list->args[i] && i < digit)
-				i++;
-			tmp = &list->args[i];
-			i = 0;
-			while (i < digit)
+			lst->i = 0;
+			lst->tmpargs = ft_strnew(digit);
+			while (list->args[lst->i] && lst->i < digit)
+				lst->i++;
+			lst->tmp = &list->args[lst->i];
+			lst->i = 0;
+			while (lst->i < digit)
 			{
-				tmpargs[i] = list->args[i];
-				i++;
+				lst->tmpargs[lst->i] = list->args[lst->i];
+				lst->i++;
 			}
-			i = 0;
+			lst->i = 0;
 			if (list->args[0] != '\0')
 				digittmp -= digit;
-			fdigit = ft_strnew(digittmp);
-			while (i < digittmp)
-				fdigit[i++] = ' ';
-			list->args = ft_strjoin(tmpargs, fdigit);
-			ft_strdel(&tmpargs);
-			ft_strdel(&fdigit);
-			tmpargs = list->args;
-			list->args = ft_strjoin(list->args, tmp);
+			lst->tmp = ft_strnew(digittmp);
+			while (lst->i < digittmp)
+				lst->tmp[lst->i++] = ' ';
+			list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+			ft_strdel(&lst->tmpargs);
+			ft_strdel(&lst->tmp);
+			lst->tmpargs = list->args;
+			list->args = ft_strjoin(list->args, lst->tmp);
 		}
 	}
 }
@@ -169,28 +164,28 @@ static void		ft_ldigit_nnn(t_flags *list, int *i, char **tmp)
 void			ft_ldigitflag(t_flags *list)
 {
 	char	*newarg;
-	char	*tmp;
 	int		digit;
-	int		i;
-	int		size;
+	t_precs	*lst;
 
-	ft_ldigit_nnnn(list, &size, &i, &newarg);
+	lst = NULL;
+	lst = ft_init_precs(lst);
+	ft_ldigit_nnnn(list, &lst->size, &lst->i, &newarg);
 	if (list->args == NULL)
-		size += 1;
+		lst->size += 1;
 	if (list->precision == 0)
 	{
-		digit = ft_atoi(list->digit);
-		newarg = ft_strnew(digit - size);
-		while (i < (digit - size))
-			newarg[i++] = ' ';
-		ft_ldigit_n(list, &i, &digit, &newarg);
-		ft_ldigit_nn(list, &tmp, &newarg);
+		ft_ldigit_nnnnn(list, &newarg, &digit, lst);
+		while (lst->i < (digit - lst->size))
+			newarg[lst->i++] = ' ';
+		ft_ldigit_n(list, &lst->i, &digit, &newarg);
+		ft_ldigit_nn(list, &lst->tmp, &newarg);
 	}
 	else
 	{
-		ft_ldigit_nnn(list, &i, &tmp);
-		digit = ft_atoi(&list->digit[i + 1]);
-		newarg = ft_strnew(ft_atoi(tmp) + (digit - (int)ft_strlen(list->args)));
-		ft_precs(list, newarg, tmp, digit);
+		ft_ldigit_nnn(list, &lst->i, &lst->tmp);
+		digit = ft_atoi(&list->digit[lst->i + 1]);
+		newarg = ft_strnew(ft_atoi(lst->tmp) + (digit -
+					(int)ft_strlen(list->args)));
+		ft_precs(list, newarg, lst, digit);
 	}
 }
