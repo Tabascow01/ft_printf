@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/28 23:53:18 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:21:51 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,15 @@ typedef struct		s_list
 
 t_precs				*ft_init_precs(t_precs *lst);
 
-/*
-void				ft_dgt_10(int *i, int *dtmp, int *d, int *s);
-void				ft_dgt_9(t_flags *list, int *i, char **tmar, int *dgt);
-void				ft_dgt_8(t_flags *list, char **tmp, char **newarg);
-void				ft_dgt_7(t_flags *list, char **t, char **ar, int *d);
-void				ft_dgt_6(t_flags *list, char **tmp, char **ar, char *s);
-void				ft_dgt_5(t_flags *list, char **tmp, char **newarg);
-void				ft_dgt_4(int *i, int *dgtmp, int *size, char **ar);
-void				ft_dgt_3(t_flags *list, int *i, int *j, char **str);
+void				ft_dgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
+void				ft_dgt_7(t_flags *list, t_precs *lst, int *dgt);
+void				ft_dgt_6(t_flags *list, t_precs *lst, char **ar);
+void				ft_dgt_5(t_flags *list, char **ar, t_precs *lst, int *dtmp);
+void				ft_dgt_4(t_flags *list, char **ar, t_precs *lst, int *dgt);
+void				ft_dgt_3(t_flags *list, char **str, t_precs *lst, int *dgt);
 void				ft_dgt_2(t_flags *list, int *dtmp, t_precs *lst, int *dgt);
-void				ft_dgt_1(t_flags *list, int *dgttmp, t_precs *lst);
-*/
+int					ft_dgt_1(t_flags *list, int *dgttmp, t_precs *lst, int *d);
+
 void				ft_ldigit_nnnnn(t_flags *l, char **n, int *dgt, t_precs *s);
 void				ft_ldigit_nnnn(t_flags *list, int *size, int *i, char **s);
 void				ft_return_size_nn(t_flags *list);

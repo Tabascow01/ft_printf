@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/28 23:24:01 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:21:21 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,120 +16,28 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
 	int		digittmp;
 
-	digittmp = ft_atoi(lst->tmp);
-	ft_strdel(&lst->tmp);
-	if (digittmp == 0 && digit == 0)
+	if (ft_dgt_1(list, &digittmp, lst, &digit) == 0)
 		return ;
-	lst->i = 0;
-	lst->size = (int)ft_strlen(list->args);
 	if (list->conv != 's')
 	{
-		if (((list->args[0] == '-' || list->args[0] == '+') && digit >= 0)
-				|| (digittmp > digit && list->conv == 'p'))
-			lst->size -= 1;
-		if (digittmp > digit && (list->space > 0 || list->sign > 0)
-				&& digit > 0 && list->conv != 'p')
-			digittmp = digittmp - digit + lst->size;
-		else if (digittmp > digit && lst->size > 0 && lst->size <= digit &&
-				digit > 0
-				&& list->conv != 'p' && list->args[0] != '-'
-				&& list->args[0] != '+')
-			digittmp = digittmp - (digit - lst->size) + 1;
-		else if (digittmp > digit && digittmp > lst->size && digit > 0
-				&& list->conv != 'p' && list->args[0] != '-'
-				&& list->args[0] != '+')
-			digittmp += 1;
-		else if ((list->args[0] == '-' || list->args[0] == '+')
-				&& digittmp > digit && digit > 0 && lst->size > 0 &&
-				digit > lst->size)
-			digittmp -= lst->size;
-		else
-			digittmp += 0;
+		ft_dgt_2(list, &digittmp, lst, &digit);
 		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
-		{
-			while (lst->i < digittmp - lst->size)
-				newarg[lst->i++] = ' ';
-			lst->i--;
-		}
-		lst->j = 0;
-		while (lst->j < digit - lst->size)
-		{
-			if (list->args[0] == '-' && newarg[lst->i - 1] != '0')
-				newarg[lst->i++] = '-';
-			if (list->args[0] == '+' && newarg[lst->i - 1] != '0')
-				newarg[lst->i++] = '+';
-			newarg[lst->i] = '0';
-			lst->i++;
-			lst->j++;
-		}
-		if (lst->i > 0)
-			newarg[lst->i] = '\0';
+			ft_dgt_3(list, &newarg, lst, &digit);
+		ft_dgt_4(list, &newarg, lst, &digit);
 		if (digit < lst->size && (list->args[0] == '-' || list->args[0] == '+')
 				&& digittmp > lst->size)
 			newarg[lst->i] = list->args[0];
-		if ((list->args[0] == '-' || list->args[0] == '+') && lst->i > 0)
-		{
-			list->args++;
-			lst->tmp = newarg;
-			newarg = ft_strjoin(newarg, list->args);
-			ft_strdel(&lst->tmp);
-			list->args--;
-			lst->tmp = list->args;
-		}
-		else
-		{
-			lst->tmpargs = newarg;
-			if (digittmp > 0 && list->args[0] == '\0')
-				list->args[0] = ' ';
-			lst->tmp = list->args;
-			newarg = ft_strjoin(lst->tmpargs, list->args);
-			ft_strdel(&lst->tmpargs);
-		}
-		ft_strdel(&lst->tmp);
-		list->args = ft_reallocf(newarg, 0);
-		if (list->space > 0)
-			ft_spaceflag(list);
+		ft_dgt_5(list, &newarg, lst, &digittmp);
+		ft_dgt_6(list, lst, &newarg);
 	}
 	else
 	{
 		if (digit > 0)
-		{
-			lst->tmpargs = ft_strnew(digit);
-			while (list->args[lst->i] && lst->i < digit)
-				lst->i++;
-			lst->tmp = &list->args[lst->i];
-			lst->i = 0;
-			while (lst->i < digit)
-			{
-				lst->tmpargs[lst->i] = list->args[lst->i];
-				lst->i++;
-			}
-			if (list->args[0] != '\0')
-				ft_strdel(&list->args);
-			list->args = ft_strjoin(lst->tmpargs, lst->tmp);
-			ft_strdel(&lst->tmpargs);
-		}
+			ft_dgt_7(list, lst, &digit);
 		else
 			ft_bzero(list->args, lst->size);
 		if (digittmp > 0)
-		{
-			lst->i = 0;
-			if (digittmp > digit && digit <= lst->size)
-				digittmp -= digit;
-			else if (digittmp > digit && digit > lst->size && lst->size > 0)
-				digittmp -= digit - lst->size;
-			else if (digittmp < digit && digittmp > lst->size && lst->size > 0)
-				digittmp -= lst->size;
-			else if (digittmp < digit && digittmp < lst->size && digittmp > 0)
-				digittmp -= digit;
-			else
-				digittmp -= 0;
-			lst->tmp = ft_strnew(digittmp);
-			while (lst->i < digittmp)
-				lst->tmp[lst->i++] = ' ';
-			list->args = ft_strjoin(lst->tmp, list->args);
-			ft_strdel(&lst->tmp);
-		}
+			ft_dgt_8(list, lst, &digittmp, &digit);
 	}
 }
 

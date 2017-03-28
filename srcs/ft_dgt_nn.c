@@ -6,57 +6,55 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:40:34 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 06:21:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:21:39 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_dgt_6(t_flags *list, char **tmp, char **newarg, char *tmpargs)
+void	ft_dgt_6(t_flags *list, t_precs *lst, char **newarg)
 {
-	(*tmp) = list->args;
-	(*newarg) = ft_strjoin(tmpargs, list->args);
-	ft_strdel(&tmpargs);
-}
-
-void	ft_dgt_7(t_flags *list, char **tmpargs, char **newarg, int *digitmp)
-{
-	(*tmpargs) = (*newarg);
-	if ((*digitmp) > 0 && list->args[0] == '\0')
-		list->args[0] = ' ';
-}
-
-void	ft_dgt_8(t_flags *list, char **tmp, char **newarg)
-{
-	ft_strdel((*&tmp));
+	ft_strdel(&lst->tmp);
 	list->args = ft_reallocf((*newarg), 0);
 	if (list->space > 0)
 		ft_spaceflag(list);
 }
 
-void	ft_dgt_9(t_flags *list, int *i, char **tmpargs, int *digit)
+void	ft_dgt_7(t_flags *list, t_precs *lst, int *digit)
 {
-	(*i) = 0;
-	while ((*i) < (*digit))
+	lst->tmpargs = ft_strnew((*digit));
+	while (list->args[lst->i] && lst->i < (*digit))
+		lst->i++;
+	lst->tmp = &list->args[lst->i];
+	lst->i = 0;
+	while (lst->i < (*digit))
 	{
-		(*tmpargs)[(*i)] = list->args[(*i)];
-		(*i)++;
+		lst->tmpargs[lst->i] = list->args[lst->i];
+		lst->i++;
 	}
 	if (list->args[0] != '\0')
 		ft_strdel(&list->args);
+	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+	ft_strdel(&lst->tmpargs);
 }
 
-void	ft_dgt_10(int *i, int *dgttmp, int *dgt, int *size)
+void	ft_dgt_8(t_flags *list, t_precs *lst, int *digittmp, int *digit)
 {
-	(*i) = 0;
-	if ((*dgttmp) > (*dgt) && (*dgt) <= (*size))
-		(*dgttmp) -= (*dgt);
-	else if ((*dgttmp) > (*dgt) && (*dgt) > (*size) && (*size) > 0)
-		(*dgttmp) -= (*dgt) - (*size);
-	else if ((*dgttmp) < (*dgt) && (*dgttmp) > (*size) && (*size) > 0)
-		(*dgttmp) -= (*size);
-	else if ((*dgttmp) < (*dgt) && (*dgttmp) < (*size) && (*dgttmp) > 0)
-		(*dgttmp) -= (*dgt);
+	lst->i = 0;
+	if ((*digittmp) > (*digit) && (*digit) <= lst->size)
+		(*digittmp) -= (*digit);
+	else if ((*digittmp) > (*digit) && (*digit) > lst->size && lst->size > 0)
+		(*digittmp) -= (*digit) - lst->size;
+	else if ((*digittmp) < (*digit) && (*digittmp) > lst->size && lst->size > 0)
+		(*digittmp) -= lst->size;
+	else if ((*digittmp) < (*digit) && (*digittmp) < lst->size &&
+			(*digittmp) > 0)
+		(*digittmp) -= (*digit);
 	else
-		(*dgttmp) -= 0;
+		(*digittmp) -= 0;
+	lst->tmp = ft_strnew((*digittmp));
+	while (lst->i < (*digittmp))
+		lst->tmp[lst->i++] = ' ';
+	list->args = ft_strjoin(lst->tmp, list->args);
+	ft_strdel(&lst->tmp);
 }
