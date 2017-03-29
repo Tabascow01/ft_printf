@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 02:37:08 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 04:47:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,23 @@ typedef struct		s_list
 /*
 ** ft_printf
 */
+
+void				ft_wldgt_8(t_flags *lit, t_precs *lst, int *dtmp, int *d);
+void				ft_wldgt_7(t_flags *list, t_precs *lst, int *d);
+void				ft_wldgt_6(t_flags *list, t_precs *lst, wchar_t **ar);
+void				ft_wldgt_5(t_flags *lit, t_precs *lst, int *d);
+void				ft_wldgt_4(t_precs *lst, int *dtmp, wchar_t **ar);
+void				ft_wldgt_3(t_precs *lst, int *dtmp, wchar_t **ar);
+void				ft_wldgt_2(t_flags *lit, t_precs *lst, int *dtmp, int *d);
+void				ft_wldgt_1(t_flags *lit, t_precs *lst, int *dtmp);
+
+void				ft_wdgt_7(t_flags *lit, t_precs *lst, int *dtmp, int *d);
+void				ft_wdgt_6(t_flags *lit, t_precs *lst, int *d);
+void				ft_wdgt_5(t_flags *lit, t_precs *lst, int *d, wchar_t **ar);
+void				ft_wdgt_4(t_flags *lit, t_precs *lst, int *d, wchar_t **ar);
+void				ft_wdgt_3(t_precs *lst, int *dgtmp, wchar_t **ar);
+void				ft_wdgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
+int					ft_wdgt_1(t_flags *list, t_precs *lst, int *dtmp, int *d);
 
 void				ft_ldgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_ldgt_7(t_flags *list, t_precs *lst, int *d);
@@ -312,7 +329,7 @@ int					ft_wputstr(wchar_t *wstr);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd(t_list **alst, t_list *n);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 

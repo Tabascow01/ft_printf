@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 03:45:29 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 04:26:36 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_ldgt_5(t_flags *list, t_precs *lst, int *digit, char **newarg)
 {
