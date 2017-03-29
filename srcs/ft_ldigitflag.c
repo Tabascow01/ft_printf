@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/28 23:51:39 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 02:37:09 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,118 +16,23 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
 	int		digittmp;
 
-	digittmp = ft_atoi(lst->tmp);
-	ft_strdel(&lst->tmp);
-	lst->i = 0;
-	lst->size = (int)ft_strlen(list->args);
+	ft_ldgt_1(list, lst, &digittmp);
 	if (list->conv != 's')
 	{
-		if (list->args[0] == '-' || list->args[0] == '+')
-			lst->size -= 1;
-		if (digittmp > digit && (list->space > 0 || list->sign > 0))
-			digittmp -= digit;
+		ft_ldgt_2(list, lst, &digittmp, &digit);
 		if (digittmp > (digit - lst->size) + (int)ft_strlen(list->args))
-		{
-			while (lst->i < digittmp - lst->size)
-				newarg[lst->i++] = ' ';
-			lst->i--;
-		}
+			ft_ldgt_3(lst, &digittmp, &newarg);
 		else if (list->sign > 0)
-		{
-			while (lst->i < digittmp)
-				newarg[lst->i++] = ' ';
-			lst->i--;
-		}
-		if (lst->i > 0)
-			newarg[lst->i] = '\0';
-		if (list->args[0] == '-' || list->args[0] == '+')
-			lst->i = 0;
-		else
-			lst->i = 1;
-		lst->j = 0;
-		lst->tmp = ft_strnew(digit - lst->size);
-		while (lst->i <= digit - lst->size)
-		{
-			if (list->args[0] == '-' && lst->j < 1)
-				lst->tmp[lst->j++] = '-';
-			else if (list->args[0] == '+' && lst->j < 1)
-				lst->tmp[lst->j++] = '+';
-			else
-				lst->tmp[lst->j++] = '0';
-			lst->i++;
-		}
-		if (lst->j >= 1)
-			lst->tmp[lst->j] = '\0';
-		if (list->args[0] == '-' || list->args[0] == '+')
-		{
-			list->args++;
-			lst->tmpargs = ft_strjoin(lst->tmp, list->args);
-			ft_strdel(&lst->tmp);
-			list->args--;
-			ft_strdel(&list->args);
-			lst->tmp = newarg;
-			newarg = ft_strjoin(lst->tmpargs, lst->tmp);
-			ft_strdel(&lst->tmpargs);
-			ft_strdel(&lst->tmp);
-		}
-		else
-		{
-			lst->tmpargs = ft_strjoin(lst->tmp, list->args);
-			ft_strdel(&list->args);
-			ft_strdel(&lst->tmp);
-			lst->tmp = newarg;
-			newarg = ft_strjoin(lst->tmpargs, lst->tmp);
-			ft_strdel(&lst->tmpargs);
-			ft_strdel(&lst->tmp);
-		}
-		list->args = ft_reallocf(newarg, 0);
+			ft_ldgt_4(lst, &digittmp, &newarg);
+		ft_ldgt_5(list, lst, &digit, &newarg);
+		ft_ldgt_6(list, lst, &newarg);
 		if (list->space > 0)
 			ft_spaceflag(list);
 	}
 	else
 	{
-		if (digit > 0)
-		{
-			lst->tmpargs = ft_strnew(digit);
-			while (list->args[lst->i] && lst->i < digit)
-				lst->i++;
-			lst->tmp = &list->args[lst->i];
-			lst->i = 0;
-			while (lst->i < digit)
-			{
-				lst->tmpargs[lst->i] = list->args[lst->i];
-				lst->i++;
-			}
-			if (list->args[0] != '\0')
-				ft_strdel(&list->args);
-			list->args = ft_strjoin(lst->tmpargs, lst->tmp);
-			ft_strdel(&lst->tmpargs);
-		}
-		if (digittmp > 0)
-		{
-			lst->i = 0;
-			lst->tmpargs = ft_strnew(digit);
-			while (list->args[lst->i] && lst->i < digit)
-				lst->i++;
-			lst->tmp = &list->args[lst->i];
-			lst->i = 0;
-			while (lst->i < digit)
-			{
-				lst->tmpargs[lst->i] = list->args[lst->i];
-				lst->i++;
-			}
-			lst->i = 0;
-			if (list->args[0] != '\0')
-				digittmp -= digit;
-			lst->tmp = ft_strnew(digittmp);
-			while (lst->i < digittmp)
-				lst->tmp[lst->i++] = ' ';
-			list->args = ft_strjoin(lst->tmpargs, lst->tmp);
-			ft_strdel(&lst->tmpargs);
-			ft_strdel(&lst->tmp);
-			lst->tmpargs = list->args;
-			list->args = ft_strjoin(list->args, lst->tmp);
-		}
+		ft_ldgt_7(list, lst, &digit);
+		ft_ldgt_8(list, lst, &digittmp, &digit);
 	}
 }
 
