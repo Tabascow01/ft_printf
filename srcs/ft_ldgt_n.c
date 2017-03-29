@@ -6,23 +6,25 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 02:50:04 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 03:20:43 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	ft_ldgt_5(t_flags *list, t_precs *lst, int *digit, char **newarg)
 {
-	if (lst->i > 0)
+	if (lst->i > 0 && (*digit) - lst->size >= 0)
 		(*newarg)[lst->i] = '\0';
 	if (list->args[0] == '-' || list->args[0] == '+')
 		lst->i = 0;
 	else
 		lst->i = 1;
 	lst->j = 0;
-	lst->tmp = ft_strnew((*digit) - lst->size);
-	while (lst->i <= (*digit) - lst->size)
+	if ((*digit) - lst->size >= 0)
+		lst->tmp = ft_memalloc((*digit) - lst->size);
+	while (lst->i < (*digit) - lst->size)
 	{
 		if (list->args[0] == '-' && lst->j < 1)
 			lst->tmp[lst->j++] = '-';
@@ -56,7 +58,7 @@ void	ft_ldgt_2(t_flags *list, t_precs *lst, int *digittmp, int *digit)
 		lst->size -= 1;
 	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0))
 		(*digittmp) -= (*digit);
-	else if ((*digit) == lst->size && (*digittmp) > (*digit))
+	else if (((*digit) == lst->size || (*digit) == 0) && (*digittmp) > (*digit))
 		(*digittmp) += 1;
 }
 
