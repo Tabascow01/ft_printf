@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 01:21:21 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 02:06:05 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
@@ -22,7 +23,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 	{
 		ft_dgt_2(list, &digittmp, lst, &digit);
 		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
-			ft_dgt_3(list, &newarg, lst, &digit);
+			ft_dgt_3(&newarg, lst, &digittmp);
 		ft_dgt_4(list, &newarg, lst, &digit);
 		if (digit < lst->size && (list->args[0] == '-' || list->args[0] == '+')
 				&& digittmp > lst->size)

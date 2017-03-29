@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 01:11:16 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 02:06:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
@@ -32,8 +33,7 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 			&& (*digit) > 0 && list->conv != 'p')
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
 	else if ((*digittmp) > (*digit) && lst->size > 0 && lst->size <= (*digit)
-			&& (*digit) > 0
-			&& list->conv != 'p' && list->args[0] != '-'
+			&& (*digit) > 0 && list->conv != 'p' && list->args[0] != '-'
 			&& list->args[0] != '+')
 		(*digittmp) = (*digittmp) - ((*digit) - lst->size) + 1;
 	else if ((*digittmp) > (*digit) && (*digittmp) > lst->size && (*digit) > 0
@@ -41,14 +41,14 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 			&& list->args[0] != '+')
 		(*digittmp) += 1;
 	else if ((list->args[0] == '-' || list->args[0] == '+')
-			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0 &&
-			(*digit) > lst->size)
+			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
+			&& (*digit) > lst->size)
 		(*digittmp) -= lst->size;
 	else
 		(*digittmp) += 0;
 }
 
-void	ft_dgt_3(t_flags *list, char **newarg, t_precs *lst, int *digittmp)
+void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp)
 {
 	while (lst->i < (*digittmp) - lst->size)
 		(*newarg)[lst->i++] = ' ';
@@ -57,6 +57,7 @@ void	ft_dgt_3(t_flags *list, char **newarg, t_precs *lst, int *digittmp)
 
 void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 {
+	lst->j = 0;
 	while (lst->j < (*digit) - lst->size)
 	{
 		if (list->args[0] == '-' && (*newarg)[lst->i - 1] != '0')

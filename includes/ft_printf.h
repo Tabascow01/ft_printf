@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 01:21:51 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 01:31:00 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ typedef struct		s_list
 ** ft_printf
 */
 
-t_precs				*ft_init_precs(t_precs *lst);
-
 void				ft_dgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_dgt_7(t_flags *list, t_precs *lst, int *dgt);
 void				ft_dgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_dgt_5(t_flags *list, char **ar, t_precs *lst, int *dtmp);
 void				ft_dgt_4(t_flags *list, char **ar, t_precs *lst, int *dgt);
-void				ft_dgt_3(t_flags *list, char **str, t_precs *lst, int *dgt);
+void				ft_dgt_3(char **str, t_precs *lst, int *dgt);
 void				ft_dgt_2(t_flags *list, int *dtmp, t_precs *lst, int *dgt);
 int					ft_dgt_1(t_flags *list, int *dgttmp, t_precs *lst, int *d);
 
@@ -210,6 +208,7 @@ int					ft_verif_flags(t_flags *list);
 int					ft_vrf_cv_nnnnn(t_flags *lst, int *i, va_list args);
 int					ft_verif_conv(t_flags *list, va_list args);
 
+t_precs				*ft_init_precs(t_precs *lst);
 t_flags				*ft_init_flags(t_flags *list, const char *format);
 int					ft_handle(t_flags *list, va_list args);
 int					ft_printf(const char *format, ...);
