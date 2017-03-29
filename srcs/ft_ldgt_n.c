@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 03:42:14 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/03/29 03:45:29 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_ldgt_2(t_flags *list, t_precs *lst, int *digittmp, int *digit)
 		lst->size -= 1;
 	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0))
 		(*digittmp) -= (*digit);
-	else if (((*digit) == lst->size || (*digit) - lst->size < 0) && (*digittmp) > (*digit) && (*digit) != 0)
+	else if (((*digit) == lst->size || (*digit) - lst->size < 0)
+			&& (*digittmp) > (*digit) && (*digit) != 0)
 		(*digittmp) += 1;
 }
 
