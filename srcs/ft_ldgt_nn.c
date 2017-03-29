@@ -14,52 +14,47 @@
 
 void	ft_ldgt_8(t_flags *list, t_precs *lst, int *digittmp, int *digit)
 {
-	if ((*digittmp) > 0)
+	lst->i = 0;
+	lst->tmpargs = ft_strnew((*digit));
+	while (list->args[lst->i] && lst->i < (*digit))
+		lst->i++;
+	lst->tmp = &list->args[lst->i];
+	lst->i = 0;
+	while (lst->i < (*digit))
 	{
-		lst->i = 0;
-		lst->tmpargs = ft_strnew((*digit));
-		while (list->args[lst->i] && lst->i < (*digit))
-			lst->i++;
-		lst->tmp = &list->args[lst->i];
-		lst->i = 0;
-		while (lst->i < (*digit))
-		{
-			lst->tmpargs[lst->i] = list->args[lst->i];
-			lst->i++;
-		}
-		lst->i = 0;
-		if (list->args[0] != '\0')
-			digittmp -= (*digit);
-		lst->tmp = ft_strnew((*digittmp));
-		while (lst->i < (*digittmp))
-			lst->tmp[lst->i++] = ' ';
-		list->args = ft_strjoin(lst->tmpargs, lst->tmp);
-		ft_strdel(&lst->tmpargs);
-		ft_strdel(&lst->tmp);
-		lst->tmpargs = list->args;
-		list->args = ft_strjoin(list->args, lst->tmp);
+		lst->tmpargs[lst->i] = list->args[lst->i];
+		lst->i++;
 	}
+	lst->i = 0;
+	if (list->args[0] != '\0')
+		(*digittmp) -= (*digit);
+	lst->tmp = ft_strnew((*digittmp));
+	while (lst->i < (*digittmp))
+		lst->tmp[lst->i++] = ' ';
+	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+	ft_strdel(&lst->tmpargs);
+	ft_strdel(&lst->tmp);
+	lst->tmpargs = ft_reallocf(list->args, ft_strlen(list->args));
+	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+	list->args = ft_reallocf(list->args, ft_strlen(list->args));
 }
 
 void	ft_ldgt_7(t_flags *list, t_precs *lst, int *digit)
 {
-	if ((*digit) > 0)
+	lst->tmpargs = ft_strnew((*digit));
+	while (list->args[lst->i] && lst->i < (*digit))
+		lst->i++;
+	lst->tmp = &list->args[lst->i];
+	lst->i = 0;
+	while (lst->i < (*digit))
 	{
-		lst->tmpargs = ft_strnew((*digit));
-		while (list->args[lst->i] && lst->i < (*digit))
-			lst->i++;
-		lst->tmp = &list->args[lst->i];
-		lst->i = 0;
-		while (lst->i < (*digit))
-		{
-			lst->tmpargs[lst->i] = list->args[lst->i];
-			lst->i++;
-		}
-		if (list->args[0] != '\0')
-			ft_strdel(&list->args);
-		list->args = ft_strjoin(lst->tmpargs, lst->tmp);
-		ft_strdel(&lst->tmpargs);
+		lst->tmpargs[lst->i] = list->args[lst->i];
+		lst->i++;
 	}
+	if (list->args[0] != '\0')
+		ft_strdel(&list->args);
+	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
+	ft_strdel(&lst->tmpargs);
 }
 
 void	ft_ldgt_6(t_flags *list, t_precs *lst, char **newarg)

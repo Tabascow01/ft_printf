@@ -31,8 +31,10 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 	}
 	else
 	{
-		ft_ldgt_7(list, lst, &digit);
-		ft_ldgt_8(list, lst, &digittmp, &digit);
+		if (digit > 0)
+			ft_ldgt_7(list, lst, &digit);
+		if (digittmp > 0)
+			ft_ldgt_8(list, lst, &digittmp, &digit);
 	}
 }
 
@@ -93,4 +95,5 @@ void			ft_ldigitflag(t_flags *list)
 					(int)ft_strlen(list->args)));
 		ft_precs(list, newarg, lst, digit);
 	}
+	free(lst);
 }

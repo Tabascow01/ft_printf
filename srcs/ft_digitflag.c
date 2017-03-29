@@ -104,4 +104,5 @@ void			ft_digitflag(t_flags *list)
 				((int)ft_strlen(list->args)));
 		ft_precs(list, newarg, lst, digit);
 	}
+	free(lst);
 }
