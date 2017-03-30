@@ -40,14 +40,14 @@ $(OBJ_PATH)%.o: $(SRCS_PATH)%.c
 	@echo "\033[32m█\033[0m\c"
 
 clean: 
-	@/bin/rm -rf $(OBJ_PATH)
-	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@echo "[$(OBJ_NAME)]"
+	@rm -rf $(OBJ_PATH)
+	@echo "\033[1;31m[OBJS]\033[0m"
 	@echo "\033[1;35m[Deleted]\033[0m"
 
 fclean: clean
 	@/bin/rm -rf $(NAME)
-	@echo "[$(NAME)]\t\t\t\t\t\t\033[1;31m[Deleted]\033[0m"
+	@echo "\033[1;31m[libftprintf.a]\033[0m"
+	@echo "\033[1;35m[Deleted]\033[0m"
 
 re: fclean all
 
