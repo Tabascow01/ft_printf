@@ -30,7 +30,7 @@ int		ft_isspcs_allowed(t_flags *list, int idxtmp)
 {
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 			&& ft_isflag(list->format[idxtmp]))
-	{
+	{	
 		if (list->format[idxtmp + 1] == 'u' || list->format[idxtmp + 1] == 'U')
 		{
 			list->size -= 1;

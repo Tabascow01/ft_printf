@@ -44,8 +44,7 @@ int				ft_verif_flags(t_flags *list)
 		if (ft_verif_numbersign(list, idxtmp) &&
 				ft_isnbsign_allowed(list, idxtmp) && list->sign == 0)
 			ft_save_sign(list, idxtmp);
-		else
-			ft_verif_flags_next(list, idxtmp);
+		ft_verif_flags_next(list, idxtmp);
 		if (ft_verif_percent(list, idxtmp) && list->percent == 0)
 		{
 			list->index += 1;

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h> //
 
 static void		ft_process_flags_n(t_flags *list)
 {
