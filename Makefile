@@ -28,16 +28,17 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\n[$(OBJ_NAME)]"
-	@echo "\033[1;36m[Created]\033[0m"
+	@echo "\033[1;31m[OBJS]\033[0m"
+	@echo "\033[1;32m[Created]\033[0m"
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "[$(NAME)]\t\t\t\t\t\t\033[1;32m[Created]\033[0m"
+	@echo "\033[1;31m[libftprintf.a]\033[0m"
+	@echo "\033[1;32m[Created]\033[0m"
 
 $(OBJ_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(INC_PATH) -g -o $@ -c $<
-	@echo "\033[32m█\033[0m\c"
+#	@echo "\033[32m█\033[0m\c"
 
 clean: 
 	@rm -rf $(OBJ_PATH)
