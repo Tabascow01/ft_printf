@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 04:26:22 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:44:34 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
@@ -30,26 +31,58 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 		lst->size -= 1;
 	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
 			&& (*digit) > 0 && list->conv != 'p')
+	{
+		printf("1\n");
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
+	}
 	else if ((*digittmp) > (*digit) && lst->size > 0 && lst->size <= (*digit)
 			&& (*digit) > 0 && list->conv != 'p' && list->args[0] != '-'
-			&& list->args[0] != '+')
+			&& list->args[0] != '+' && (*digittmp) > (*digit) +
+			(int)ft_strlen(list->args))
+	{
+		printf("2\n");
 		(*digittmp) = (*digittmp) - ((*digit) - lst->size) + 1;
+	}
 	else if ((*digittmp) > (*digit) && (*digittmp) > lst->size && (*digit) > 0
 			&& list->conv != 'p' && list->args[0] != '-'
-			&& list->args[0] != '+')
+			&& list->args[0] != '+' && (*digittmp) > (*digit) +
+			(int)ft_strlen(list->args))
+	{
+		printf("3\n");
 		(*digittmp) += 1;
+	}
 	else if ((list->args[0] == '-' || list->args[0] == '+')
 			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
 			&& (*digit) > lst->size)
+	{
+		printf("4\n");
 		(*digittmp) -= lst->size;
+	}
+	else if ((*digittmp) > (*digit) && lst->size > 0 && lst->size <= (*digit)
+			&& (*digit) > 0 && list->conv != 'p' && list->args[0] != '-'
+			&& list->args[0] != '+' && (*digittmp) <= (*digit) +
+			(int)ft_strlen(list->args))
+	{
+		printf("5\n");
+		(*digittmp) += lst->size;
+	}
 	else
+	{
+		printf("6\n");
 		(*digittmp) += 0;
+	}
 }
 
 void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp)
 {
-	while (lst->i < (*digittmp) - lst->size)
+	int		diff;
+
+	diff = 0;
+	if ((*digittmp) > lst->size)
+		diff = (*digittmp);
+	else
+		diff = (*digittmp) - lst->size;
+	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
 	lst->i--;
 }

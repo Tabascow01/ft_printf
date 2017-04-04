@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 03:16:40 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/04 04:38:56 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
@@ -40,8 +41,8 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 
 static void		ft_ldigit_n(t_flags *list, int *i, int *digit, char **newarg)
 {
-	if ((((*i) >= 0 && list->conv != 'p') || ((*i) > 0 && list->conv == 'p'))
-			&& (*digit) < 13)
+	if ((((*i) >= 0 && list->conv != 'p') || (((*i) > 0 && list->conv == 'p'
+			 && (*digit) < 13))) && (int)ft_strlen((*newarg)) > 0)
 		(*newarg)[(*i)] = '\0';
 	else if (list->conv == 'p' && (*digit) > 12)
 		(*newarg)[(*i)] = '\0';
