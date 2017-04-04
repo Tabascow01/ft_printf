@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/04 04:21:31 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/04 05:17:06 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 	{
 		ft_dgt_2(list, &digittmp, lst, &digit);
 		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
-			ft_dgt_3(&newarg, lst, &digittmp);
+			ft_dgt_3(&newarg, lst, &digittmp, &digit);
 		ft_dgt_4(list, &newarg, lst, &digit);
 		if (digit < lst->size && (list->args[0] == '-' || list->args[0] == '+')
 				&& digittmp > lst->size)

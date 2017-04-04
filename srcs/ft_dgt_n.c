@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/04 05:14:39 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/04 05:17:50 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 	}
 }
 
-void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp)
+void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
 {
 	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > lst->size)
+	if ((*digittmp) > (*digit) - lst->size)
 		diff = (*digittmp);
 	else
 		diff = (*digittmp) - lst->size;
