@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 01:51:36 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:55:31 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ static void		ft_process_flags_n(t_flags *list)
 	if (list->sign > 0 && list->conv != 'p' && list->conv != 'c'
 			&& list->conv != 's' && list->conv != 'C')
 		ft_signflag(list);
-	if (list->hash == '#' && ft_atoi(list->args) != 0
+	if (list->hash == '#' && ft_ishex(list->args) != 0
 			&& ((list->zero == 0 || list->left > 0) && list->conv != 'p'
 				&& list->conv != 'c') && list->precision == 0)
+	{
+		printf("");
 		ft_hashflag(list);
+	}
 }
 
 static void		ft_process_flags_nn(t_flags *list)

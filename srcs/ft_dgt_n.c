@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/04 05:17:50 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:43:30 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
 			&& (*digit) > lst->size)
 	{
-		//printf("4\n");
-		(*digittmp) -= lst->size;
+		printf("4\n");
+		lst->neg = 1;
 	}
 	/*
 	else if ((*digittmp) > (*digit) && lst->size > 0 && lst->size <= (*digit)
@@ -80,19 +80,29 @@ void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
 	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > (*digit) - lst->size)
+	//printf("dgtmp3[%d]-dgt3[%d]\n",*digittmp, *digit);
+	if ((*digittmp) > (*digit) + lst->size)
 		diff = (*digittmp);
 	else
-		diff = (*digittmp) - lst->size;
+		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
+	//printf("%d - (%d + (%d - %d)) = [%d]\n",*digittmp,lst->size,*digit,lst->size,diff);
 	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
-	lst->i--;
+	if (lst->neg > 0)
+		lst->i--;
 }
 
 void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 {
+	int diff;
+
+	diff = 0;
 	lst->j = 0;
-	while (lst->j < (*digit) - lst->size)
+	if ((*digit) < lst->size)
+		diff = (*digit);
+	else
+		diff = (*digit) - lst->size;
+	while (lst->j < diff)
 	{
 		if (list->args[0] == '-' && (*newarg)[lst->i - 1] != '0')
 			(*newarg)[lst->i++] = '-';

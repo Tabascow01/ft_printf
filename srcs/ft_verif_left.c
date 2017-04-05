@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:16 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/27 07:35:31 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:00:21 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		ft_isleft_allowed(t_flags *list, int idxtmp)
 				|| list->format[idxtmp + 1] == '+'
 				|| list->format[idxtmp + 1] == '#'
 				|| !ft_isflag(list->format[idxtmp + 1])
-				|| list->format[idxtmp + 1] == '.'))
+				|| list->format[idxtmp + 1] == '.'
+				|| list->format[idxtmp + 1] == '-'))
 			return (1);
 		idxtmp++;
 	}

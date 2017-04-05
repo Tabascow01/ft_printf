@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 02:04:09 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/28 23:53:45 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:42:44 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_precs		*ft_init_precs(t_precs *lst)
 		lst->i = 0;
 		lst->j = 0;
 		lst->size = 0;
+		lst->neg = 0;
 	}
 	return (lst);
 }

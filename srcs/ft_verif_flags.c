@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 00:59:31 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 21:02:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:03:09 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_verif_flags_next(t_flags *list, int idxtmp)
 {
@@ -21,10 +22,10 @@ static void		ft_verif_flags_next(t_flags *list, int idxtmp)
 			ft_isspcs_allowed(list, idxtmp) && list->space == 0)
 		ft_save_spcs(list, idxtmp);
 	if (ft_verif_left(list, idxtmp) &&
-			ft_isleft_allowed(list, idxtmp) && list->left == 0)
+			ft_isleft_allowed(list, idxtmp))
 	{
 		list->index += 1;
-		list->left = 1;
+		list->left += 1;
 	}
 	if (ft_verif_number(list, idxtmp) &&
 			ft_isdigit_allowed(list, idxtmp) && list->digit == 0)

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 04:47:11 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:42:27 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct		s_precs
 	int			i;
 	int			j;
 	int			size;
+	int			neg;
 }					t_precs;
 
 typedef struct		s_list
@@ -66,6 +67,8 @@ typedef struct		s_list
 /*
 ** ft_printf
 */
+
+int					ft_ishex(char *str);
 
 void				ft_wldgt_8(t_flags *lit, t_precs *lst, int *dtmp, int *d);
 void				ft_wldgt_7(t_flags *list, t_precs *lst, int *d);
@@ -98,7 +101,7 @@ void				ft_dgt_7(t_flags *list, t_precs *lst, int *dgt);
 void				ft_dgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_dgt_5(t_flags *list, char **ar, t_precs *lst, int *dtmp);
 void				ft_dgt_4(t_flags *list, char **ar, t_precs *lst, int *dgt);
-void				ft_dgt_3(char **str, t_precs *lst, int *dgt);
+void				ft_dgt_3(char **str, t_precs *lst, int *dgt, int *d);
 void				ft_dgt_2(t_flags *list, int *dtmp, t_precs *lst, int *dgt);
 int					ft_dgt_1(t_flags *list, int *dgttmp, t_precs *lst, int *d);
 

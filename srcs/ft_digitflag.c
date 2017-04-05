@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/04 05:17:06 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:37:12 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 		return ;
 	if (list->conv != 's')
 	{
+		//printf("dgtmp2[%d]-dgt1[%d]\n",digittmp, digit);
 		ft_dgt_2(list, &digittmp, lst, &digit);
+		//printf("dgtmp2[%d]-dgt2[%d]\n",digittmp, digit);
+		//printf("IF(%d > %d + %d - %d)\n",digittmp,(int)ft_strlen(list->args),digit, lst->size);
 		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
 			ft_dgt_3(&newarg, lst, &digittmp, &digit);
 		ft_dgt_4(list, &newarg, lst, &digit);

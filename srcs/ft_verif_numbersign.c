@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:30 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 21:52:06 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/05 23:58:30 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ int		ft_isnbsign_allowed(t_flags *list, int idxtmp)
 				|| list->format[idxtmp + 1] == 'x'
 				|| list->format[idxtmp + 1] == 'X'
 				|| list->format[idxtmp + 1] == 's'
-				|| list->format[idxtmp + 1] == 'S')
+				|| list->format[idxtmp + 1] == 'S'
+				|| list->format[idxtmp + 1] == '-')
 		{
 			list->index += 1;
-			list->size -= 1;
+			if (list->format[idxtmp + 1] != '-')
+				list->size -= 1;
 		}
 		if (list->format[idxtmp + 1] == 'd' || list->format[idxtmp + 1] == 'i')
 			return (1);
