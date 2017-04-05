@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 04:26:36 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 00:59:35 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 void	ft_ldgt_5(t_flags *list, t_precs *lst, int *digit, char **newarg)
 {
@@ -37,6 +38,7 @@ void	ft_ldgt_5(t_flags *list, t_precs *lst, int *digit, char **newarg)
 		lst->tmp[lst->j] = '\0';
 }
 
+// A VOIR
 void	ft_ldgt_4(t_precs *lst, int *digittmp, char **newarg)
 {
 	while (lst->i < (*digittmp))
@@ -44,11 +46,19 @@ void	ft_ldgt_4(t_precs *lst, int *digittmp, char **newarg)
 	lst->i--;
 }
 
-void	ft_ldgt_3(t_precs *lst, int *digittmp, char **newarg)
+void	ft_ldgt_3(t_precs *lst, int *digittmp, char **newarg, int *digit)
 {
-	while (lst->i < (*digittmp) - lst->size)
+	int diff;
+
+	diff = 0;
+	if ((*digittmp) > (*digit) + lst->size)
+		diff = (*digittmp);
+	else
+		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
+	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
-	lst->i--;
+	if (lst->neg > 0)
+		lst->i--;
 }
 
 void	ft_ldgt_2(t_flags *list, t_precs *lst, int *digittmp, int *digit)
