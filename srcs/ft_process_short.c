@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:22:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 04:18:52 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 04:29:13 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	ft_process_short(t_flags *list, va_list args, char conv)
 	else if (conv == 'x')
 	{
 		tmp = ft_ustoa_base((unsigned short)va_arg(args, int), 16);
-		list->args = ft_strtolower(tmp);
-		list->args = ft_reallocf(list->args, 0);
+		tmp = ft_strtolower(tmp);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	else if (conv == 'X')
 	{
 		tmp = ft_ustoa_base((unsigned short)va_arg(args, int), 16);
-		list->args = ft_strtoupper(tmp);
-		list->args = ft_reallocf(list->args , 0);
+		tmp = ft_strtoupper(tmp);
+		list->args = ft_reallocf(tmp , 0);
 	}
 	else if (conv == 'u')
 		list->args = ft_ustoa_base((unsigned short)va_arg(args, int), 10);

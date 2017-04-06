@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:23:19 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 04:22:02 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 04:31:05 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	ft_process_sizet(t_flags *list, va_list args, char conv)
 	else if (conv == 'x')
 	{
 		tmp = ft_luitoa_base(va_arg(args, size_t), 16);
-		list->args = ft_strtolower(tmp);
-		list->args = ft_reallocf(list->args, 0);
+		tmp = ft_strtolower(tmp);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	else if (conv == 'X')
 	{
 		tmp = ft_luitoa_base(va_arg(args, size_t), 16);
-		list->args = ft_strtoupper(tmp);
-		list->args = ft_reallocf(list->args, 0);
+		tmp = ft_strtoupper(tmp);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	else if (conv == 'u' || conv == 'U')
 		list->args = ft_luitoa_base(va_arg(args, size_t), 10);
