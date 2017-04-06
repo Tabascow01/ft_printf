@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 00:56:14 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:37:37 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_flags
 	char		*digit;
 	int			dig1;
 	int			dig2;
+	int			nbleft;
 }					t_flags;
 
 typedef struct		s_precs
@@ -55,6 +56,7 @@ typedef struct		s_precs
 	int			j;
 	int			size;
 	int			neg;
+	int			null;
 }					t_precs;
 
 typedef struct		s_list
@@ -91,7 +93,7 @@ void				ft_ldgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_ldgt_7(t_flags *list, t_precs *lst, int *d);
 void				ft_ldgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_ldgt_5(t_flags *list, t_precs *lst, int *d, char **ar);
-void				ft_ldgt_4(t_precs *lst, int *d, char **ar);
+void				ft_ldgt_4(t_precs *lst, int *dtmp, char **ar, int *d);
 void				ft_ldgt_3(t_precs *lst, int *dtmp, char **ar, int *d);
 void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_ldgt_1(t_flags *list, t_precs *lst, int *dgtmp);
@@ -203,6 +205,7 @@ int					ft_verif_percent(t_flags *list, int idxtmp);
 void				ft_save_spcs(t_flags *list, int idxtmp);
 void				ft_save_digit(t_flags *list, int idxtmp);
 void				ft_save_sign(t_flags *list, int idxtmp);
+void				ft_save_left(t_flags *list, int idxtmp);
 
 int					ft_isshort_allowed(t_flags *list, int idxtmp);
 int					ft_isintmax_allowed(t_flags *list, int idxtmp);

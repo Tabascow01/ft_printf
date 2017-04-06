@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:10:31 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/15 20:06:09 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 02:31:53 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	ft_clear_flags(t_flags *list)
 	list->dig1 = 0;
 	list->dig2 = 0;
 	list->bytes = 0;
+	list->nbleft = 0;
 }

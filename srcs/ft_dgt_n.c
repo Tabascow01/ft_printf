@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 00:51:06 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 01:57:43 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 
 void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
+	if (list->args[0] == 0 && (list->conv == 'd' || list->conv == 'i'
+				|| list->conv == 'x' || list->conv == 'X'
+				|| list->conv == 'o' || list->conv == 'O'))
+		lst->null = 1;
 	if (((list->args[0] == '-' || list->args[0] == '+') && (*digit) >= 0)
 			|| ((*digittmp) > (*digit) && list->conv == 'p'))
 		lst->size -= 1;
@@ -55,10 +59,14 @@ void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
 	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > (*digit) + lst->size)
-		diff = (*digittmp);
-	else
+	if ((*digittmp) > (*digit) + lst->size && (*digit) <= lst->size)
+		diff = (*digittmp) - (*digit);
+	else if ((*digittmp) > (*digit) && (*digit) > lst->size)
 		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
+	else
+		diff = (*digittmp) - lst->size;
+	if (lst->null > 0)
+		diff -= 1;
 	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
 	if (lst->neg > 0)
@@ -72,7 +80,7 @@ void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 	diff = 0;
 	lst->j = 0;
 	if ((*digit) < lst->size)
-		diff = (*digit);
+		diff = 0;
 	else
 		diff = (*digit) - lst->size;
 	while (lst->j < diff)
