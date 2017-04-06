@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/14 18:04:54 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/01/20 02:20:33 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 20:33:53 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void		ft_read_fd(int *sizeread, int *size, int fd, char **buf)
 	(*buf)[(*size)] = '\0';
 }
 
-int				get_next_line(const int fd, char **line)
+int				ft_get_next_line(const int fd, char **line)
 {
 	static t_list	*lst = NULL;
 	char			**stock;
