@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 01:57:43 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 03:50:04 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,13 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 				|| list->conv == 'x' || list->conv == 'X'
 				|| list->conv == 'o' || list->conv == 'O'))
 		lst->null = 1;
-	if (((list->args[0] == '-' || list->args[0] == '+') && (*digit) >= 0)
+	if ((list->args[0] == '-' && (*digit) >= lst->size) || (list->args[0] == '+'
+			&& (*digit) >= 0)
 			|| ((*digittmp) > (*digit) && list->conv == 'p'))
 		lst->size -= 1;
 	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
 			&& (*digit) > 0 && list->conv != 'p')
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
-	else if ((*digittmp) > (*digit) && lst->size > 0 && lst->size <= (*digit)
-			&& (*digit) > 0 && list->conv != 'p' && list->args[0] != '-'
-			&& list->args[0] != '+' && (*digittmp) > (*digit) +
-			(int)ft_strlen(list->args))
-		(*digittmp) = (*digittmp) - ((*digit) - lst->size) + 1;
-	else if ((*digittmp) > (*digit) && (*digittmp) > lst->size && (*digit) > 0
-			&& list->conv != 'p' && list->args[0] != '-'
-			&& list->args[0] != '+' && (*digittmp) > (*digit) +
-			(int)ft_strlen(list->args))
-		(*digittmp) += 1;
 	else if ((list->args[0] == '-' || list->args[0] == '+')
 			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
 			&& (*digit) > lst->size)
@@ -59,8 +50,8 @@ void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
 	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > (*digit) + lst->size && (*digit) <= lst->size)
-		diff = (*digittmp) - (*digit);
+	if ((*digittmp) > (*digit) + lst->size && (*digit) < lst->size)
+		diff = (*digittmp) - lst->size;
 	else if ((*digittmp) > (*digit) && (*digit) > lst->size)
 		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
 	else

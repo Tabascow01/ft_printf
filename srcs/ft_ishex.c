@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 23:50:50 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 00:48:07 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 03:54:16 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int		ft_ishex(char *str)
 	{
 		if (str[0] == '0' && str[1] == '\0')
 			return (0);
-		if (str[i] < '0' && str[i] > '9' && ((str[i] < 'a' || str[i] < 'A')
-					&& (str[i] > 'f' || str[i] > 'F')))
+		if (!ft_isdigit(str[i]) && str[i] < 'a' && str[i] > 'z' && str[i] < 'A' && str[i] > 'Z')
 			return (0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:23:05 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 20:09:23 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/06 04:17:09 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 void	ft_process_long(t_flags *list, va_list args, char conv)
 {
-	int i;
+	char *tmp;
 
-	i = -1;
 	if (conv == 'd' || conv == 'i')
 		list->args = ft_litoa_base(va_arg(args, long), 10);
 	else if (conv == 'o' || conv == 'O')
 		list->args = ft_luitoa_base(va_arg(args, unsigned long), 8);
 	else if (conv == 'x')
 	{
-		list->args = ft_luitoa_base(va_arg(args, unsigned long), 16);
-		while (list->args[i++])
-			list->args[i] = ft_tolower(list->args[i]);
+		tmp = ft_luitoa_base(va_arg(args, unsigned long), 16);
+		list->args = ft_strtolower(tmp);
+		list->args = ft_reallocf(list->args, 0);
 	}
 	else if (conv == 'X')
 	{
-		list->args = ft_luitoa_base(va_arg(args, unsigned long), 16);
-		while (list->args[i++])
-			list->args[i] = ft_toupper(list->args[i]);
+		tmp = ft_luitoa_base(va_arg(args, unsigned long), 16);
+		list->args = ft_strtoupper(tmp);
+		list->args = ft_reallocf(list->args, 0);
 	}
 	else if (conv == 'u' || conv == 'U')
 		list->args = ft_luitoa_base(va_arg(args, unsigned long), 10);
