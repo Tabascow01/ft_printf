@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 03:02:13 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:06:02 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "stdio.h" //
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:51 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/02/25 05:23:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:16:07 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_isspcs_allowed(t_flags *list, int idxtmp)
 {
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 			&& ft_isflag(list->format[idxtmp]))
-	{	
+	{
 		if (list->format[idxtmp + 1] == 'u' || list->format[idxtmp + 1] == 'U')
 		{
 			list->size -= 1;

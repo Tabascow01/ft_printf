@@ -6,13 +6,20 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:30 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 02:35:08 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:15:40 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_save_sign(t_flags *list, int idxtmp)
+static int		ft_allowed_next(t_flags *list, int idxtmp)
+{
+	if (list->format[idxtmp] == 'd' || list->format[idxtmp] == 'i')
+		return (1);
+	return (0);
+}
+
+void			ft_save_sign(t_flags *list, int idxtmp)
 {
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 			&& ft_isflag(list->format[idxtmp]))
@@ -26,10 +33,9 @@ void	ft_save_sign(t_flags *list, int idxtmp)
 	}
 }
 
-int		ft_isnbsign_allowed(t_flags *list, int idxtmp)
+int				ft_isnbsign_allowed(t_flags *list, int idxtmp)
 {
-	if (list->format[idxtmp] == 'd' ||
-		list->format[idxtmp] == 'i')
+	if (ft_allowed_next(list, idxtmp))
 		return (1);
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 		&& ft_isflag(list->format[idxtmp]))
@@ -56,7 +62,7 @@ int		ft_isnbsign_allowed(t_flags *list, int idxtmp)
 	return (0);
 }
 
-int		ft_verif_numbersign(t_flags *list, int idxtmp)
+int				ft_verif_numbersign(t_flags *list, int idxtmp)
 {
 	while (list->format[idxtmp] != '%' && list->format[idxtmp]
 		&& ft_isflag(list->format[idxtmp]))

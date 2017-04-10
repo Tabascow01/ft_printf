@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 19:59:24 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/04 04:20:22 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:06:31 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char			*ft_itoa_base(int num, int base)
 
 	i = 0;
 	negative = 0;
-
 	if (num == -2147483648)
 		return (ft_strdup("-2147483648"));
 	str = ft_strnew(12);

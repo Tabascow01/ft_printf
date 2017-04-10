@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 02:18:05 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 00:50:07 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:09:56 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 void	ft_return_size_nnnnn(t_flags *list)
 {
@@ -51,7 +50,7 @@ void	ft_return_size_nnnn(t_flags *list)
 }
 
 void	ft_return_size_nnn(t_flags *list)
-{	
+{
 	if (list->left > 1)
 		list->size += (int)ft_strlen(list->args) - (int)ft_strlen(list->digit)
 			- list->nbleft - 2;

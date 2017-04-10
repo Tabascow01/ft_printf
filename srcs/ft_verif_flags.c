@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 00:59:31 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 03:51:19 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:10:08 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_verif_flags_next(t_flags *list, int idxtmp)
 {

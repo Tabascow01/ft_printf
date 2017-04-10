@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:13:16 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 02:39:03 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:12:14 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 void	ft_save_left(t_flags *list, int idxtmp)
 {
@@ -19,7 +18,7 @@ void	ft_save_left(t_flags *list, int idxtmp)
 			&& ft_isflag(list->format[idxtmp]))
 	{
 		if (list->format[idxtmp] == '-')
-				list->nbleft += 1;
+			list->nbleft += 1;
 		idxtmp++;
 	}
 	if (list->nbleft > 0)

@@ -6,28 +6,23 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 01:30:11 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:40:53 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
 	int		digittmp;
 
-
 	ft_ldgt_1(list, lst, &digittmp, &digit);
-
 	if (list->conv != 's')
 	{
 		ft_ldgt_2(list, lst, &digittmp, &digit);
-		if (digittmp > (digit - lst->size) + (int)ft_strlen(list->args) 
-				&& list->sign == 0)
+		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
 			ft_ldgt_3(lst, &digittmp, &newarg, &digit);
-		else if ((digittmp > digit + (int)ft_strlen(list->args))
-				|| (list->sign > 0 && digittmp > digit))
-			ft_ldgt_4(lst, &digittmp, &newarg, &digit);
 		ft_ldgt_5(list, lst, &digit, &newarg);
 		ft_ldgt_6(list, lst, &newarg);
 		if (list->space > 0)
@@ -45,7 +40,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 static void		ft_ldigit_n(t_flags *list, int *i, int *digit, char **newarg)
 {
 	if ((((*i) >= 0 && list->conv != 'p') || (((*i) > 0 && list->conv == 'p'
-			 && (*digit) < 13))) && (int)ft_strlen((*newarg)) > 0)
+						&& (*digit) < 13))) && (int)ft_strlen((*newarg)) > 0)
 		(*newarg)[(*i)] = '\0';
 	else if (list->conv == 'p' && (*digit) > 12)
 		(*newarg)[(*i)] = '\0';

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 00:22:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 04:30:40 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 03:08:41 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_process_llong(t_flags *list, va_list args, char conv)
 	{
 		tmp = ft_luitoa_base(va_arg(args, unsigned long long), 16);
 		tmp = ft_strtoupper(tmp);
-		list->args = ft_reallocf(tmp ,0);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	else if (conv == 'u' || conv == 'U')
 		list->args = ft_luitoa_base(va_arg(args, unsigned long long), 10);

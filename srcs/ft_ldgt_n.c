@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 01:35:39 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 04:41:34 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,17 @@ void	ft_ldgt_4(t_precs *lst, int *digittmp, char **newarg, int *digit)
 
 void	ft_ldgt_3(t_precs *lst, int *digittmp, char **newarg, int *digit)
 {
-	int diff;
+	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > (*digit) + lst->size && (*digit) <= lst->size
-			&& (*digit) > 0)
-		diff = (*digittmp) - (*digit);
+	if ((*digittmp) > (*digit) + lst->size		 && (*digit) < lst->size)
+		diff = (*digittmp) - lst->size;
 	else if ((*digittmp) > (*digit) && (*digit) > lst->size)
 		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
 	else
 		diff = (*digittmp) - lst->size;
+	if (lst->null > 0)
+		diff -= 1;
 	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
 	if (lst->neg > 0)
@@ -76,13 +77,23 @@ void	ft_ldgt_3(t_precs *lst, int *digittmp, char **newarg, int *digit)
 
 void	ft_ldgt_2(t_flags *list, t_precs *lst, int *digittmp, int *digit)
 {
-	if (list->args[0] == '-' || list->args[0] == '+')
+	if (list->args[0] == 0 && (list->conv == 'd' || list->conv == 'i'
+				|| list->conv == 'x' || list->conv == 'X'
+				|| list->conv == 'o' || list->conv == 'O'))
+		lst->null = 1;
+	if ((list->args[0] == '-' && (*digit) >= lst->size) || (list->args[0] == '+'
+				&& (*digit) >= 0)
+			|| ((*digittmp) > (*digit) && list->conv == 'p'))
 		lst->size -= 1;
-	if ((*digittmp) > (*digit) && (list->space > 0))
-		(*digittmp) -= (*digit);
-	else if (((*digit) == lst->size || (*digit) - lst->size < 0)
-			&& (*digittmp) > (*digit) && (*digit) != 0)
-		(*digittmp) += 1;
+	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
+			&& (*digit) > 0 && list->conv != 'p')
+		(*digittmp) = (*digittmp) - (*digit) + lst->size;
+	else if ((list->args[0] == '-' || list->args[0] == '+')
+			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
+			&& (*digit) > lst->size)
+		lst->neg = 1;
+	else
+		(*digittmp) += 0;
 }
 
 int		ft_ldgt_1(t_flags *list, t_precs *lst, int *digittmp, int *digit)

@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 02:31:53 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 05:40:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void		ft_process_flags_n(t_flags *list)
 {
@@ -28,7 +29,8 @@ static void		ft_process_flags_n(t_flags *list)
 		ft_signflag(list);
 	if (list->hash == '#' && ft_ishex(list->args) != 0
 			&& ((list->zero == 0 || list->left > 0) && list->conv != 'p'
-				&& list->conv != 'c') && list->precision == 0)
+				&& list->conv != 'c') && (list->precision == 0
+					|| (list->precision > 0 && list->dig1 > 0))) // list->dig1 !!
 		ft_hashflag(list);
 }
 
@@ -55,7 +57,7 @@ static void		ft_process_flags_nnext(t_flags *list)
 	if (list->hash == '#' && (list->conv == 'p' || list->conv == 'x'
 				|| list->conv == 'X' || list->conv == 'o'
 				|| list->conv == 'O') && list->precision > 0
-				&& (int)ft_strlen(list->digit) > 2)
+				&& list->dig1 > 0) //list->dig1 !!!
 		ft_zhashflag(list);
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
