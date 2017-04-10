@@ -6,25 +6,27 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 02:12:44 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 01:30:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
 	int		digittmp;
 
-	ft_ldgt_1(list, lst, &digittmp);
+
+	ft_ldgt_1(list, lst, &digittmp, &digit);
+
 	if (list->conv != 's')
 	{
 		ft_ldgt_2(list, lst, &digittmp, &digit);
-		if (digittmp > (digit - lst->size) + (int)ft_strlen(list->args))
+		if (digittmp > (digit - lst->size) + (int)ft_strlen(list->args) 
+				&& list->sign == 0)
 			ft_ldgt_3(lst, &digittmp, &newarg, &digit);
-		else if (digittmp > digit + (int)ft_strlen(list->args)
-				|| list->sign > 0)
+		else if ((digittmp > digit + (int)ft_strlen(list->args))
+				|| (list->sign > 0 && digittmp > digit))
 			ft_ldgt_4(lst, &digittmp, &newarg, &digit);
 		ft_ldgt_5(list, lst, &digit, &newarg);
 		ft_ldgt_6(list, lst, &newarg);

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 02:37:37 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 01:30:03 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_precs
 	int			size;
 	int			neg;
 	int			null;
+	int			flags;
 }					t_precs;
 
 typedef struct		s_list
@@ -96,7 +97,7 @@ void				ft_ldgt_5(t_flags *list, t_precs *lst, int *d, char **ar);
 void				ft_ldgt_4(t_precs *lst, int *dtmp, char **ar, int *d);
 void				ft_ldgt_3(t_precs *lst, int *dtmp, char **ar, int *d);
 void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
-void				ft_ldgt_1(t_flags *list, t_precs *lst, int *dgtmp);
+int					ft_ldgt_1(t_flags *list, t_precs *lst, int *dgtmp, int *d);
 
 void				ft_dgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_dgt_7(t_flags *list, t_precs *lst, int *dgt);

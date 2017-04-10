@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 04:02:23 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:31:53 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h> //
 
 static void		ft_process_flags_n(t_flags *list)
 {
@@ -29,7 +28,7 @@ static void		ft_process_flags_n(t_flags *list)
 		ft_signflag(list);
 	if (list->hash == '#' && ft_ishex(list->args) != 0
 			&& ((list->zero == 0 || list->left > 0) && list->conv != 'p'
-				&& list->conv != 'c'))
+				&& list->conv != 'c') && list->precision == 0)
 		ft_hashflag(list);
 }
 
@@ -56,7 +55,7 @@ static void		ft_process_flags_nnext(t_flags *list)
 	if (list->hash == '#' && (list->conv == 'p' || list->conv == 'x'
 				|| list->conv == 'X' || list->conv == 'o'
 				|| list->conv == 'O') && list->precision > 0
-			&& (int)ft_strlen(list->digit) > 2)
+				&& (int)ft_strlen(list->digit) > 2)
 		ft_zhashflag(list);
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
@@ -68,7 +67,8 @@ static void		ft_process_flags_nnext(t_flags *list)
 
 static void		ft_process_flags_nnn(t_flags *list)
 {
-	if ((int)ft_strlen(list->digit) > 0 && list->conv != 'S')
+	if ((int)ft_strlen(list->digit) > 0 && list->conv != 'S'
+			&& ft_strcmp(list->digit, ".") != 0)
 	{
 		ft_process_flags_nn(list);
 		if ((list->conv == 'C' || list->conv == 'c') && list->precision > 0)
@@ -77,7 +77,7 @@ static void		ft_process_flags_nnn(t_flags *list)
 			ft_digitflag(list);
 		ft_process_flags_nnext(list);
 	}
-	else if (list->space > 0 && list->conv != 'S' && list->digit == 0)
+	else if (list->space > 0 && list->conv != 'S')
 	{
 		if (list->args[0] == '-' || list->sign > 0 ||
 				list->conv == 's' || list->conv == 'p'

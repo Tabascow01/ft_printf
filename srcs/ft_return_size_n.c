@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 02:18:05 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 00:09:28 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 00:50:07 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 void	ft_return_size_nnnnn(t_flags *list)
 {
@@ -31,29 +32,29 @@ void	ft_return_size_nnnn(t_flags *list)
 	else if (list->sign == 0 && list->space == 0
 			&& list->hash == 0 && list->zero == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->left - 2;
+			- (int)ft_strlen(list->digit) - list->nbleft - 2;
 	else if (list->precision > 0 && list->sign > 0 && list->hash == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->left - list->sign - 2;
+			- (int)ft_strlen(list->digit) - list->nbleft - list->sign - 2;
 	else if (list->sign > 0 && list->hash == 0 && list->zero == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->left - list->sign - 1;
+			- (int)ft_strlen(list->digit) - list->nbleft - list->sign - 2;
 	else if (list->hash == '#' && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->left - 3;
+			- (int)ft_strlen(list->digit) - list->nbleft - 3;
 	else if (list->hash == '#' && (int)ft_strlen(list->digit) > 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->left - 3;
+			- (int)ft_strlen(list->digit) - list->nbleft - 3;
 	else if (list->zero == '0' && list->digit > 0)
 		list->size += (int)ft_strlen(list->args)
-			- list->left - (int)ft_strlen(list->digit) - 2;
+			- list->nbleft - (int)ft_strlen(list->digit) - 2;
 }
 
 void	ft_return_size_nnn(t_flags *list)
 {	
 	if (list->left > 1)
 		list->size += (int)ft_strlen(list->args) - (int)ft_strlen(list->digit)
-			- list->left - 2;
+			- list->nbleft - 2;
 	else if (list->conv == 'c'
 			&& (int)ft_strlen(list->args) == ft_atoi(list->digit) - 1)
 		list->size += (int)ft_strlen(list->digit) - 2;

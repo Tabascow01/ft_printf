@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:11:53 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:06:59 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/10 02:35:23 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int		ft_print_int(t_flags *list)
 {
