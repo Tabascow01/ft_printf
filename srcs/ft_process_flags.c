@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include <stdio.h>//
 
 static void		ft_process_flags_n(t_flags *list)
 {
+//	printf("dig1[%d]-dig2[%d]\n",list->dig1,list->dig2);
 	if (list->digit != 0)
 	{
 		if (list->digit[0] == '0' && list->precision == 0)
@@ -29,14 +30,19 @@ static void		ft_process_flags_n(t_flags *list)
 		ft_signflag(list);
 	if (list->hash == '#' && ft_ishex(list->args) != 0
 			&& ((list->zero == 0 || list->left > 0) && list->conv != 'p'
-				&& list->conv != 'c') && (list->precision == 0
-					|| (list->precision > 0 && list->dig1 > 0))) // list->dig1 !!
+				&& list->conv != 'c') && (((list->precision == 0))
+					|| (list->precision > 0
+					&& list->dig1 <= (int)ft_strlen(list->args)
+					&& list->dig2 <= (int)ft_strlen(list->args))))
+	{
 		ft_hashflag(list);
+		list->hash = 0;
+	}
 }
 
 static void		ft_process_flags_nn(t_flags *list)
 {
-	ft_decompose_digit(list);
+
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
 	{
@@ -54,11 +60,13 @@ static void		ft_process_flags_nn(t_flags *list)
 
 static void		ft_process_flags_nnext(t_flags *list)
 {
+/*
 	if (list->hash == '#' && (list->conv == 'p' || list->conv == 'x'
 				|| list->conv == 'X' || list->conv == 'o'
-				|| list->conv == 'O') && list->precision > 0
-				&& list->dig1 > 0) //list->dig1 !!!
+				|| list->conv == 'O'
+				|| list->dig2 > list->dig1) && list->precision > 0)
 		ft_zhashflag(list);
+*/
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
 		list->hash = 0;
@@ -95,6 +103,7 @@ static void		ft_process_flags_nnn(t_flags *list)
 
 void			ft_process_flags(t_flags *list)
 {
+	ft_decompose_digit(list);
 	ft_process_flags_n(list);
 	if (list->left > 0 && list->conv != 'S')
 	{

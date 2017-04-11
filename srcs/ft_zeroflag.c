@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_zeroflag_nn(t_flags *list, char **tmparg, char **newarg)
 {
@@ -106,4 +107,36 @@ void			ft_zhashflag(t_flags *list)
 	newarg = ft_strcat(newarg, tmp);
 	ft_strdel(&list->args);
 	list->args = ft_reallocf(newarg, 0);
+}
+
+void			ft_strzhash(t_flags *list, char **str)
+{
+	char	*newarg;
+	int		i;
+	char	*tmp;
+	char	*tmparg;
+
+	i = 0;
+	tmparg = ft_strnew(list->dig2);
+	while ((*str)[i] && (*str)[i] == ' ')
+	{
+		tmparg[i] = (*str)[i];
+		i++;
+	}
+	tmp = &(*str)[i];
+	newarg = ft_strnew((int)ft_strlen(list->args) + 2);
+	if (list->conv == 'x')
+		newarg = ft_strcpy(newarg, "0x");
+	else if (list->conv == 'X')
+		newarg = ft_strcpy(newarg, "0X");
+	else if ((list->conv == 'o' || list->conv == 'O')
+			&& list->dig2 <= (int)ft_strlen(list->args)
+			&& list-> dig1 > (int)ft_strlen(list->args))
+		newarg = ft_strcpy(newarg, "0");
+	newarg = ft_strjoin(newarg, tmp);
+	(*str) = ft_strjoin(tmparg, newarg);
+	ft_strdel(&tmparg);
+	ft_strdel(&newarg);
+	(*str) = ft_reallocf((*str), 0);
+	return ;
 }

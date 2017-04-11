@@ -17,10 +17,12 @@ int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
 	(*digittmp) = ft_atoi(lst->tmp);
 	ft_strdel(&lst->tmp);
-	if ((*digittmp) == 0 && (*digit) == 0)
-		return (0);
 	lst->i = 0;
 	lst->size = (int)ft_strlen(list->args);
+	if (((*digittmp) == 0 && (*digit) == 0)
+			|| ((*digittmp) < lst->size
+			&& (*digit) < lst->size))
+		return (0);
 	return (1);
 }
 
@@ -34,7 +36,13 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 			&& (*digit) >= 0)
 			|| ((*digittmp) > (*digit) && list->conv == 'p'))
 		lst->size -= 1;
-	if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
+	if ((list->conv == 'o' ||list->conv == 'O') && (*digittmp) > (*digit)
+			&& (*digit) <= lst->size && list->hash > 0)
+		lst->size += 1;
+	else if ((list->conv == 'x' ||list->conv == 'X') && (*digittmp) > (*digit)
+			&& (*digit) <= lst->size && list->hash > 0)
+		lst->size += 2;
+	else if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
 			&& (*digit) > 0 && list->conv != 'p')
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
 	else if ((list->args[0] == '-' || list->args[0] == '+')
@@ -84,8 +92,10 @@ void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 		lst->i++;
 		lst->j++;
 	}
-	if (lst->i > 0)
+	if (lst->i > 0 && list->hash == 0)
 		(*newarg)[lst->i] = '\0';
+	else
+		ft_strzhash(list, &(*newarg));
 }
 
 void	ft_dgt_5(t_flags *list, char **newarg, t_precs *lst, int *digittmp)

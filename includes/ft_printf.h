@@ -137,6 +137,7 @@ void				ft_digitflag(t_flags *list);
 void				ft_lspaceflag(t_flags *list);
 void				ft_ldigitflag(t_flags *list);
 void				ft_wzeroflag(t_flags *list);
+void				ft_strzhash(t_flags *list, char **str);
 void				ft_zhashflag(t_flags *list);
 void				ft_zeroflag(t_flags *list);
 void				ft_hashflag(t_flags *list);
