@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 02:56:37 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/12 08:14:33 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,30 @@ void			ft_strzhash(t_flags *list, char **str)
 {
 	char	*newarg;
 	int		i;
+	int		j;
 	char	*tmp;
 	char	*tmparg;
 
 	i = 0;
-	tmparg = ft_strnew(list->dig2);
+	j = 0;
+	if (ft_strchr((*str), '0') && (list->conv == 'o' || list->conv == 'O'))
+		return ;
+	if (list->dig1 > (int)ft_strlen(list->args) + list->dig2)
+		tmparg = ft_strnew(list->dig1);
+	else
+		tmparg = ft_strnew(list->dig2);
 	while ((*str)[i] && (*str)[i] == ' ')
 	{
-		tmparg[i] = (*str)[i];
-		i++;
+		if (i < 1 && list->dig1 > list->dig2
+				&& list->dig2 > (int)ft_strlen(list->args)
+				&& list->dig1 > list->dig2 && list->dig1 <= list->dig2 + 1)
+			i++;
+		else if (i < 2 && list->dig1 > list->dig2
+				&& list->dig2 > (int)ft_strlen(list->args)
+				&& list->dig1 > list->dig2 + 1)
+			i++;
+		else
+			tmparg[j++] = (*str)[i++];
 	}
 	tmp = &(*str)[i];
 	newarg = ft_strnew((int)ft_strlen(list->args) + 2);

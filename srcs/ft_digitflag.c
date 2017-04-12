@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 03:06:02 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/12 10:00:14 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 {
@@ -25,7 +26,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
 			ft_dgt_3(&newarg, lst, &digittmp, &digit);
 		ft_dgt_4(list, &newarg, lst, &digit);
 		if (digit < lst->size && (list->args[0] == '-' || list->args[0] == '+')
-				&& digittmp > lst->size)
+				&& digittmp > lst->size + digit)
 			newarg[lst->i] = list->args[0];
 		ft_dgt_5(list, &newarg, lst, &digittmp);
 		ft_dgt_6(list, lst, &newarg);
@@ -103,8 +104,7 @@ void			ft_digitflag(t_flags *list)
 	{
 		ft_digit_nn(list, &lst->i, &lst->tmp);
 		digit = ft_atoi(&list->digit[lst->i + 1]);
-		newarg = ft_strnew(ft_atoi(lst->tmp) + digit -
-				((int)ft_strlen(list->args)));
+		newarg = ft_strnew(ft_atoi(lst->tmp) + digit);
 		ft_precs(list, newarg, lst, digit);
 	}
 	free(lst);

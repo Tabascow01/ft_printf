@@ -6,12 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/06 03:50:04 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/12 10:08:57 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include <stdio.h>//
 
 int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
@@ -42,12 +42,11 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 	else if ((list->conv == 'x' ||list->conv == 'X') && (*digittmp) > (*digit)
 			&& (*digit) <= lst->size && list->hash > 0)
 		lst->size += 2;
-	else if ((*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
+	else if (list->args[0] != '+' && list->args[0] != '-' && (*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
 			&& (*digit) > 0 && list->conv != 'p')
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
 	else if ((list->args[0] == '-' || list->args[0] == '+')
-			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
-			&& (*digit) > lst->size)
+			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0)
 		lst->neg = 1;
 	else
 		(*digittmp) += 0;
@@ -66,6 +65,7 @@ void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
 		diff = (*digittmp) - lst->size;
 	if (lst->null > 0)
 		diff -= 1;
+//	printf("diff[%d]\n", diff);
 	while (lst->i < diff)
 		(*newarg)[lst->i++] = ' ';
 	if (lst->neg > 0)
@@ -78,7 +78,7 @@ void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 
 	diff = 0;
 	lst->j = 0;
-	if ((*digit) < lst->size)
+	if ((*digit) <= lst->size)
 		diff = 0;
 	else
 		diff = (*digit) - lst->size;
@@ -94,8 +94,10 @@ void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
 	}
 	if (lst->i > 0 && list->hash == 0)
 		(*newarg)[lst->i] = '\0';
-	else
+	else if (list->hash > 0)
 		ft_strzhash(list, &(*newarg));
+	else
+		(*newarg)[lst->i + 1] = '\0';
 }
 
 void	ft_dgt_5(t_flags *list, char **newarg, t_precs *lst, int *digittmp)
