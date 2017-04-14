@@ -92,18 +92,20 @@ void				ft_wdgt_3(t_precs *lst, int *dgtmp, wchar_t **ar);
 void				ft_wdgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
 int					ft_wdgt_1(t_flags *list, t_precs *lst, int *dtmp, int *d);
 
-void				ft_ldgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
-void				ft_ldgt_7(t_flags *list, t_precs *lst, int *d);
+// Re-encodage
+void				ft_ldgt_8(t_flags *list, t_precs *lst);
+void				ft_ldgt_7(t_flags *list, t_precs *lst);
 //void				ft_ldgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_ldgt_5(char **ar, t_flags *list, t_precs *lst);
 void				ft_ldgt_4(t_flags *list, t_precs *lst);
 void				ft_ldgt_3(t_flags *list, t_precs *lst);
-void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
+//void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
 int					ft_ldgt_1(t_flags *list, t_precs *lst);
+// EOM
 
-// Tout Modifier
-void				ft_dgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
-void				ft_dgt_7(t_flags *list, t_precs *lst, int *dgt);
+// Re-encodage
+void				ft_dgt_8(t_flags *list, t_precs *lst);
+void				ft_dgt_7(t_flags *list, t_precs *lst);
 //void				ft_dgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_dgt_5(char **ar, t_flags *list, t_precs *lst);
 void				ft_dgt_4(t_flags *list, t_precs *lst);
