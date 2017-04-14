@@ -13,19 +13,18 @@
 #include "ft_printf.h"
 #include <stdio.h>//
 
-int		ft_dgt_1(t_flags *list, int *digittmp, t_precs *lst, int *digit)
+int		ft_dgt_1(t_flags *list, t_precs *lst)
 {
-	(*digittmp) = ft_atoi(lst->tmp);
 	ft_strdel(&lst->tmp);
 	lst->i = 0;
-	lst->size = (int)ft_strlen(list->args);
-	if (((*digittmp) == 0 && (*digit) == 0)
-			|| ((*digittmp) < lst->size
-			&& (*digit) < lst->size))
+	if ((list->dig1 == 0 && list->dig2 == 0)
+			|| (list->dig1 <= lst->size
+			&& list->dig2 <= lst->size))
 		return (0);
 	return (1);
 }
 
+/*
 void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 {
 	if (list->args[0] == 0 && (list->conv == 'd' || list->conv == 'i'
@@ -42,7 +41,8 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 	else if ((list->conv == 'x' ||list->conv == 'X') && (*digittmp) > (*digit)
 			&& (*digit) <= lst->size && list->hash > 0)
 		lst->size += 2;
-	else if (list->args[0] != '+' && list->args[0] != '-' && (*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
+	else if (list->args[0] != '+' && list->args[0] != '-'
+			&& (*digittmp) > (*digit) && (list->space > 0 || list->sign > 0)
 			&& (*digit) > 0 && list->conv != 'p')
 		(*digittmp) = (*digittmp) - (*digit) + lst->size;
 	else if ((list->args[0] == '-' || list->args[0] == '+')
@@ -51,73 +51,81 @@ void	ft_dgt_2(t_flags *list, int *digittmp, t_precs *lst, int *digit)
 	else
 		(*digittmp) += 0;
 }
+*/
 
-void	ft_dgt_3(char **newarg, t_precs *lst, int *digittmp, int *digit)
+void	ft_dgt_3(t_flags *list, t_precs *lst)
 {
 	int		diff;
 
 	diff = 0;
-	if ((*digittmp) > (*digit) + lst->size && (*digit) < lst->size)
-		diff = (*digittmp) - lst->size;
-	else if ((*digittmp) > (*digit) && (*digit) > lst->size)
-		diff = (*digittmp) - (lst->size + ((*digit) - lst->size));
-	else
-		diff = (*digittmp) - lst->size;
-	if (lst->null > 0)
-		diff -= 1;
-//	printf("diff[%d]\n", diff);
+	if (lst->neg > 0)
+		diff = -1;
+	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
+		diff += list->dig1 - list->dig2;
+	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size)
+		diff += list->dig1 - lst->size;
+	if (list->hash > 0 && (list->conv == 'x' || list->conv == 'X'))
+		diff -= 2;
+	lst->spaces = ft_strnew(diff);
 	while (lst->i < diff)
-		(*newarg)[lst->i++] = ' ';
+		lst->spaces[lst->i++] = ' ';
 	if (lst->neg > 0)
 		lst->i--;
 }
 
-void	ft_dgt_4(t_flags *list, char **newarg, t_precs *lst, int *digit)
+void	ft_dgt_4(t_flags *list, t_precs *lst)
 {
 	int diff;
 
 	diff = 0;
-	lst->j = 0;
-	if ((*digit) <= lst->size)
-		diff = 0;
-	else
-		diff = (*digit) - lst->size;
-	while (lst->j < diff)
+	lst->i = 0;
+	if (list->args[0] == '-' ||list->args[0] == '+')
+		lst->size -= 2;
+	if (list->dig2 > lst->size)
 	{
-		if (list->args[0] == '-' && (*newarg)[lst->i - 1] != '0')
-			(*newarg)[lst->i++] = '-';
-		if (list->args[0] == '+' && (*newarg)[lst->i - 1] != '0')
-			(*newarg)[lst->i++] = '+';
-		(*newarg)[lst->i] = '0';
+		diff = list->dig2 - lst->size;
+		lst->zero = ft_strnew(list->dig2);
+		if (list->args[0] == '-')
+			lst->zero[lst->i++] = '-';
+		if (list->args[0] == '+')
+			lst->zero[lst->i++] = '+';
+	}
+	while (lst->i < diff)
+	{
+		lst->zero[lst->i] = '0';
 		lst->i++;
-		lst->j++;
 	}
 	if (lst->i > 0 && list->hash == 0)
-		(*newarg)[lst->i] = '\0';
+		lst->zero[lst->i] = '\0';
 	else if (list->hash > 0)
-		ft_strzhash(list, &(*newarg));
+		ft_strzhash(list, &lst->zero);
 	else
-		(*newarg)[lst->i + 1] = '\0';
+		lst->zero[lst->i + 1] = '\0';
 }
 
-void	ft_dgt_5(t_flags *list, char **newarg, t_precs *lst, int *digittmp)
+void	ft_dgt_5(char **newarg, t_flags *list, t_precs *lst)
 {
+	int a;
+
+	a = 0;
 	if ((list->args[0] == '-' || list->args[0] == '+') && lst->i > 0)
 	{
 		list->args++;
-		lst->tmp = (*newarg);
-		(*newarg) = ft_strjoin((*newarg), list->args);
-		ft_strdel(&lst->tmp);
-		list->args--;
-		lst->tmp = list->args;
+		a++;
+	}
+	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
+	{
+		lst->tmp = ft_strjoin(lst->spaces, lst->zero);
+		*newarg = ft_strjoin(lst->tmp, list->args);
+	}
+	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size)
+	{
+		*newarg = ft_strjoin(lst->spaces, list->args);
 	}
 	else
-	{
-		lst->tmpargs = (*newarg);
-		if ((*digittmp) > 0 && list->args[0] == '\0')
-			list->args[0] = ' ';
-		lst->tmp = list->args;
-		(*newarg) = ft_strjoin(lst->tmpargs, list->args);
-		ft_strdel(&lst->tmpargs);
-	}
+		*newarg = ft_strjoin(lst->zero, list->args);
+	if (a > 0)
+		list->args--;
+	ft_strdel(&list->args);
+	list->args = (*newarg);
 }

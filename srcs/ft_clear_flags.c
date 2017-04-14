@@ -12,6 +12,28 @@
 
 #include "ft_printf.h"
 
+void	ft_clear_precs(t_precs *lst)
+{
+	if (lst->zero != NULL)
+		ft_strdel(&lst->zero);
+	if (lst->spaces != NULL)
+		ft_strdel(&lst->spaces);
+	if (lst->tmp != NULL)
+		ft_strdel(&lst->tmp);
+	if (lst->tmpargs != NULL)
+		ft_strdel(&lst->tmpargs);
+	if (lst->wtmp != NULL)
+		ft_wstrdel(&lst->wtmp);
+	if (lst->wtmpargs != NULL)
+		ft_wstrdel(&lst->wtmpargs);
+	lst->i = 0;
+	lst->j = 0;
+	lst->size = 0;
+	lst->neg = 0;
+	lst->null = 0;
+	lst->flags = 0;
+}
+
 void	ft_clear_flags(t_flags *list)
 {
 	list->percent = 0;
