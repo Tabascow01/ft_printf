@@ -80,10 +80,9 @@ void			ft_digitflag(t_flags *list)
 	if (list->precision == 0)
 	{
 		ft_digit_n(list, &lst->size, &newarg);
-		while (lst->i < (list->dig2 - lst->size))
+		while (lst->i < (list->dig1 - lst->size))
 			newarg[lst->i++] = ' ';
 		ft_digit_nn(list, &lst->i, &newarg, &lst->tmp);
-		ft_clear_precs(lst);
 	}
 	else
 	{
@@ -94,6 +93,7 @@ void			ft_digitflag(t_flags *list)
 		else
 			newarg = ft_strnew(list->dig1 + list->dig2);
 		ft_precs(list, newarg, lst);
+		ft_clear_precs(lst);
 	}
 	free(lst);
 }
