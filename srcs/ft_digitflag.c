@@ -93,9 +93,11 @@ void			ft_digitflag(t_flags *list)
 				newarg = ft_strnew(list->dig2);
 			else
 				newarg = ft_strnew(list->dig1 + list->dig2);
-			ft_clear_precs(lst);
+			
 		}
 		ft_precs(list, newarg, lst);
 	}
+	if (list->conv != 's' && list->precision > 0)
+		ft_clear_precs(lst);
 	free(lst);
 }
