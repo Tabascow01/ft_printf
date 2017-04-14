@@ -13,30 +13,27 @@
 #include "ft_printf.h"
 #include <stdio.h>//
 
-static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
+static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
-	ft_dgt_1(list, lst);
+	if (!ft_dgt_1(list, lst))
+		return ;
 	if (list->conv != 's')
 	{
 		if(list->args[0] == '-' || list->args[0] == '+')
 			lst->neg = 1;
-		// Add spaces
 		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
 			ft_dgt_3(list, lst);
-		// Add zero
 		if (list->dig2 > lst->size)
 			ft_dgt_4(list, lst);
-		// Joining string for result
 		ft_dgt_5(&newarg, list, lst);
-		// ft_dgt_6(list, lst, &newarg);
 	}
 	else
 	{
-		if (digit > 0)
-			ft_dgt_7(list, lst, &digit);
+		if (list->dig2 > 0)
+			ft_dgt_7(list, lst, &list->dig2);
 		else
 			ft_bzero(list->args, lst->size);
-		if (list->dig1 > 0 && list->dig1 > (int)ft_strlen(list->args))
+		if (list->dig1 > 0 && list->dig1 > lst->size)
 			ft_dgt_8(list, lst, &list->dig1, &list->dig2);
 	}
 }
@@ -95,7 +92,7 @@ void			ft_digitflag(t_flags *list)
 			newarg = ft_strnew(list->dig2);
 		else
 			newarg = ft_strnew(list->dig1 + list->dig2);
-		ft_precs(list, newarg, lst, list->dig2);
+		ft_precs(list, newarg, lst);
 	}
 	ft_clear_precs(lst);
 	free(lst);

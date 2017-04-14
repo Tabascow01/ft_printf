@@ -94,12 +94,12 @@ int					ft_wdgt_1(t_flags *list, t_precs *lst, int *dtmp, int *d);
 
 void				ft_ldgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);
 void				ft_ldgt_7(t_flags *list, t_precs *lst, int *d);
-void				ft_ldgt_6(t_flags *list, t_precs *lst, char **ar);
-void				ft_ldgt_5(t_flags *list, t_precs *lst, int *d, char **ar);
-void				ft_ldgt_4(t_precs *lst, int *dtmp, char **ar, int *d);
-void				ft_ldgt_3(t_precs *lst, int *dtmp, char **ar, int *d);
+//void				ft_ldgt_6(t_flags *list, t_precs *lst, char **ar);
+void				ft_ldgt_5(char **ar, t_flags *list, t_precs *lst);
+void				ft_ldgt_4(t_flags *list, t_precs *lst);
+void				ft_ldgt_3(t_flags *list, t_precs *lst);
 void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
-int					ft_ldgt_1(t_flags *list, t_precs *lst, int *dgtmp, int *d);
+int					ft_ldgt_1(t_flags *list, t_precs *lst);
 
 // Tout Modifier
 void				ft_dgt_8(t_flags *list, t_precs *lst, int *dtmp, int *d);

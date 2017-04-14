@@ -66,6 +66,8 @@ void	ft_dgt_3(t_flags *list, t_precs *lst)
 		diff += list->dig1 - lst->size;
 	if (list->hash > 0 && (list->conv == 'x' || list->conv == 'X'))
 		diff -= 2;
+	else if (list->hash > 0 && (list->conv == 'o' || list->conv == 'O'))
+		diff -= 1;
 	lst->spaces = ft_strnew(diff);
 	while (lst->i < diff)
 		lst->spaces[lst->i++] = ' ';
@@ -79,22 +81,20 @@ void	ft_dgt_4(t_flags *list, t_precs *lst)
 
 	diff = 0;
 	lst->i = 0;
+	lst->zero = ft_strnew(list->dig2);
 	if (list->args[0] == '-' ||list->args[0] == '+')
 		lst->size -= 2;
 	if (list->dig2 > lst->size)
 	{
 		diff = list->dig2 - lst->size;
-		lst->zero = ft_strnew(list->dig2);
+
 		if (list->args[0] == '-')
 			lst->zero[lst->i++] = '-';
 		if (list->args[0] == '+')
 			lst->zero[lst->i++] = '+';
 	}
 	while (lst->i < diff)
-	{
-		lst->zero[lst->i] = '0';
-		lst->i++;
-	}
+		lst->zero[lst->i++] = '0';
 	if (lst->i > 0 && list->hash == 0)
 		lst->zero[lst->i] = '\0';
 	else if (list->hash > 0)
@@ -118,9 +118,16 @@ void	ft_dgt_5(char **newarg, t_flags *list, t_precs *lst)
 		lst->tmp = ft_strjoin(lst->spaces, lst->zero);
 		*newarg = ft_strjoin(lst->tmp, list->args);
 	}
-	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size)
-	{
+	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size
+			&& list->hash == 0)
 		*newarg = ft_strjoin(lst->spaces, list->args);
+	else if (list-> dig1 > list->dig2 && list->dig2 <= lst->size
+				&& list->hash > 0)
+	{
+		lst->zero = ft_strnew(2);
+		ft_strzhash(list, &lst->zero);
+		lst->tmp = ft_strjoin(lst->zero, list->args);
+		*newarg = ft_strjoin(lst->spaces, lst->tmp);
 	}
 	else
 		*newarg = ft_strjoin(lst->zero, list->args);

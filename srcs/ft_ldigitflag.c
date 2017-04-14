@@ -13,38 +13,42 @@
 #include "ft_printf.h"
 #include <stdio.h>//
 
-static void		ft_precs(t_flags *list, char *newarg, t_precs *lst, int digit)
+static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
-	int		digittmp;
-
-	if (!ft_ldgt_1(list, lst, &digittmp, &digit))
+	if (!ft_ldgt_1(list, lst))
 		return ;
 	if (list->conv != 's')
 	{
-		ft_ldgt_2(list, lst, &digittmp, &digit);
-		if (digittmp > (int)ft_strlen(list->args) + digit - lst->size)
-			ft_ldgt_3(lst, &digittmp, &newarg, &digit);
-		ft_ldgt_5(list, lst, &digit, &newarg);
-		ft_ldgt_6(list, lst, &newarg);
+		if (list->args[0] == '-' || list->args[0] == '+')
+			lst->neg = 1;
+		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
+			ft_ldgt_3(list, lst);
+		if (list->dig2 > lst->size)
+			ft_ldgt_4(list, lst);
+		ft_ldgt_5(&newarg, list, lst);
+/*
 		if (list->space > 0)
 			ft_spaceflag(list);
+*/
 	}
 	else
 	{
-		if (digit > 0)
-			ft_ldgt_7(list, lst, &digit);
-		if (digittmp > 0)
-			ft_ldgt_8(list, lst, &digittmp, &digit);
+		if (list->dig2 > 0)
+			ft_ldgt_7(list, lst, &list->dig2);
+		else
+			ft_bzero(list->args, lst->size);
+		if (list->dig1 > 0 && list->dig1 > lst->size)
+			ft_ldgt_8(list, lst, &list->dig1, &list->dig2);
 	}
 }
 
-static void		ft_ldigit_n(t_flags *list, int *i, int *digit, char **newarg)
+static void		ft_ldigit_n(t_flags *list, int i, int digit, char **newarg)
 {
-	if ((((*i) >= 0 && list->conv != 'p') || (((*i) > 0 && list->conv == 'p'
-			&& (*digit) < 13))) && (int)ft_strlen((*newarg)) > 0)
-		(*newarg)[(*i)] = '\0';
-	else if (list->conv == 'p' && (*digit) > 12)
-		(*newarg)[(*i)] = '\0';
+	if (((i >= 0 && list->conv != 'p') || ((i > 0 && list->conv == 'p'
+			&& digit < 13))) && (int)ft_strlen((*newarg)) > 0)
+		(*newarg)[i] = '\0';
+	else if (list->conv == 'p' && digit > 12)
+		(*newarg)[i] = '\0';
 }
 
 static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
@@ -55,6 +59,7 @@ static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
 	list->args = ft_reallocf((*tmp), 0);
 }
 
+/*
 static void		ft_ldigit_nnn(t_flags *list, int *i, char **tmp)
 {
 	while (list->digit[(*i)] && list->digit[(*i)] != '.')
@@ -67,33 +72,37 @@ static void		ft_ldigit_nnn(t_flags *list, int *i, char **tmp)
 		(*i)++;
 	}
 }
+*/
 
 void			ft_ldigitflag(t_flags *list)
 {
 	char	*newarg;
-	int		digit;
 	t_precs	*lst;
 
+	newarg = NULL;
 	lst = NULL;
 	lst = ft_init_precs(lst);
-	ft_ldigit_nnnn(list, &lst->size, &lst->i, &newarg);
+	lst->size = (int)ft_strlen(list->args);
 	if (list->args == NULL)
 		lst->size += 1;
 	if (list->precision == 0)
 	{
-		ft_ldigit_nnnnn(list, &newarg, &digit, lst);
-		while (lst->i < (digit - lst->size))
+		newarg = ft_strnew(list->dig1 - lst->size);
+		while (lst->i < (list->dig1 - lst->size))
 			newarg[lst->i++] = ' ';
-		ft_ldigit_n(list, &lst->i, &digit, &newarg);
+		ft_ldigit_n(list, lst->i, list->dig1, &newarg);
 		ft_ldigit_nn(list, &lst->tmp, &newarg);
 	}
 	else
 	{
-		ft_ldigit_nnn(list, &lst->i, &lst->tmp);
-		digit = ft_atoi(&list->digit[lst->i + 1]);
-		newarg = ft_strnew(ft_atoi(lst->tmp) + (digit -
-					(int)ft_strlen(list->args)));
-		ft_precs(list, newarg, lst, digit);
+		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
+			newarg = ft_strnew(list->dig1);
+		else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
+			newarg = ft_strnew(list->dig2);
+		else
+			newarg = ft_strnew(list->dig1 + list->dig2);
+		ft_precs(list, newarg, lst);
 	}
+	ft_clear_precs(lst);
 	free(lst);
 }
