@@ -18,8 +18,9 @@ int		ft_dgt_1(t_flags *list, t_precs *lst)
 	ft_strdel(&lst->tmp);
 	lst->i = 0;
 	if ((list->dig1 == 0 && list->dig2 == 0)
-			|| (list->dig1 <= lst->size
-			&& list->dig2 <= lst->size))
+			|| ((list->dig1 <= lst->size
+			&& list->dig2 <= lst->size)
+			&& list->conv != 's'))
 		return (0);
 	return (1);
 }

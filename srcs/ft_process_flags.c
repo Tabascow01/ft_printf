@@ -76,7 +76,9 @@ static void		ft_process_flags_nnext(t_flags *list)
 
 static void		ft_process_flags_nnn(t_flags *list)
 {
-	if (list->dig1 > 0 || list->dig2 > 0 || (list->dig1 > 0 && list->dig2 > 0))
+	if ((list->dig1 > 0 || list->dig2 > 0
+			|| (list->dig1 > 0 && list->dig2 > 0))
+			&& list->left == 0)
 	{
 		ft_process_flags_nn(list);
 		if ((list->conv == 'C' || list->conv == 'c') && list->precision > 0)
@@ -105,7 +107,8 @@ void			ft_process_flags(t_flags *list)
 	ft_process_flags_n(list);
 	if (list->left > 0 && list->conv != 'S')
 	{
-		if ((int)ft_strlen(list->digit) > 0)
+		if (list->dig1 > 0 ||list->dig2 > 0 || list->precision > 0 ||
+				(list->dig1 > 0 && list->dig2 > 0 && list->precision > 0))
 			ft_ldigitflag(list);
 		else if (list->space > 0)
 			ft_lspaceflag(list);

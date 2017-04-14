@@ -26,19 +26,15 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 		if (list->dig2 > lst->size)
 			ft_ldgt_4(list, lst);
 		ft_ldgt_5(&newarg, list, lst);
-/*
-		if (list->space > 0)
-			ft_spaceflag(list);
-*/
 	}
 	else
 	{
 		if (list->dig2 > 0)
-			ft_ldgt_7(list, lst, &list->dig2);
+			ft_ldgt_7(list, lst);
 		else
 			ft_bzero(list->args, lst->size);
 		if (list->dig1 > 0 && list->dig1 > lst->size)
-			ft_ldgt_8(list, lst, &list->dig1, &list->dig2);
+			ft_ldgt_8(list, lst);
 	}
 }
 
@@ -81,14 +77,17 @@ void			ft_ldigitflag(t_flags *list)
 	}
 	else
 	{
-		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
-			newarg = ft_strnew(list->dig1);
-		else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
-			newarg = ft_strnew(list->dig2);
-		else
-			newarg = ft_strnew(list->dig1 + list->dig2);
+		if (list->conv != 's')
+		{
+			if (list->dig1 > list->dig2 && list->dig1 > lst->size)
+				newarg = ft_strnew(list->dig1);
+			else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
+				newarg = ft_strnew(list->dig2);
+			else
+				newarg = ft_strnew(list->dig1 + list->dig2);
+			ft_clear_precs(lst);
+		}
 		ft_precs(list, newarg, lst);
-		ft_clear_precs(lst);
 	}
 	free(lst);
 }
