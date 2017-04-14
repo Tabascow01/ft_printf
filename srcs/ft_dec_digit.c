@@ -17,10 +17,13 @@ void	ft_decompose_digit(t_flags *list)
 	int		i;
 
 	i = 0;
-	list->dig1 = ft_atoi(list->digit);
-	while (list->digit[i] && list->digit[i] != '.')
-		i++;
-	if (list->digit[i] == '.')
-		i++;
-	list->dig2 = ft_atoi(&list->digit[i]);
+	if (list->digit != NULL)
+	{
+		list->dig1 = ft_atoi(list->digit);
+		while (list->digit[i] && list->digit[i] != '.')
+			i++;
+		if (list->digit[i] == '.')
+			i++;
+		list->dig2 = ft_atoi(&list->digit[i]);
+	}
 }

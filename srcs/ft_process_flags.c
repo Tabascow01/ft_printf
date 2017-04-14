@@ -15,7 +15,6 @@
 
 static void		ft_process_flags_n(t_flags *list)
 {
-//	printf("dig1[%d]-dig2[%d]\n",list->dig1,list->dig2);
 	if (list->digit != 0)
 	{
 		if (list->digit[0] == '0' && list->precision == 0)
@@ -77,8 +76,7 @@ static void		ft_process_flags_nnext(t_flags *list)
 
 static void		ft_process_flags_nnn(t_flags *list)
 {
-	if ((int)ft_strlen(list->digit) > 0 && list->conv != 'S'
-			&& ft_strcmp(list->digit, ".") != 0)
+	if (list->dig1 > 0 || list->dig2 > 0 || (list->dig1 > 0 && list->dig2 > 0))
 	{
 		ft_process_flags_nn(list);
 		if ((list->conv == 'C' || list->conv == 'c') && list->precision > 0)
