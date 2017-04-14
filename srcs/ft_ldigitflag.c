@@ -55,24 +55,10 @@ static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
 {
 	(*tmp) = ft_strjoin(list->args, (*newarg));
 	ft_strdel((*&newarg));
-	ft_strdel(&list->args);
+	if (list->conv == 's')
+		ft_strdel(&list->args);
 	list->args = ft_reallocf((*tmp), 0);
 }
-
-/*
-static void		ft_ldigit_nnn(t_flags *list, int *i, char **tmp)
-{
-	while (list->digit[(*i)] && list->digit[(*i)] != '.')
-		(*i)++;
-	(*tmp) = ft_strnew((*i));
-	(*i) = 0;
-	while (list->digit[(*i)] && list->digit[(*i)] != '.')
-	{
-		(*tmp)[(*i)] = list->digit[(*i)];
-		(*i)++;
-	}
-}
-*/
 
 void			ft_ldigitflag(t_flags *list)
 {
@@ -87,7 +73,7 @@ void			ft_ldigitflag(t_flags *list)
 		lst->size += 1;
 	if (list->precision == 0)
 	{
-		newarg = ft_strnew(list->dig1 - lst->size);
+		newarg = ft_strnew(list->dig1);
 		while (lst->i < (list->dig1 - lst->size))
 			newarg[lst->i++] = ' ';
 		ft_ldigit_n(list, lst->i, list->dig1, &newarg);
@@ -102,7 +88,7 @@ void			ft_ldigitflag(t_flags *list)
 		else
 			newarg = ft_strnew(list->dig1 + list->dig2);
 		ft_precs(list, newarg, lst);
+		ft_clear_precs(lst);
 	}
-	ft_clear_precs(lst);
 	free(lst);
 }
