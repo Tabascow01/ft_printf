@@ -22,11 +22,10 @@ void	ft_signflag(t_flags *list)
 	{
 		newarg = ft_strnew((int)ft_strlen(list->args) + 1);
 		newarg[0] = '+';
-		tmp = newarg;
-		newarg = ft_strjoin(tmp, list->args);
-		ft_strdel(&tmp);
+		tmp = ft_strjoin(newarg, list->args);
+		ft_strdel(&newarg);
 		ft_strdel(&list->args);
-		list->args = ft_reallocf(newarg, 0);
+		list->args = ft_reallocf(tmp, 0);
 	}
 	else
 		return ;

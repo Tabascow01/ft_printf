@@ -24,6 +24,7 @@ char	*ft_strtoupper(char *str)
 		newstr[i] = ft_toupper(str[i]);
 		i++;
 	}
+	ft_strdel(&str);
 	return (newstr);
 }
 

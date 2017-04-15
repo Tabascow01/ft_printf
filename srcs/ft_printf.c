@@ -27,7 +27,16 @@ int		ft_printf(const char *format, ...)
 	ft_strdel(&list->format);
 	returned = list->ret;
 	if (list != NULL)
+	{
+		if (list->wargs != NULL)
+			ft_wstrdel(&list->wargs);
+		if (list->format != NULL)
+			ft_strdel(&list->format);
+		if (list->digit != NULL)
+			ft_strdel(&list->digit);
+		ft_clear_flags(list);
 		free(list);
+	}
 	va_end(args);
 	return (returned);
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 int		ft_print_str(t_flags *list)
 {
@@ -32,6 +33,7 @@ void	ft_process_str(t_flags *list)
 	}
 	else
 	{
+		printf("ARGS[%p] - DGT[%p]\n", &list->args, &list->digit);
 		ft_putstr(list->args);
 		ft_return_size(list);
 		if (ft_strcmp(list->args, "(null)") == 0)

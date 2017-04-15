@@ -24,6 +24,7 @@ char	*ft_strtolower(char *str)
 		newstr[i] = ft_tolower(str[i]);
 		i++;
 	}
+	ft_strdel(&str);
 	return (newstr);
 }
 
