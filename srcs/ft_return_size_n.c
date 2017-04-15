@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 void	ft_return_size_nnnnn(t_flags *list)
 {
@@ -20,7 +21,10 @@ void	ft_return_size_nnnnn(t_flags *list)
 	else if (list->space > 0 && (list->conv == 's'))
 		list->size += (int)ft_strlen(list->args) - 3;
 	else
+	{
+//		printf("-_-\n");
 		list->size += (int)ft_strlen(list->args) - 2;
+	}
 }
 
 void	ft_return_size_nnnn(t_flags *list)
@@ -96,8 +100,10 @@ void	ft_return_size_nn(t_flags *list)
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->sign - 2;
 	else if (list->digit > 0 && list->hash == '#' && list->conv != 'p')
+	{
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - 3;
+	}
 	else if (list->conv == 'c'
 			&& list->args[ft_atoi(list->digit) - 1] == '\0')
 		list->size += (int)ft_strlen(list->args)

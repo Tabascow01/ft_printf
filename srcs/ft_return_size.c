@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_size_conv_n(t_flags *list)
 {
@@ -39,9 +40,9 @@ static void		ft_size_conv(t_flags *list)
 	}
 	else if (list->left > 0)
 		ft_return_size_nnnn(list);
-	else if (list->hash == '#' && list->conv != 'c' && list->args != 0)
+	else if (list->hash > 0 && list->conv != 'c' && list->args != 0)
 		list->size += (int)ft_strlen(list->args) - 3;
-	else if (list->hash == '#' && list->conv == 'c' && list->args[0] != '\0')
+	else if (list->hash > 0 && list->conv == 'c' && list->args[0] != '\0')
 		list->size += (int)ft_strlen(list->args) - 3;
 	else
 		ft_return_size_nnnnn(list);

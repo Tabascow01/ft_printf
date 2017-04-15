@@ -23,7 +23,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 			lst->neg = 1;
 		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
 			ft_dgt_3(list, lst);
-		if (list->dig2 > lst->size)
+		if (list->dig2 >= lst->size)
 			ft_dgt_4(list, lst);
 		ft_dgt_5(&newarg, list, lst);
 	}
