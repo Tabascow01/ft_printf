@@ -35,7 +35,7 @@ static void		ft_process_flags_n(t_flags *list)
 					&& list->dig2 <= (int)ft_strlen(list->args))))
 	{
 		ft_hashflag(list);
-		if (list->dig1 > 0 || list->dig2 > 0)
+		if (list->dig2 > 0 && list->precision > 0)
 			list->hash = 0;
 	}
 }
