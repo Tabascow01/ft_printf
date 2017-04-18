@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/12 08:14:33 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:15:30 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_zeroflag_nn(t_flags *list, char **tmparg, char **newarg)
 {
@@ -146,7 +145,7 @@ void			ft_strzhash(t_flags *list, char **str)
 		newarg = ft_strcpy(newarg, "0X");
 	else if ((list->conv == 'o' || list->conv == 'O')
 			&& list->dig2 <= (int)ft_strlen(list->args)
-			&& list-> dig1 > (int)ft_strlen(list->args))
+			&& list->dig1 > (int)ft_strlen(list->args))
 		newarg = ft_strcpy(newarg, "0");
 	newarg = ft_strjoin(newarg, tmp);
 	(*str) = ft_strjoin(tmparg, newarg);

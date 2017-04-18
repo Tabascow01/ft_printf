@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:02:18 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:12:14 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -86,7 +85,6 @@ void			ft_ldigitflag(t_flags *list)
 				newarg = ft_strnew(list->dig2);
 			else
 				newarg = ft_strnew(list->dig1 + list->dig2);
-
 		}
 		ft_precs(list, newarg, lst);
 	}

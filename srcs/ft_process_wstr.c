@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:05:57 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:31:39 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:13:32 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <wchar.h>
 
 int		ft_print_wstr(t_flags *list)
 {

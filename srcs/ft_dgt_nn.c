@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:40:34 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:52:27 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:07:47 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 void	ft_dgt_7(t_flags *list, t_precs *lst)
 {

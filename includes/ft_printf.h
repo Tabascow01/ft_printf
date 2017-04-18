@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 01:30:03 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:05:58 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,27 +92,19 @@ void				ft_wdgt_3(t_precs *lst, int *dgtmp, wchar_t **ar);
 void				ft_wdgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
 int					ft_wdgt_1(t_flags *list, t_precs *lst, int *dtmp, int *d);
 
-// Re-encodage
 void				ft_ldgt_8(t_flags *list, t_precs *lst);
 void				ft_ldgt_7(t_flags *list, t_precs *lst);
-//void				ft_ldgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_ldgt_5(char **ar, t_flags *list, t_precs *lst);
 void				ft_ldgt_4(t_flags *list, t_precs *lst);
 void				ft_ldgt_3(t_flags *list, t_precs *lst);
-//void				ft_ldgt_2(t_flags *list, t_precs *lst, int *dtmp, int *d);
 int					ft_ldgt_1(t_flags *list, t_precs *lst);
-// EOM
 
-// Re-encodage
 void				ft_dgt_8(t_flags *list, t_precs *lst);
 void				ft_dgt_7(t_flags *list, t_precs *lst);
-//void				ft_dgt_6(t_flags *list, t_precs *lst, char **ar);
 void				ft_dgt_5(char **ar, t_flags *list, t_precs *lst);
 void				ft_dgt_4(t_flags *list, t_precs *lst);
 void				ft_dgt_3(t_flags *list, t_precs *lst);
-//void				ft_dgt_2(t_flags *list, int *dtmp, t_precs *lst, int *dgt);
 int					ft_dgt_1(t_flags *list, t_precs *lst);
-// EOM
 
 void				ft_ldigit_nnnnn(t_flags *l, char **n, int *dgt, t_precs *s);
 void				ft_ldigit_nnnn(t_flags *list, int *size, int *i, char **s);

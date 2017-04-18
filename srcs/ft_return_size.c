@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:16:52 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/27 02:26:51 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:13:59 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_size_conv_n(t_flags *list)
 {

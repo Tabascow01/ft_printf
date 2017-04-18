@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:45:04 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:12:58 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_process_flags_n(t_flags *list)
 {
@@ -42,7 +41,6 @@ static void		ft_process_flags_n(t_flags *list)
 
 static void		ft_process_flags_nn(t_flags *list)
 {
-
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
 	{
@@ -101,7 +99,7 @@ void			ft_process_flags(t_flags *list)
 	ft_process_flags_n(list);
 	if (list->left > 0)
 	{
-		if (list->dig1 > 0 ||list->dig2 > 0 || list->precision > 0 ||
+		if (list->dig1 > 0 || list->dig2 > 0 || list->precision > 0 ||
 				(list->dig1 > 0 && list->dig2 > 0 && list->precision > 0))
 			ft_ldigitflag(list);
 		else if (list->space > 0)

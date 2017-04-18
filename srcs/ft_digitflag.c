@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:58:11 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:08:32 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -19,7 +18,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 		return ;
 	if (list->conv != 's')
 	{
-		if(list->args[0] == '-' || list->args[0] == '+')
+		if (list->args[0] == '-' || list->args[0] == '+')
 			lst->neg = 1;
 		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
 			ft_dgt_3(list, lst);
@@ -87,7 +86,8 @@ void			ft_digitflag(t_flags *list)
 		ft_digit_nn(list, &lst->i, &newarg, &lst->tmp);
 	}
 	else
-	{	if (list->conv != 's')
+	{
+		if (list->conv != 's')
 		{
 			if (list->dig1 > list->dig2 && list->dig1 > lst->size)
 				newarg = ft_strnew(list->dig1);
@@ -95,7 +95,6 @@ void			ft_digitflag(t_flags *list)
 				newarg = ft_strnew(list->dig2);
 			else
 				newarg = ft_strnew(list->dig1 + list->dig2);
-			
 		}
 		ft_precs(list, newarg, lst);
 	}

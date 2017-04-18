@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/12 09:25:40 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:10:39 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 void	ft_ldgt_5(char **newarg, t_flags *list, t_precs *lst)
 {
@@ -32,7 +31,7 @@ void	ft_ldgt_5(char **newarg, t_flags *list, t_precs *lst)
 	{
 		*newarg = ft_strjoin(list->args, lst->spaces);
 		if (list->hash > 0)
-			ft_strzhash(list,&(*newarg));
+			ft_strzhash(list, &(*newarg));
 	}
 	else
 		*newarg = ft_strjoin(lst->zero, list->args);
@@ -57,9 +56,9 @@ void	ft_ldgt_4(t_flags *list, t_precs *lst)
 		if (list->args[0] == '-')
 			lst->zero[lst->i++] = '-';
 		if (list->args[0] == '+')
-		lst->zero[lst->i++] = '+';
+			lst->zero[lst->i++] = '+';
 	}
-	while(lst->i < diff)
+	while (lst->i < diff)
 		lst->zero[lst->i++] = '0';
 	if (lst->i > 0 && list->hash == 0)
 		lst->zero[lst->i] = '\0';
@@ -90,28 +89,7 @@ void	ft_ldgt_3(t_flags *list, t_precs *lst)
 	if (lst->neg > 0)
 		lst->i--;
 }
-/*
-void	ft_ldgt_2(t_flags *list, t_precs *lst, int *digittmp, int *digit)
-{
-	if (list->args[0] == 0 && (list->conv == 'd' || list->conv == 'i'
-				|| list->conv == 'x' || list->conv == 'X'
-				|| list->conv == 'o' || list->conv == 'O'))
-		lst->null = 1;
-	if ((list->args[0] == '-' && (*digit) >= lst->size) || (list->args[0] == '+'
-				&& (*digit) >= 0)
-			|| ((*digittmp) > (*digit) && list->conv == 'p'))
-		lst->size -= 1;
-	if ((*digittmp) > (*digit) && (list->space > 0)
-			&& (*digit) > 0 && list->conv != 'p')
-		(*digittmp) = (*digittmp) - (*digit) + lst->size;
-	else if ((list->args[0] == '-' || list->args[0] == '+')
-			&& (*digittmp) > (*digit) && (*digit) > 0 && lst->size > 0
-			&& (*digit) > lst->size)
-		lst->neg = 1;
-	else
-		(*digittmp) += 0;
-}
-*/
+
 int		ft_ldgt_1(t_flags *list, t_precs *lst)
 {
 	ft_strdel(&lst->tmp);

@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:27:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/29 03:16:33 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:11:26 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 void	ft_ldgt_8(t_flags *list, t_precs *lst)
 {
@@ -59,32 +58,3 @@ void	ft_ldgt_7(t_flags *list, t_precs *lst)
 	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
 	ft_strdel(&lst->tmpargs);
 }
-
-/*
-void	ft_ldgt_6(t_flags *list, t_precs *lst, char **newarg)
-{
-	if (list->args[0] == '-' || list->args[0] == '+')
-	{
-		list->args++;
-		lst->tmpargs = ft_strjoin(lst->tmp, list->args);
-		ft_strdel(&lst->tmp);
-		list->args--;
-		ft_strdel(&list->args);
-		lst->tmp = (*newarg);
-		(*newarg) = ft_strjoin(lst->tmpargs, lst->tmp);
-		ft_strdel(&lst->tmpargs);
-		ft_strdel(&lst->tmp);
-	}
-	else
-	{
-		lst->tmpargs = ft_strjoin(lst->tmp, list->args);
-		ft_strdel(&list->args);
-		ft_strdel(&lst->tmp);
-		lst->tmp = (*newarg);
-		(*newarg) = ft_strjoin(lst->tmpargs, lst->tmp);
-		ft_strdel(&lst->tmpargs);
-		ft_strdel(&lst->tmp);
-	}
-	list->args = ft_reallocf((*newarg), 0);
-}
-*/
