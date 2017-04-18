@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/12 09:25:44 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:02:18 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void		ft_ldigit_n(t_flags *list, int i, int digit, char **newarg)
 static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
 {
 	(*tmp) = ft_strjoin(list->args, (*newarg));
+	ft_strdel(&list->args);
 	ft_strdel((*&newarg));
 	if (list->conv == 's')
 		ft_strdel(&list->args);

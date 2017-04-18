@@ -6,22 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:40:34 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/10 03:05:27 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:52:27 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>//
-
-/*
-void	ft_dgt_6(t_flags *list, t_precs *lst, char **newarg)
-{
-	ft_strdel(&lst->tmp);
-	list->args = ft_reallocf((*newarg), 0);
-	if (list->space > 0)
-		ft_spaceflag(list);
-}
-*/
 
 void	ft_dgt_7(t_flags *list, t_precs *lst)
 {

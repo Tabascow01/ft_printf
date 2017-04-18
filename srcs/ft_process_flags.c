@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/12 08:52:00 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:45:04 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ static void		ft_process_flags_nn(t_flags *list)
 
 static void		ft_process_flags_nnext(t_flags *list)
 {
-/*
-	if (list->hash == '#' && (list->conv == 'p' || list->conv == 'x'
-				|| list->conv == 'X' || list->conv == 'o'
-				|| list->conv == 'O'
-				|| list->dig2 > list->dig1) && list->precision > 0)
-		ft_zhashflag(list);
-*/
 	if (list->conv == 'p' && (int)ft_strlen(list->args) < 3
 			&& (int)ft_strlen(list->digit) > 1 && list->digit[1] != '0')
 		list->hash = 0;
@@ -79,7 +72,7 @@ static void		ft_process_flags_nnn(t_flags *list)
 {
 	if ((list->dig1 > 0 || list->dig2 > 0
 			|| (list->dig1 > 0 && list->dig2 > 0))
-			&& list->left == 0)
+			&& list->left == 0 && list->conv != 'S')
 	{
 		ft_process_flags_nn(list);
 		if ((list->conv == 'C' || list->conv == 'c') && list->precision > 0)
@@ -106,7 +99,7 @@ void			ft_process_flags(t_flags *list)
 {
 	ft_decompose_digit(list);
 	ft_process_flags_n(list);
-	if (list->left > 0 && list->conv != 'S')
+	if (list->left > 0)
 	{
 		if (list->dig1 > 0 ||list->dig2 > 0 || list->precision > 0 ||
 				(list->dig1 > 0 && list->dig2 > 0 && list->precision > 0))

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 00:16:03 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/14 01:21:21 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:06:57 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void	ft_process_str(t_flags *list)
 	}
 	else
 	{
-		printf("ARGS[%p] - DGT[%p]\n", &list->args, &list->digit);
 		ft_putstr(list->args);
 		ft_return_size(list);
-		if (ft_strcmp(list->args, "(null)") == 0)
-			ft_strdel(&list->args);
+		ft_strdel(&list->args);
 		ft_clear_flags(list);
 		return ;
 	}

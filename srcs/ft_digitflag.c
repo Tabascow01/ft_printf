@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/12 10:00:14 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:58:11 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 			ft_dgt_7(list, lst);
 		else
 			ft_bzero(list->args, lst->size);
-		if (list->dig1 > 0 && list->dig1 > lst->size)
+		if ((list->dig1 > list->dig2 && list->dig1 > 0)
+				|| (list->dig2 >= lst->size && list->dig1 > 0
+					&& list->dig1 < list->dig2))
 			ft_dgt_8(list, lst);
 	}
 }
