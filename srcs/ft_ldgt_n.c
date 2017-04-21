@@ -64,7 +64,7 @@ void	ft_ldgt_4(t_flags *list, t_precs *lst)
 		lst->zero[lst->i] = '\0';
 	else if (list->hash > 0)
 		ft_strzhash(list, &lst->zero);
-	else
+	else if (lst->i > 1)
 		lst->zero[lst->i + 1] = '\0';
 }
 
