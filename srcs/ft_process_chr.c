@@ -14,15 +14,16 @@
 
 int		ft_print_chr(t_flags *list, char c)
 {
-	if (list->left == 0 && (list->args[ft_atoi(list->digit) - 1] == 0
-			|| list->args[0] == '\0'))
+	if (list->left == 0 && (ft_atoi(list->digit) > 1
+			|| list->args[0] == '\0') && !ft_isprint(c))
 	{
 		ft_putstr(list->args);
 		ft_putchar(c);
 	}
-	else if (list->left > 0 && (list->args[ft_atoi(list->digit) - 1] == 0
-			|| list->args[0] == '\0'))
+	else if (list->left > 0 && (ft_atoi(list->digit) > 1
+			|| list->args[0] == '\0') && !ft_isprint(c))
 	{
+		list->size += 1;//
 		ft_putchar(c);
 		ft_putstr(list->args);
 	}

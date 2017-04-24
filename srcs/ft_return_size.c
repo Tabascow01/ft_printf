@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_size_conv_n(t_flags *list)
 {
@@ -49,12 +50,10 @@ static void		ft_size_conv(t_flags *list)
 
 static void		ft_size_percent(t_flags *list)
 {
-	if (list->digit > 0 && list->zero == 0)
+	if (((int)ft_strlen(list->digit) > 0 || list->nbleft > 0) && list->zero == 0)
 	{
 		list->size += (int)ft_strlen(list->args) -
-			(int)ft_strlen(list->digit) - 2;
-		if (list->left > 0)
-			list->size -= 1;
+			(int)ft_strlen(list->digit) - list->nbleft - 2;
 	}
 	else if (list->digit > 0 && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)

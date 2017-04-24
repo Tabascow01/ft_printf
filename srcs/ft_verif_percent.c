@@ -22,6 +22,9 @@ int		ft_verif_percent(t_flags *list, int idxtmp)
 			ft_isflag(list->format[idxtmp + 1]))
 		idxtmp++;
 	if (list->format[idxtmp] == '%')
+	{
+		list->conv = '%';
 		return (1);
+	}
 	return (0);
 }

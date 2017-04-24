@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -51,8 +52,10 @@ static void		ft_digit_n(t_flags *list, int *size, char **newarg)
 			list->size += 1;
 		(*size) += 1;
 	}
-	if (digit > (*size))
+	if (digit > (*size) && list->noconv == 0)
 		(*newarg) = ft_strnew(digit - (*size));
+	else if (list->args[0] == '%')
+		(*newarg) = ft_strnew(list->dig1 + 1);
 	else
 		(*newarg) = ft_strnew(1);
 }

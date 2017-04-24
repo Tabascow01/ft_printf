@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -65,7 +66,7 @@ void			ft_ldigitflag(t_flags *list)
 	lst = NULL;
 	lst = ft_init_precs(lst);
 	lst->size = (int)ft_strlen(list->args);
-	if (list->args == NULL)
+	if (list->args == NULL || list->args[0] == '\0')
 		lst->size += 1;
 	if (list->precision == 0)
 	{

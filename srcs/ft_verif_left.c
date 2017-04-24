@@ -42,7 +42,8 @@ int		ft_isleft_allowed(t_flags *list, int idxtmp)
 				|| list->format[idxtmp + 1] == '#'
 				|| !ft_isflag(list->format[idxtmp + 1])
 				|| list->format[idxtmp + 1] == '.'
-				|| list->format[idxtmp + 1] == '-'))
+				|| list->format[idxtmp + 1] == '-'
+				|| list->format[idxtmp + 1] == '%'))
 			return (1);
 		idxtmp++;
 	}

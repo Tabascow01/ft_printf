@@ -22,7 +22,7 @@ void	ft_save_str(t_flags *list, va_list args)
 		list->args = ft_strnew(6);
 		list->args = ft_strcpy(list->args, "(null)");
 	}
-	else
+	else if (list->precision == 0 || (int)ft_strlen(list->digit) > 1)
 	{
 		list->args = ft_strnew((int)ft_strlen(tmp));
 		if (tmp != NULL)

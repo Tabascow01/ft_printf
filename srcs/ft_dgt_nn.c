@@ -18,17 +18,20 @@ void	ft_dgt_7(t_flags *list, t_precs *lst)
 
 	del = list->args;
 	lst->tmpargs = ft_strnew(list->dig2);
-	while (list->args[lst->i] && lst->i < list->dig2)
-		lst->i++;
-	lst->tmp = &list->args[lst->i];
-	lst->i = 0;
-	while (lst->i < list->dig2)
+	if (list->args != NULL)
 	{
-		lst->tmpargs[lst->i] = list->args[lst->i];
-		lst->i++;
+		while (list->args[lst->i] && lst->i < list->dig2)
+			lst->i++;
+		lst->tmp = &list->args[lst->i];
+		lst->i = 0;
+		while (lst->i < list->dig2)
+		{
+			lst->tmpargs[lst->i] = list->args[lst->i];
+			lst->i++;
+		}
+		ft_strdel(&del);
+		list->args = ft_strjoin(lst->tmpargs, lst->tmp);
 	}
-	ft_strdel(&del);
-	list->args = ft_strjoin(lst->tmpargs, lst->tmp);
 	ft_strdel(&lst->tmpargs);
 }
 
