@@ -118,6 +118,7 @@ void			ft_strzhash(t_flags *list, char **str)
 
 	i = 0;
 	j = 0;
+
 	if (ft_strchr((*str), '0') && (list->conv == 'o' || list->conv == 'O'))
 		return ;
 	if (list->dig1 > (int)ft_strlen(list->args) + list->dig2)
