@@ -29,6 +29,9 @@ void	ft_return_size_nnnn(t_flags *list)
 	if (list->noconv > 0)
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - 2;
+	else if (list->conv == 's' && ft_strlen(list->digit) > 0)
+		list->size += (int)ft_strlen(list->args) - (int)ft_strlen(list->digit)
+			- list->nbleft - 2;
 	else if (list->sign == 0 && list->space == 0
 			&& list->hash == 0 && list->zero == 0 && ft_atoi(list->args) != 0)
 		list->size += (int)ft_strlen(list->args)
