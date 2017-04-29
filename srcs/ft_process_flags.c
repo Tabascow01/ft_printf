@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:04 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:12:58 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 13:35:40 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void		ft_process_flags_nnn(t_flags *list)
 			ft_digitflag(list);
 		ft_process_flags_nnext(list);
 	}
-	else if (list->space > 0 && list->conv != 'S')
+	else if (list->space > 0 && list->conv != 'S' && list->precision == 0)
 	{
 		if (list->args[0] == '-' || list->sign > 0 ||
 				list->conv == 's' || list->conv == 'p'
