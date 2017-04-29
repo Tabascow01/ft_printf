@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:07:38 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 13:48:08 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 int		ft_dgt_1(t_flags *list, t_precs *lst)
 {
@@ -65,7 +66,7 @@ void	ft_dgt_4(t_flags *list, t_precs *lst)
 	}
 	while (lst->i < diff)
 		lst->zero[lst->i++] = '0';
-	if (lst->i > 0 && list->hash == 0)
+	if (lst->i > 0 && list->hash == 0 && list->space == 0)
 		lst->zero[lst->i] = '\0';
 	else if (list->hash > 0)
 		ft_strzhash(list, &lst->zero);
