@@ -6,12 +6,18 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 16:38:38 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 13:51:26 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:38:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
+
+static void		ft_precs_n(t_flags *list, t_precs *lst)
+{
+	if (list->space > 0 && list->hash == 0 && lst->neg == 0
+			&& list->dig1 < list->dig2)
+		ft_spaceflag(list);
+}
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -26,9 +32,7 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 		if (list->dig2 >= lst->size)
 			ft_dgt_4(list, lst);
 		ft_dgt_5(&newarg, list, lst);
-		if (list->space > 0 && list->hash == 0 && lst->neg == 0
-				&& list->dig1 < list->dig2)
-			ft_spaceflag(list);
+		ft_precs_n(list, lst);
 	}
 	else
 	{
@@ -93,15 +97,7 @@ void			ft_digitflag(t_flags *list)
 	}
 	else
 	{
-		if (list->conv != 's')
-		{
-			if (list->dig1 > list->dig2 && list->dig1 > lst->size)
-				newarg = ft_strnew(list->dig1);
-			else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
-				newarg = ft_strnew(list->dig2);
-			else
-				newarg = ft_strnew(list->dig1 + list->dig2);
-		}
+		ft_dgt_nnn(list, lst, &newarg);
 		ft_precs(list, newarg, lst);
 	}
 	if (list->conv != 's' && list->precision > 0)

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:40:34 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:07:47 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:36:45 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,27 @@ void	ft_dgt_8(t_flags *list, t_precs *lst)
 		lst->tmp[lst->i++] = ' ';
 	list->args = ft_strjoin(lst->tmp, list->args);
 	ft_strdel(&lst->tmp);
+}
+
+void	ft_dgt_5_n(char **newarg, t_flags *list, t_precs *lst, int *a)
+{
+	*a = 0;
+	if ((list->args[0] == '-' || list->args[0] == '+') && lst->i > 0)
+	{
+		list->args++;
+		*a += 1;
+	}
+}
+
+void	ft_dgt_nnn(t_flags *list, t_precs *lst, char **newarg)
+{
+	if (list->conv != 's')
+	{
+		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
+			(*newarg) = ft_strnew(list->dig1);
+		else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
+			(*newarg) = ft_strnew(list->dig2);
+		else
+			(*newarg) = ft_strnew(list->dig1 + list->dig2);
+	}
 }

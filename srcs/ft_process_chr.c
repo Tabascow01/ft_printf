@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 22:39:31 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:59:13 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 15:38:31 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_print_chr(t_flags *list, char c)
 	else if (list->left > 0 && (ft_atoi(list->digit) > 1
 			|| list->args[0] == '\0') && !ft_isprint(c))
 	{
-		list->size += 1;//
+		list->size += 1;
 		ft_putchar(c);
 		ft_putstr(list->args);
 	}

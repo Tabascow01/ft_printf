@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:15:30 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:22:19 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,9 @@ void			ft_strzhash(t_flags *list, char **str)
 	char	*tmp;
 	char	*tmparg;
 
-	i = 0;
-	j = 0;
-
-	if (ft_strchr((*str), '0') && (list->conv == 'o' || list->conv == 'O'))
+	ft_strzhash_nnnn(&i, &j);
+	if (ft_strzhash_n(list, &str, &tmparg))
 		return ;
-	if (list->dig1 > (int)ft_strlen(list->args) + list->dig2)
-		tmparg = ft_strnew(list->dig1);
-	else
-		tmparg = ft_strnew(list->dig2);
 	while ((*str)[i] && (*str)[i] == ' ')
 	{
 		if (i < 1 && list->dig1 > list->dig2
@@ -139,19 +133,6 @@ void			ft_strzhash(t_flags *list, char **str)
 			tmparg[j++] = (*str)[i++];
 	}
 	tmp = &(*str)[i];
-	newarg = ft_strnew((int)ft_strlen(list->args) + 2);
-	if (list->conv == 'x')
-		newarg = ft_strcpy(newarg, "0x");
-	else if (list->conv == 'X')
-		newarg = ft_strcpy(newarg, "0X");
-	else if ((list->conv == 'o' || list->conv == 'O')
-			&& list->dig2 <= (int)ft_strlen(list->args)
-			&& list->dig1 > (int)ft_strlen(list->args))
-		newarg = ft_strcpy(newarg, "0");
-	newarg = ft_strjoin(newarg, tmp);
-	(*str) = ft_strjoin(tmparg, newarg);
-	ft_strdel(&tmparg);
-	ft_strdel(&newarg);
-	(*str) = ft_reallocf((*str), 0);
-	return ;
+	ft_strzhash_nn(list, &newarg);
+	ft_strzhash_nnn(&newarg, &tmp, &tmparg, &str);
 }

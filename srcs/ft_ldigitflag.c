@@ -6,12 +6,11 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:12:14 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 15:36:46 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -57,6 +56,19 @@ static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
 	list->args = ft_reallocf((*tmp), 0);
 }
 
+static void		ft_ldgt_nnn(t_flags *list, t_precs *lst, char **newarg)
+{
+	if (list->conv != 's')
+	{
+		if (list->dig1 > list->dig2 && list->dig1 > lst->size)
+			*newarg = ft_strnew(list->dig1);
+		else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
+			*newarg = ft_strnew(list->dig2);
+		else
+			*newarg = ft_strnew(list->dig1 + list->dig2);
+	}
+}
+
 void			ft_ldigitflag(t_flags *list)
 {
 	char	*newarg;
@@ -78,15 +90,7 @@ void			ft_ldigitflag(t_flags *list)
 	}
 	else
 	{
-		if (list->conv != 's')
-		{
-			if (list->dig1 > list->dig2 && list->dig1 > lst->size)
-				newarg = ft_strnew(list->dig1);
-			else if (list->dig2 > list->dig1 && list->dig2 > lst->size)
-				newarg = ft_strnew(list->dig2);
-			else
-				newarg = ft_strnew(list->dig1 + list->dig2);
-		}
+		ft_ldgt_nnn(list, lst, &newarg);
 		ft_precs(list, newarg, lst);
 	}
 	if (list->conv != 's' && list->precision > 0)
