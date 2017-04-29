@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 16:28:50 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:50:17 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_dgt_5(char **newarg, t_flags *list, t_precs *lst)
 {
 	int a;
 
-	ft_dgt_5_n(&(*newarg), list, lst, &a);
+	ft_dgt_5_n(list, lst, &a);
 	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
 	{
 		lst->tmp = ft_strjoin(lst->spaces, lst->zero);
