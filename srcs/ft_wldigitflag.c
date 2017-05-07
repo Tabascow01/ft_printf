@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 13:35:19 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/07 22:54:35 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		ft_precs(t_flags *list, wchar_t *newarg, t_precs *lst, int dgit)
 {
-	int			digittmp;
+	int		digittmp;
 
 	ft_wldgt_1(list, lst, &digittmp);
 	if (list->conv != 'S')

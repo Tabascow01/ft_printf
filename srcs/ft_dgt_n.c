@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 16:50:17 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/07 22:16:20 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	ft_dgt_3(t_flags *list, t_precs *lst)
 	int		diff;
 
 	diff = 0;
-	if (lst->neg > 0)
-		diff = -1;
+	if (list->args[0] == '+' || (list->args[0] == '-'
+				&& (list->zero > 0 || list->dig2 > lst->size)))
+		diff -= 1;
 	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
 		diff += list->dig1 - list->dig2;
 	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size)
@@ -99,5 +100,5 @@ void	ft_dgt_5(char **newarg, t_flags *list, t_precs *lst)
 	if (a > 0)
 		list->args--;
 	ft_strdel(&list->args);
-	list->args = (*newarg);
+	list->args = ft_reallocf((*newarg), 0);
 }
