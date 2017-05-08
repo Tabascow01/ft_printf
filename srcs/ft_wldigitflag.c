@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+/*
 static void		ft_precs(t_flags *list, wchar_t *newarg, t_precs *lst, int dgit)
 {
 	int		digittmp;
@@ -38,7 +38,7 @@ static void		ft_precs(t_flags *list, wchar_t *newarg, t_precs *lst, int dgit)
 		ft_wldgt_8(list, lst, &digittmp, &dgit);
 	}
 }
-
+*/
 static void		ft_wldigit_n(t_flags *list, int *size, int *i, wchar_t **newarg)
 {
 	(*newarg) = NULL;
@@ -53,10 +53,10 @@ static void		ft_wld_nn(t_flags *lst, int *i, wchar_t **newarg, wchar_t **tmp)
 	if ((*i) > 0)
 		(*newarg)[(*i)] = 0;
 	(*tmp) = ft_wstrjoin(lst->wargs, (*newarg));
-	ft_wstrdel((*&newarg));
+//	ft_wstrdel((*&newarg));
 	lst->wargs = ft_wreallocf((*tmp), 0);
 }
-
+/*
 static void		ft_wldigit_nnn(t_flags *list, int *i, wchar_t **tmp)
 {
 	while (list->digit[(*i)] && list->digit[(*i)] != '.')
@@ -69,7 +69,7 @@ static void		ft_wldigit_nnn(t_flags *list, int *i, wchar_t **tmp)
 		(*i)++;
 	}
 }
-
+*/
 void			ft_wldigitflag(t_flags *list)
 {
 	wchar_t		*newarg;
@@ -79,20 +79,10 @@ void			ft_wldigitflag(t_flags *list)
 	lst = NULL;
 	lst = ft_init_precs(lst);
 	ft_wldigit_n(list, &lst->size, &lst->i, &newarg);
-	if (list->precision == 0)
-	{
-		digit = ft_atoi(list->digit);
-		newarg = ft_wstrnew(digit - lst->size);
-		while (lst->i < (digit - lst->size))
-			newarg[lst->i++] = ' ';
-		ft_wld_nn(list, &lst->i, &newarg, &lst->wtmp);
-	}
-	else
-	{
-		ft_wldigit_nnn(list, &lst->i, &lst->wtmp);
-		digit = ft_atoi(&list->digit[lst->i + 1]);
-		newarg = ft_wstrnew(ft_atoi((void *)lst->wtmp) + (digit -
-					(int)ft_wstrlen(list->wargs)));
-		ft_precs(list, newarg, lst, digit);
-	}
+	digit = ft_atoi(list->digit);
+	newarg = ft_wstrnew(digit - lst->size);
+	while (lst->i < (digit - lst->size))
+		newarg[lst->i++] = ' ';
+	ft_wld_nn(list, &lst->i, &newarg, &lst->wtmp);
+	free(lst);
 }
