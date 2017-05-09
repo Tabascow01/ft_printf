@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/07 22:54:35 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/09 22:39:52 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void		ft_wld_nn(t_flags *lst, int *i, wchar_t **newarg, wchar_t **tmp)
 	if ((*i) > 0)
 		(*newarg)[(*i)] = '\0';
 	(*tmp) = ft_wstrjoin(lst->wargs, (*newarg));
-//	ft_wstrdel((*&newarg));
 	ft_wstrdel(&lst->wargs);
 	lst->wargs = (*tmp);
 }
