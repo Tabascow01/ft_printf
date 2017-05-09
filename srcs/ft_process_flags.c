@@ -70,7 +70,8 @@ static void		ft_process_flags_nnn(t_flags *list)
 {
 	if ((list->dig1 > 0 || list->dig2 > 0
 			|| (list->dig1 > 0 && list->dig2 > 0))
-			&& list->left == 0 && list->conv != 'S')
+			&& list->left == 0 && list->conv != 'S'
+			&& list->conv != 'C' && list->noconv == 0)
 	{
 		ft_process_flags_nn(list);
 		if ((list->conv == 'C' || list->conv == 'c') && list->precision > 0)
@@ -97,7 +98,8 @@ void			ft_process_flags(t_flags *list)
 {
 	ft_decompose_digit(list);
 	ft_process_flags_n(list);
-	if (list->left > 0 && list->conv != 'S')
+	if (list->left > 0 && list->conv != 'S' && list->conv != 'C'
+		&& list->noconv == 0)
 	{
 		if (list->dig1 > 0 || list->dig2 > 0 || list->precision > 0 ||
 				(list->dig1 > 0 && list->dig2 > 0 && list->precision > 0))
@@ -107,7 +109,7 @@ void			ft_process_flags(t_flags *list)
 	}
 	else if (list->zero == '0' && (list->precision == 0 || list->conv == 'c'
 				|| (list->conv == 's' || list->noconv > 0))
-			&& list->conv != 'C')
+			&& list->conv != 'C' && list->conv != 'S')
 	{
 		ft_zeroflag(list);
 		if (list->hash == '#' || list->conv == 'p')

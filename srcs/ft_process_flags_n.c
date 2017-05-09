@@ -14,15 +14,19 @@
 
 void	ft_process_flags_nnnn(t_flags *list)
 {
-	if (((int)ft_strlen(list->digit) > 0 && list->conv == 'S'
+	if (((int)ft_strlen(list->digit) > 0 && (list->conv == 'S'
+			|| list->conv == 'C')
 			&& list->left == 0 && list->zero == 0)
-			|| (list->conv == 'S' && list->zero == '0'
-			&& list->precision > 0))
+			|| ((list->conv == 'S' || list->conv == 'C')
+			&& list->zero == '0'
+			&& list->precision == 0))
 		ft_wdigitflag(list);
-	else if (((int)ft_strlen(list->digit) > 0 && list->conv == 'S'
+	else if (((int)ft_strlen(list->digit) > 0 && (list->conv == 'S'
+			|| list->conv == 'C')
 			&& list->left > 0 && list->zero == 0)
-			|| (list->conv == 'S' && list->zero == '0'
-			&& list->precision > 0))
+			|| ((list->conv == 'S' || list->conv == 'C')
+			&& list->zero == '0'
+			&& list->precision == 0))
 		ft_wldigitflag(list);
 	else if (list->zero == '0' && (list->conv == 'C' || list->conv == 'S')
 			&& list->precision == 0)

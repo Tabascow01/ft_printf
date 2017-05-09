@@ -16,10 +16,10 @@ int		ft_print_wstr(t_flags *list)
 {
 	list->bytes = ft_wputstr(list->wargs);
 	ft_return_wsize(list);
-	ft_wstrdel(&list->wargs);
-	if (list->digit > 0)
-		ft_strdel(&list->digit);
-	ft_clear_flags(list);
+//	ft_wstrdel(&list->wargs);
+//	if (list->digit > 0)
+//		ft_strdel(&list->digit);
+//	ft_clear_flags(list);
 	return (0);
 }
 
