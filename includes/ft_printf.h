@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 16:49:32 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/21 23:32:01 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ typedef struct		s_list
 /*
 ** ft_printf
 */
+
+
+void				ft_process_flags_ups(t_flags *lst);
+void				ft_process_flags_upc(t_flags *lst);
+void				ft_process_flags_s(t_flags *lst);
+void				ft_process_flags_c(t_flags *lst);
+void				ft_process_flags_p(t_flags *lst);
+void				ft_process_flags_u(t_flags *lst);
+void				ft_process_flags_x(t_flags *lst);
+void				ft_process_flags_o(t_flags *lst);
+void				ft_process_flags_d(t_flags *lst);
 
 int					ft_ishex(char *str);
 int					ft_strzhash_n(t_flags *list, char ***str, char **tmp);
@@ -155,7 +166,7 @@ void				ft_process_short(t_flags *list, va_list args, char conv);
 void				ft_process_long(t_flags *list, va_list args, char conv);
 void				ft_process_sshort(t_flags *list, va_list args, char conv);
 void				ft_process_llong(t_flags *list, va_list args, char conv);
-void				ft_process_flags(t_flags *list);
+//void				ft_process_flags(t_flags *list);
 void				ft_process_option(t_flags *list, va_list args, char conv);
 void				ft_process_percent(t_flags *list);
 
