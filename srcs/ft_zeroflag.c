@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:56:45 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/22 01:57:38 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 04:54:45 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ static void		ft_zeroflag_n(t_flags *list, int *size, int *digit)
 {
 	if (list->args != NULL)
 	{
-		if (list->sign > 0 && list->args[0] != '-')
+		if (list->sign > 0 && list->args[0] != '-'
+				&& list->dig1 < (int)ft_strlen(list->args))
 			(*size) += 1;
-		else if (list->args[0] == '-' && list->sign == 0 && list->space > 0)
+		else if (list->args[0] == '-' && list->sign > 0 && list->space > 0)
 			(*size) -= 1;
 		if ((list->args[0] == '\0' && list->conv == 'c') || list->space > 0)
 			(*digit) -= 1;
