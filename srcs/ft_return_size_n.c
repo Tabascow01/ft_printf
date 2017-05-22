@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 02:18:05 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 16:44:00 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 02:01:49 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ void	ft_return_size_nn(t_flags *list)
 {
 	if (list->sign > 0 && list->precision == 0 && list->zero == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->sign - 1;
+			- (int)ft_strlen(list->digit) - list->sign - 2;
 	else if (list->sign > 0 && list->precision == 0 && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->sign - 2;
 	else if (list->space > 0 && list->precision > 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->space - 2;
+			- (int)ft_strlen(list->digit) - list->space - list->sign - 2;
 	else if (list->sign > 0 && list->precision > 0)
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->sign - 2;

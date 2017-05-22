@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 02:56:18 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/21 23:32:01 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:43:18 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct		s_list
 ** ft_printf
 */
 
-
+void				ft_process_flags_percent(t_flags *list);
 void				ft_process_flags_ups(t_flags *lst);
 void				ft_process_flags_upc(t_flags *lst);
 void				ft_process_flags_s(t_flags *lst);

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 01:12:28 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/21 22:10:42 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:42:33 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,12 @@ int				ft_verif_conv(t_flags *list, va_list args)
 			ret = ft_verif_cnv_n(list, &idxtmp, args);
 		idxtmp++;
 	}
+	/*
 	if ((ret == 'Z' || ret == 'R') && ft_check_flags(list)
 			&& list->space == 0)
 		ft_process_flags(list);
-	else if (ret == 0 && !ft_check_flags(list))
+	else*/ 
+	if (ret == 0 && !ft_check_flags(list))
 		list->noconv = 1;
 	return (ret);
 }

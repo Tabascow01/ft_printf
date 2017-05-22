@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 02:12:44 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/15 20:06:16 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:43:00 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		ft_process_percent(t_flags *list)
 	{
 		list->args = ft_strnew(1);
 		list->args[0] = '%';
-		ft_process_flags(list);
+		ft_process_flags_percent(list);
 		ft_print_percent(list);
 	}
 	else

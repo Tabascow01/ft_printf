@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:06:06 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/20 01:06:45 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:48:05 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_process_wchr(t_flags *list)
 			&& list->sign == 0)
 	{
 		c = list->wargs[0];
-		ft_process_flags(list);
+		ft_process_flags_upc(list);
 		ft_print_wchr(list, c);
 	}
 	else

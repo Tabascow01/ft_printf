@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 20:52:37 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/10 04:07:09 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:46:08 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_process_hex(t_flags *list)
 {
 	if (ft_check_flags(list))
 	{
-		ft_process_flags(list);
+		ft_process_flags_x(list);
 		ft_print_hex(list);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 23:53:51 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/03/19 23:08:22 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:47:51 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_process_uint(t_flags *list)
 {
 	if (ft_check_flags(list))
 	{
-		ft_process_flags(list);
+		ft_process_flags_u(list);
 		ft_print_uint(list);
 	}
 	else

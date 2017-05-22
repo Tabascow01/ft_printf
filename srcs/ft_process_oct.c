@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:34:20 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:13:24 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 00:47:12 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_process_oct(t_flags *list)
 {
 	if (ft_check_flags(list))
 	{
-		ft_process_flags(list);
+		ft_process_flags_o(list);
 		ft_print_oct(list);
 	}
 	else
