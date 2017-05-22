@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 15:57:39 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/29 15:36:46 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 03:59:58 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 {
@@ -25,6 +26,8 @@ static void		ft_precs(t_flags *list, char *newarg, t_precs *lst)
 		if (list->dig2 >= lst->size)
 			ft_ldgt_4(list, lst);
 		ft_ldgt_5(&newarg, list, lst);
+		if (list->space > 0 && list->hash == 0 && lst->neg == 0)
+			ft_spaceflag(list);
 	}
 	else
 	{

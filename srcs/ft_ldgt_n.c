@@ -6,18 +6,20 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 02:13:40 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/04/18 14:10:39 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 04:02:29 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 void	ft_ldgt_5(char **newarg, t_flags *list, t_precs *lst)
 {
 	int	a;
 
 	a = 0;
-	if ((list->args[0] == '-' || list->args[0] == '+') && lst->i > 0)
+	if ((list->args[0] == '-' || list->args[0] == '+') && lst->i > 0
+			&& list->dig2 >= lst->size)
 	{
 		list->args++;
 		a++;
@@ -73,7 +75,9 @@ void	ft_ldgt_3(t_flags *list, t_precs *lst)
 	int		diff;
 
 	diff = 0;
-	if (lst->neg > 0)
+	if ((lst->neg > 0 || list->space) && list->dig2 >= lst->size)
+		diff = -1;
+	if (list->space > 0 && list->dig1 > lst->size && lst->neg == 0)
 		diff = -1;
 	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
 		diff += list->dig1 - list->dig2;
@@ -84,6 +88,7 @@ void	ft_ldgt_3(t_flags *list, t_precs *lst)
 	else if (list->hash > 0 && (list->conv == 'o' || list->conv == 'O'))
 		diff -= 1;
 	lst->spaces = ft_strnew(diff);
+//	printf("size[%d] - diff[%d]\n", lst->size, diff);
 	while (lst->i < diff)
 		lst->spaces[lst->i++] = ' ';
 	if (lst->neg > 0)
@@ -99,6 +104,10 @@ int		ft_ldgt_1(t_flags *list, t_precs *lst)
 			|| (list->dig1 < lst->size
 			&& list->dig2 < lst->size
 			&& list->conv != 's'))
+	{
+		if (list->space > 0 && list->args[0] != '-' && list->args[0] != '+')
+			ft_spaceflag(list);
 		return (0);
+	}
 	return (1);
 }

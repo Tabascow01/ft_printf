@@ -6,11 +6,12 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 02:18:05 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/22 02:01:49 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 03:18:46 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 void	ft_return_size_nnnnn(t_flags *list)
 {
@@ -20,7 +21,8 @@ void	ft_return_size_nnnnn(t_flags *list)
 	else if (list->space > 0 && (list->conv == 's'))
 		list->size += (int)ft_strlen(list->args) - 3;
 	else
-		list->size += (int)ft_strlen(list->args) - 2;
+		list->size += (int)ft_strlen(list->args) - list->nbleft -
+			list->space - (int)ft_strlen(list->digit) - list->hash - 2;
 }
 
 void	ft_return_size_nnnn(t_flags *list)
@@ -37,10 +39,12 @@ void	ft_return_size_nnnn(t_flags *list)
 			- (int)ft_strlen(list->digit) - list->nbleft - 2;
 	else if (list->precision > 0 && list->sign > 0 && list->hash == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->nbleft - list->sign - 2;
+			- (int)ft_strlen(list->digit) - list->nbleft
+			- list->sign - list->space - 2;
 	else if (list->sign > 0 && list->hash == 0 && list->zero == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->nbleft - list->sign - 2;
+			- (int)ft_strlen(list->digit) - list->nbleft
+			- list->sign - list->space - 2;
 	else if (list->hash == '#' && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->nbleft - 3;
@@ -93,10 +97,10 @@ void	ft_return_size_nn(t_flags *list)
 {
 	if (list->sign > 0 && list->precision == 0 && list->zero == 0)
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->sign - 2;
+			- (int)ft_strlen(list->digit) - list->sign - list->space - 2;
 	else if (list->sign > 0 && list->precision == 0 && list->zero == '0')
 		list->size += (int)ft_strlen(list->args)
-			- (int)ft_strlen(list->digit) - list->sign - 2;
+			- (int)ft_strlen(list->digit) - list->sign - list->space - 2;
 	else if (list->space > 0 && list->precision > 0)
 		list->size += (int)ft_strlen(list->args)
 			- (int)ft_strlen(list->digit) - list->space - list->sign - 2;
