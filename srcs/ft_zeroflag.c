@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>//
 
 static void		ft_zeroflag_nn(t_flags *list, char **tmparg, char **newarg)
 {
@@ -65,6 +66,7 @@ void			ft_zeroflag(t_flags *list)
 	int		i;
 	int		size;
 
+	printf("Hola\n");
 	i = 0;
 	if (list->conv == 'p')
 		ft_cut_lststr(list, 2);

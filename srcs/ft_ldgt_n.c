@@ -51,6 +51,8 @@ void	ft_ldgt_4(t_flags *list, t_precs *lst)
 	lst->i = 0;
 	if (list->args[0] == '-' || list->args[0] == '+')
 		lst->size -= 2;
+	else if (ft_atoi(list->args) == 0 && list->dig1 == 0)
+		lst->size -= 1;
 	if (list->dig2 > lst->size)
 	{
 		diff = list->dig2 - lst->size;
@@ -79,6 +81,13 @@ void	ft_ldgt_3(t_flags *list, t_precs *lst)
 		diff = -1;
 	if (list->space > 0 && list->dig1 > lst->size && lst->neg == 0)
 		diff = -1;
+	if (list->space > 0 && list->dig2 == 0 && list->dig1 > lst->size
+			&& ft_atoi(list->args) == 0 && list->zero == '0'
+			&& list->precision > 0 && list->dig2 == 0)
+	{
+		ft_bzero(list->args, ft_strlen(list->args));
+		lst->size = 0;
+	}
 	if (list->dig1 > list->dig2 && list->dig2 > lst->size)
 		diff += list->dig1 - list->dig2;
 	else if (list->dig1 > list->dig2 && list->dig2 <= lst->size)

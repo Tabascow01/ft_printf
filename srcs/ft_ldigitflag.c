@@ -57,6 +57,9 @@ static void		ft_ldigit_nn(t_flags *list, char **tmp, char **newarg)
 	if (list->conv == 's')
 		ft_strdel(&list->args);
 	list->args = ft_reallocf((*tmp), 0);
+	if (list->space > 0 && list->dig1 >= (int)ft_strlen(list->args)
+			&& ft_atoi(list->args) >= 0)
+		ft_spaceflag(list);
 }
 
 static void		ft_ldgt_nnn(t_flags *list, t_precs *lst, char **newarg)
@@ -81,7 +84,10 @@ void			ft_ldigitflag(t_flags *list)
 	lst = NULL;
 	lst = ft_init_precs(lst);
 	lst->size = (int)ft_strlen(list->args);
-	if ((list->args == NULL || list->args[0] == '\0') && list->conv != 's')
+	if ((list->args == NULL || list->args[0] == '\0'
+			|| (list->precision == 0 && list->dig1 > lst->size
+			&& list->dig2 == 0 && list->space > 0
+			&& ft_atoi(list->args) >= 0)) && list->conv != 's')
 		lst->size += 1;
 	if (list->precision == 0)
 	{
