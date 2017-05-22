@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 05:02:59 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/22 02:17:48 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 04:24:33 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_dgt_1(t_flags *list, t_precs *lst)
 			&& list->dig2 <= lst->size)
 			&& list->conv != 's'))
 	{
-		if (list->space > 0 && list->args[0] != '-')
+		if (list->space > 0 && list->args[0] != '-' && list->args[0] != '+')
 			ft_spaceflag(list);
 		return (0);
 	}
