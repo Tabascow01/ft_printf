@@ -6,7 +6,7 @@
 /*   By: mchemakh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/21 23:39:44 by mchemakh          #+#    #+#             */
-/*   Updated: 2017/05/22 04:32:36 by mchemakh         ###   ########.fr       */
+/*   Updated: 2017/05/22 04:34:09 by mchemakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	ft_process_flags_d(t_flags *list)
 	else if ((int)ft_strlen(list->digit) > 0 && list->left > 0
 			&& list->precision > 0)
 		ft_ldigitflag(list);
-	else if (list->space > 0 && list->precision == 0 && list->sign == 0)
+	else if (list->space > 0 && list->precision == 0 && list->sign == 0 && ft_atoi(list->args) >= 0)
 		ft_spaceflag(list);
 }
